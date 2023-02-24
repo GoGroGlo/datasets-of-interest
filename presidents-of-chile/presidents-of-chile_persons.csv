@@ -1,0 +1,57 @@
+﻿person_id,full_name,date_of_birth,date_of_death,place_of_birth,region_of_birth,is_woman
+P0001,Manuel José Blanco y Calvo de Encalada,1790-04-21,1876-09-05,Buenos Aires,Argentina,0
+P0002,Agustín Manuel de Eyzaguirre Arechavala,1768-05-03,1837-07-19,Santiago,Santiago Metropolitan,0
+P0003,Ramón Saturnino Andrés Freire y Serrano,1787-11-29,1851-12-09,Santiago,Santiago Metropolitan,0
+P0004,Francisco Antonio Pinto y Díaz de la Puente,1785-07-23,1858-07-18,Santiago,Santiago Metropolitan,0
+P0005,Francisco Ramón Vicuña y Larraín,1775-09-09,1849-01-13,Santiago,Santiago Metropolitan,0
+P0006,José Tomás Ovalle y Bezanilla,1787-12-21,1831-03-21,Santiago,Santiago Metropolitan,0
+P0007,Francisco Antonio Pascual de la Ascensión Ruiz de Tagle y Portales,1790-00-00,1860-03-23,Santiago,Santiago Metropolitan,0
+P0008,Fernando de Errázuriz y Martínez de Aldunate,1777-06-01,1841-08-16,Santiago,Santiago Metropolitan,0
+P0009,Joaquín Prieto Vial,1786-08-20,1854-11-22,Concepción,Biobío,0
+P0010,Manuel Bulnes Prieto,1799-12-25,1866-10-18,Concepción,Biobío,0
+P0011,Manuel Francisco Antonio Julián Montt Torres,1809-09-04,1880-09-21,Petorca,Valparaíso,0
+P0012,José Joaquín Pérez Mascayano,1801-05-06,1889-06-01,Santiago,Santiago Metropolitan,0
+P0013,Federico Marcos del Rosario Errázuriz Zañartu,1825-04-25,1877-07-20,Santiago,Santiago Metropolitan,0
+P0014,Aníbal Nicolás Pinto Garmendia,1825-03-15,1884-06-09,Santiago,Santiago Metropolitan,0
+P0015,Domingo Santa María González,1825-08-04,1889-07-18,Santiago,Santiago Metropolitan,0
+P0016,José Manuel Emiliano Balmaceda Fernández,1840-07-19,1891-09-19,Santo Domingo,Valparaíso,0
+P0017,Manuel Jesús Baquedano González,1823-01-01,1897-09-30,Santiago,Santiago Metropolitan,0
+P0018,Jorge Montt Álvarez,1845-04-22,1922-10-09,Casablanca,Valparaíso,0
+P0019,Virginio Federico Guillermo Rufino Arcadio Florentino Lamberto Errázuriz Echaurren,1850-11-16,1901-07-12,Santiago,Santiago Metropolitan,0
+P0020,Aníbal Zañartu Zañartu,1847-04-12,1902-02-01,Concepción,Biobío,0
+P0021,Germán Riesco Errázuriz,1854-05-28,1916-12-08,Rancagua,O'Higgins,0
+P0022,Pedro Elías Pablo Montt Montt,1849-06-29,1910-08-16,Santiago,Santiago Metropolitan,0
+P0023,Elías Fernández Albano,1845-00-00,1910-09-06,Santiago,Santiago Metropolitan,0
+P0024,Pío Emiliano Figueroa Larraín,1866-07-12,1931-05-16,Santiago,Santiago Metropolitan,0
+P0025,José Ramón Barros Luco,1835-06-09,1919-09-20,Santiago,Santiago Metropolitan,0
+P0026,Juan Luis Sanfuentes Andonaegui,1858-12-27,1930-07-16,Santiago,Santiago Metropolitan,0
+P0027,Arturo Fortunato Alessandri Palma,1868-12-20,1950-08-24,Linares,Maule,0
+P0028,Luis Altamirano Talavera,1876-06-07,1938-07-25,Concepción,Biobío,0
+P0029,Pedro Pablo Dartnell Encina,1874-12-24,1944-09-26,Linares,Maule,0
+P0030,Emilio Bello Codesido,1868-07-31,1963-03-03,Santiago,Santiago Metropolitan,0
+P0031,Luis Barros Borgoño,1858-03-26,1943-07-26,Santiago,Santiago Metropolitan,0
+P0032,Carlos Ibáñez del Campo,1877-11-03,1960-04-28,Linares,Maule,0
+P0033,Pedro Opaso Letelier,1876-07-20,1957-04-09,Talca,Maule,0
+P0034,Juan Esteban Montero Rodríguez,1879-02-12,1948-02-25,Santiago,Santiago Metropolitan,0
+P0035,Manuel Trucco Franzani,1875-03-18,1954-10-25,Cauquenes,Maule,0
+P0036,Arturo Puga Osorio,1879-00-00,0000-04-28,Santiago,Santiago Metropolitan,0
+P0037,Carlos Gregorio Dávila Espinoza,1887-09-15,1955-10-19,Los Ángeles,Biobío,0
+P0038,Bartolomé Guillermo Blanche Espejo,1879-06-06,1970-06-10,La Serena,Coquimbo,0
+P0039,Abraham Oyanedel Urrutia,1874-05-25,1954-01-28,Copiapó,Atacama,0
+P0040,Pedro Abelino Aguirre Cerda,1879-02-06,1941-11-25,Calle Larga,Valparaíso,0
+P0041,Jerónimo Segundo Méndez y Arancibia,1887-09-25,1959-06-14,Chañaral,Atacama,0
+P0042,Juan Antonio Ríos Morales,1888-11-10,1946-06-27,Cañete,Biobío,0
+P0043,Alfredo Duhalde Vásquez,1898-06-30,1985-04-10,Río Bueno,Los Ríos,0
+P0044,Vicente Merino Bielich,1889-01-01,1977-01-30,Santiago,Santiago Metropolitan,0
+P0045,Juan Antonio Iribarren Cabezas,1885-05-07,1968-04-11,Vicuña,Coquimbo,0
+P0046,Gabriel Enrique González Videla,1898-11-22,1980-08-22,La Serena,Coquimbo,0
+P0047,Jorge Eduardo Alessandri Rodríguez,1896-05-19,1986-08-31,Santiago,Santiago Metropolitan,0
+P0048,Eduardo Nicanor Frei Montalva,1911-01-16,1982-01-22,Santiago,Santiago Metropolitan,0
+P0049,Salvador Guillermo Allende Gossens,1908-06-26,1973-09-11,Santiago,Santiago Metropolitan,0
+P0050,Augusto José Ramón Pinochet Ugarte,1915-11-25,2006-12-10,Valparaíso,Valparaíso,0
+P0051,Miguel Patricio Aylwin Azócar,1918-11-26,2016-04-19,Viña del Mar,Valparaíso,0
+P0052,Eduardo Alfredo Juan Bernardo Frei Ruiz-Tagle,1942-06-24,,Santiago,Santiago Metropolitan,0
+P0053,Ricardo Froilán Lagos Escobar,1938-03-02,,Santiago,Santiago Metropolitan,0
+P0054,Verónica Michelle Bachelet Jeria,1951-09-29,,Santiago,Santiago Metropolitan,1
+P0055,Miguel Juan Sebastián Piñera Echenique,1949-12-01,,Santiago,Santiago Metropolitan,0
+P0056,Gabriel Boric Font,1986-02-11,,Punta Arenas,Magallanes and Chilean Antarctica,0
