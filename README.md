@@ -4,7 +4,7 @@ Some Python-based investigations about datasets I'm personally interested in.
 All of my notes are in Jupyter notebooks (.ipynb). The notes and datasets are included in every dataset folder.
 
 ## [Presidents of Chile](presidents-of-chile)
-**Source:** `persons`, `tenures` and `deaths` datasets manually gathered from Wikipedia
+**Source:** `persons`, `tenures` and `deaths` datasets manually gathered from Wikipedia in [English](https://en.wikipedia.org/wiki/List_of_presidents_of_Chile) and [Spanish](https://es.wikipedia.org/wiki/Anexo:Presidentes_de_Chile)
 
 **Questions to answer:**
 * `persons` - demographic info about individual presidents
