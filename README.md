@@ -1,7 +1,7 @@
 # Glo's Datasets of Interest
 Some Python-based investigations about datasets I'm personally interested in.
 
-All of my notes are in Jupyter notebooks (.ipynb). The notes and datasets are included in every dataset folder.
+Most of my notes are in Jupyter notebooks (.ipynb). The notes and datasets are included in every dataset folder.
 
 ## [Presidents of Chile](presidents-of-chile)
 **Source:** `persons`, `tenures` and `deaths` datasets manually gathered from Wikipedia in [English](https://en.wikipedia.org/wiki/List_of_presidents_of_Chile) and [Spanish](https://es.wikipedia.org/wiki/Anexo:Presidentes_de_Chile)
@@ -16,14 +16,6 @@ All of my notes are in Jupyter notebooks (.ipynb). The notes and datasets are in
 
 **Content warning:** Contains various methods of death in the `deaths` dataset and `tenures` notes.
 
-## [Mobile Phones](mobile-phones)
-**Source:** GSMArena Phone Dataset at https://www.kaggle.com/datasets/arwinneil/gsmarena-phone-dataset
-
-**Questions to answer:**
-* When exactly did big phones became popular?
-* Is the audio jack still alive? Did iPhone 7 (or whichever iPhone it was) really start its end?
-* Which regions get the most phone models? Where is competition the fiercest?
-
 ## [A Place for Salvador Allende](a-place-for-salvador-allende)
 **Source:** Based on the previous work at http://www.abacq.org/calle/, which compiled places sent by users from around the world.
 
@@ -32,3 +24,16 @@ At first, I've manually gathered a few places from Chile and elsewhere, but I'm 
 **Questions to answer:**
 * Prove that there are more places named after Salvador Allende, President of Chile from 1970 to 1973, _outside_ of Chile than there are _inside_ of Chile. There is a historical reason behind this which is worth elaborating on when the dataset is more matured.
 
+## [Mobile Phones](mobile-phones)
+**Source:** GSMArena Phone Dataset at https://www.kaggle.com/datasets/arwinneil/gsmarena-phone-dataset
+
+**Questions to answer:**
+* When exactly did big phones became popular?
+* Is the audio jack still alive? Did iPhone 7 (or whichever iPhone it was) really start its end?
+* Which regions get the most phone models? Where is competition the fiercest?
+
+## [Movies](movies)
+**Source:** Some homework for a Python course I was in. I think [`movies.xlsx`](movies/movies.xlsx) is from Kaggle.
+
+**Questions to answer:**
+* What are the top 10 movies per audience rating, as measured by their metascores?
