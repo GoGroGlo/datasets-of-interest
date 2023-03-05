@@ -477,13 +477,13 @@ for (i, link) in enumerate(single_locale, start=1):
         oldest_known_day = days[oldest_known_day]
     else:
         oldest_known_day = int(oldest_known_day)
-        # compare oldest_known_year to the year in the url.
-        # if they're different (i.e. we derived the year from the text), we'll proceed with collecting days_in_text.
+    # compare oldest_known_year to the year in the url.
+    # if they're different (i.e. we derived the year from the text), we'll proceed with collecting days_in_text.
     days_in_text = re.findall(r'(\d{1,2})\s+', lower_text)
     days_in_text = list(days_in_text)
     # remove numbers that are invalid days of a month
     for day in days_in_text:
-        if int(day) > int(32):
+        if int(day) > int(31):
             days_in_text.remove(day)
     if oldest_known_year != year_in_url and len(days_in_text) == 0:
         oldest_known_day = ''
@@ -561,7 +561,6 @@ for (i, link) in enumerate(multi_locale, start=1):
         print(f'Name: {name}')
         #
         # get TYPE
-        # the dict used here is pretty rudimentary so this is prone to errors and needs human verification
         #
         type = ''
         data['type'].append(type)
@@ -636,13 +635,13 @@ for (i, link) in enumerate(multi_locale, start=1):
             oldest_known_day = days[oldest_known_day]
         else:
             oldest_known_day = int(oldest_known_day)
-            # compare oldest_known_year to the year in the url.
-            # if they're different (i.e. we derived the year from the text), we'll proceed with collecting days_in_text.
+        # compare oldest_known_year to the year in the url.
+        # if they're different (i.e. we derived the year from the text), we'll proceed with collecting days_in_text.
         days_in_text = re.findall(r'(\d{1,2})\s+', lower_text)
         days_in_text = list(days_in_text)
         # remove numbers that are invalid days of a month
         for day in days_in_text:
-            if int(day) > int(32):
+            if int(day) > int(31):
                 days_in_text.remove(day)
         if oldest_known_year != year_in_url and len(days_in_text) == 0:
             oldest_known_day = ''
@@ -690,8 +689,12 @@ data_df.to_csv(f'a-place-for-salvador-allende/{allende_countries[country]}.csv',
 
 
 
-### A REMARK ON CHARACTER ENCODING ###
+### REMARKS ###
 
 
 # I don't know how to fix the replacement characters (question marks) because the website's encoding is messed up.
 # here https://www.i18nqa.com/debug/utf8-debug.html there is a table for the correct characters vs. how they are printed in the csv.
+
+# Not yet tested for cases when the country name has accents or has more than one word.
+
+

@@ -355,7 +355,7 @@ for (i, link) in enumerate(single_locale, start=1):
     days_in_text = list(days_in_text)
         # remove numbers that are invalid days of a month
     for day in days_in_text:
-        if int(day) > int(32):
+        if int(day) > int(31):
             days_in_text.remove(day)
     if oldest_known_year != year_in_url and len(days_in_text) == 0:
         oldest_known_day = ''
@@ -520,7 +520,7 @@ for (i, link) in enumerate(multi_locale, start=1):
         days_in_text = list(days_in_text)
             # remove numbers that are invalid days of a month
         for day in days_in_text:
-            if int(day) > int(32):
+            if int(day) > int(31):
                 days_in_text.remove(day)
         if oldest_known_year != year_in_url and len(days_in_text) == 0:
             oldest_known_day = ''
@@ -563,4 +563,6 @@ print('\nDataFrame created:\n')
 print(data_df)
 
 # export dataframe to csv
-# data_df.to_csv(index=False)
+# data_df.to_csv(f'a-place-for-salvador-allende/{allende_countries[country]}.csv', index=False)
+
+
