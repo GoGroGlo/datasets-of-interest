@@ -744,7 +744,7 @@ for (i, link) in enumerate(single_locale, start=1):
     #
     openstreetmap_link = ''
     data['openstreetmap_link'].append(openstreetmap_link)
-    print(f'Openstreetmap link: {openstreetmap_link}')
+    print(f'OpenStreetMap link: {openstreetmap_link}')
     #
     # get GOOGLE_MAPS_LINK (null)
     #
@@ -986,7 +986,7 @@ for (i, link) in enumerate(multi_locale, start=1):
         #
         openstreetmap_link = ''
         data['openstreetmap_link'].append(openstreetmap_link)
-        print(f'Openstreetmap link: {openstreetmap_link}')
+        print(f'OpenStreetMap link: {openstreetmap_link}')
         #
         # get GOOGLE_MAPS_LINK (null)
         #
@@ -1003,6 +1003,7 @@ for (i, link) in enumerate(multi_locale, start=1):
 # ------------------------------------------------------ #
 
 
+
 ### EXPORT THE DATA ###
 
 
@@ -1012,7 +1013,7 @@ print('\nDataFrame created:\n')
 print(data_df)
 
 # export dataframe to csv
-data_df.to_csv(f'{country_en}.csv', index=False)
+data_df.to_csv(f'{country_en}.csv')
 
 
 
