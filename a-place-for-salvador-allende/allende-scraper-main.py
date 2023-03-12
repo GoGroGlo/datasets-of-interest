@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from types import NoneType
 import os
 import re
 import pandas as pd
@@ -13,106 +12,246 @@ import pandas as pd
 
 # countries with a Salvador Allende presence, according to http://www.abacq.org/calle/index.php?toc/toc
 allende_countries = {
-    'Alemania'                  : 'Germany',
-    'Angola'                    : 'Angola',
-    'Arabia Saudita'            : 'Saudi Arabia',
-    'Argelia'                   : 'Algeria',
-    'Argentina'                 : 'Argentina',
-    'Australia'                 : 'Australia',
-    'Austria'                   : 'Austria',
-    'Bélgica'                   : 'Belgium',
-    'Bosnia-Herzegovina'        : 'Bosnia and Herzegovina',
-    'Brasil'                    : 'Brazil',
-    'Bulgaria'                  : 'Bulgaria',
-    'Canadá'                    : 'Canada',
-    'Chile'                     : 'Chile',
-    'Colombia'                  : 'Colombia',
-    'Cuba'                      : 'Cuba',
-    'Dinamarca'                 : 'Denmark',
-    'Ecuador'                   : 'Ecuador',
-    'Eslovaquia'                : 'Slovakia',
-    'España'                    : 'Spain',
-    'Estados Unidos'            : 'United States',
-    'Francia'                   : 'France',
-    'Guinea-Bissáu'             : 'Guinea-Bissau',
-    'Holanda'                   : 'Netherlands',
-    'Hungría'                   : 'Hungary',
-    'India'                     : 'India',
-    'Irán'                      : 'Iran',
-    'Israel'                    : 'Israel',
-    'Italia'                    : 'Italy',
-    'Luxemburgo'                : 'Luxembourg',
-    'México'                    : 'Mexico',
-    'Mozambique'                : 'Mozambique',
-    'Nicaragua'                 : 'Nicaragua',
-    'Pakistán'                  : 'Pakistan',
-    'Palestina'                 : 'Palestine',
-    'Paraguay'                  : 'Paraguay',
-    'Perú'                      : 'Peru',
-    'Portugal'                  : 'Portugal',
-    'Reino Unido'               : 'United Kingdom',
-    'República Checa'           : 'Czechia',
-    'República del Congo'       : 'Republic of the Congo',
-    'República de Macedonia'    : 'North Macedonia',
-    'República Dominicana'      : 'Dominican Republic',
-    'Rusia'                     : 'Russia',
-    'Salvador'                  : 'El Salvador',
-    'Serbia'                    : 'Serbia',
-    'Turquía'                   : 'Turkey',
-    'Uruguay'                   : 'Uruguay',
-    'Venezuela'                 : 'Venezuela'
-}
-
-
-country_to_region = {
-    'Alemania'                  : 'Europe',
-    'Angola'                    : 'Africa',
-    'Arabia Saudita'            : 'Middle East',
-    'Argelia'                   : 'Africa',
-    'Argentina'                 : 'South America',
-    'Australia'                 : 'ANZ and Oceania',
-    'Austria'                   : 'Europe',
-    'Bélgica'                   : 'Europe',
-    'Bosnia-Herzegovina'        : 'Europe',
-    'Brasil'                    : 'South America',
-    'Bulgaria'                  : 'Europe',
-    'Canadá'                    : 'North America',
-    'Chile'                     : 'South America',
-    'Colombia'                  : 'South America',
-    'Cuba'                      : 'Central America',
-    'Dinamarca'                 : 'Europe',
-    'Ecuador'                   : 'South America',
-    'Eslovaquia'                : 'Europe',
-    'España'                    : 'Europe',
-    'Estados Unidos'            : 'North America',
-    'Francia'                   : 'Europe',
-    'Guinea-Bissáu'             : 'Africa',
-    'Holanda'                   : 'Europe',
-    'Hungría'                   : 'Europe',
-    'India'                     : 'Asia',
-    'Irán'                      : 'Asia',
-    'Israel'                    : 'Middle East',
-    'Italia'                    : 'Europe',
-    'Luxemburgo'                : 'Europe',
-    'México'                    : 'North America',
-    'Mozambique'                : 'Africa',
-    'Nicaragua'                 : 'Central America',
-    'Pakistán'                  : 'Asia',
-    'Palestina'                 : 'Middle East',
-    'Paraguay'                  : 'South America',
-    'Perú'                      : 'South America',
-    'Portugal'                  : 'Europe',
-    'Reino Unido'               : 'Europe',
-    'República Checa'           : 'Europe',
-    'República del Congo'       : 'Africa',
-    'República de Macedonia'    : 'Europe',
-    'República Dominicana'      : 'Central America',
-    'Rusia'                     : 'Europe',
-    'Salvador'                  : 'Central America',
-    'Serbia'                    : 'Europe',
-    'Turquía'                   : 'Middle East',
-    'Uruguay'                   : 'South America',
-    'Venezuela'                 : 'South America'
+    'Alemania'                  : {
+                                    'country_en'    : 'Germany',
+                                    'country_link'  : 'alemania',
+                                    'region'        : 'Europe'
+                                  },
+    'Angola'                    : {
+                                    'country_en'    : 'Angola',
+                                    'country_link'  : 'angola',
+                                    'region'        : 'Africa' 
+                                  },
+    'Arabia Saudita'            : {
+                                    'country_en'    : 'Saudi Arabia',
+                                    'country_link'  : 'arabia-saudita',
+                                    'region'        : 'Middle East'
+                                  },
+    'Argelia'                   : {
+                                    'country_en'    : 'Algeria',
+                                    'country_link'  : 'argelia',
+                                    'region'        : 'Africa'
+                                  },
+    'Argentina'                 : {
+                                    'country_en'    : 'Argentina',
+                                    'country_link'  : 'argentina',
+                                    'region'        : 'South America'
+                                  },
+    'Australia'                 : {
+                                    'country_en'    : 'Australia',
+                                    'country_link'  : 'australia',
+                                    'region'        : 'ANZ and Oceania'
+                                  },
+    'Austria'                   : {
+                                    'country_en'    : 'Austria',
+                                    'country_link'  : 'austria',
+                                    'region'        : 'Europe'
+                                  },
+    'Bélgica'                   : {
+                                    'country_en'    : 'Belgium',
+                                    'country_link'  : 'belgica',
+                                    'region'        : 'Europe'
+                                  },
+    'Bosnia-Herzegovina'        : {
+                                    'country_en'    : 'Bosnia and Herzegovina',
+                                    'country_link'  : 'bosnia-herzegovina',
+                                    'region'        : 'Europe'
+                                  },
+    'Brasil'                    : {
+                                    'country_en'    : 'Brazil',
+                                    'country_link'  : 'brasil',
+                                    'region'        : 'South America'
+                                  },
+    'Bulgaria'                  : {
+                                    'country_en'    : 'Bulgaria',
+                                    'country_link'  : 'bulgaria',
+                                    'region'        : 'Europe'
+                                  },
+    'Canadá'                    : {
+                                    'country_en'    : 'Canada',
+                                    'country_link'  : 'canada',
+                                    'region'        : 'North America'
+                                  },
+    'Chile'                     : {
+                                    'country_en'    : 'Chile',
+                                    'country_link'  : 'chile',
+                                    'region'        : 'South America'
+                                  },
+    'Colombia'                  : {
+                                    'country_en'    : 'Colombia',
+                                    'country_link'  : 'colombia',
+                                    'region'        : 'South America'
+                                  },
+    'Cuba'                      : {
+                                    'country_en'    : 'Cuba',
+                                    'country_link'  : 'cuba',
+                                    'region'        : 'Central America'
+                                  },
+    'Dinamarca'                 : {
+                                    'country_en'    : 'Denmark',
+                                    'country_link'  : 'dinamarca',
+                                    'region'        : 'Europe'
+                                  },
+    'Ecuador'                   : {
+                                    'country_en'    : 'Ecuador',
+                                    'country_link'  : 'ecuador',
+                                    'region'        : 'South America'
+                                  },
+    'Eslovaquia'                : {
+                                    'country_en'    : 'Slovakia',
+                                    'country_link'  : 'eslovaquia',
+                                    'region'        : 'Europe'
+                                  },
+    'España'                    : {
+                                    'country_en'    : 'Spain',
+                                    'country_link'  : 'espana',
+                                    'region'        : 'Europe'
+                                  },
+    'Estados Unidos'            : {
+                                    'country_en'    : 'United States',
+                                    'country_link'  : 'estados-unidos',
+                                    'region'        : 'North America'
+                                  },
+    'Francia'                   : {
+                                    'country_en'    : 'France',
+                                    'country_link'  : 'francia',
+                                    'region'        : 'Europe'
+                                  },
+    'Guinea-Bissáu'             : {
+                                    'country_en'    : 'Guinea-Bissau',
+                                    'country_link'  : 'guinea-bissau',
+                                    'region'        : 'Africa'
+                                  },
+    'Holanda'                   : {
+                                    'country_en'    : 'Netherlands',
+                                    'country_link'  : 'holanda',
+                                    'region'        : 'Europe'
+                                  },
+    'Hungría'                   : {
+                                    'country_en'    : 'Hungary',
+                                    'country_link'  : 'hungria',
+                                    'region'        : 'Europe'
+                                  },
+    'India'                     : {
+                                    'country_en'    : 'India',
+                                    'country_link'  : 'india',
+                                    'region'        : 'Asia'
+                                  },
+    'Irán'                      : {
+                                    'country_en'    : 'Iran',
+                                    'country_link'  : 'iran',
+                                    'region'        : 'Asia'
+                                  },
+    'Israel'                    : {
+                                    'country_en'    : 'Israel',
+                                    'country_link'  : 'israel',
+                                    'region'        : 'Middle East'
+                                  },
+    'Italia'                    : {
+                                    'country_en'    : 'Italy',
+                                    'country_link'  : 'italia',
+                                    'region'        : 'Europe'
+                                  },
+    'Luxemburgo'                : {
+                                    'country_en'    : 'Luxembourg',
+                                    'country_link'  : 'luxemburgo',
+                                    'region'        : 'Europe'
+                                  },
+    'México'                    : {
+                                    'country_en'    : 'Mexico',
+                                    'country_link'  : 'mexico',
+                                    'region'        : 'North America'
+                                  },
+    'Mozambique'                : {
+                                    'country_en'    : 'Mozambique',
+                                    'country_link'  : 'mozambique',
+                                    'region'        : 'Africa'
+                                  },
+    'Nicaragua'                 : {
+                                    'country_en'    : 'Nicaragua',
+                                    'country_link'  : 'nicaragua',
+                                    'region'        : 'Central America'
+                                  },
+    'Pakistán'                  : {
+                                    'country_en'    : 'Pakistan',
+                                    'country_link'  : 'pakistan',
+                                    'region'        : 'Asia'
+                                  },
+    'Palestina'                 : {
+                                    'country_en'    : 'Palestine',
+                                    'country_link'  : 'palestina',
+                                    'region'        : 'Middle East'
+                                  },
+    'Paraguay'                  : {
+                                    'country_en'    : 'Paraguay',
+                                    'country_link'  : 'paraguay',
+                                    'region'        : 'South America'
+                                  },
+    'Perú'                      : {
+                                    'country_en'    : 'Peru',
+                                    'country_link'  : 'peru',
+                                    'region'        : 'South America'
+                                  },
+    'Portugal'                  : {
+                                    'country_en'    : 'Portugal',
+                                    'country_link'  : 'portugal',
+                                    'region'        : 'Europe'
+                                  },
+    'Reino Unido'               : {
+                                    'country_en'    : 'United Kingdom',
+                                    'country_link'  : 'reino-unido',
+                                    'region'        : 'Europe'
+                                  },
+    'República Checa'           : {
+                                    'country_en'    : 'Czechia',
+                                    'country_link'  : 'republica-checa',
+                                    'region'        : 'Europe'
+                                  },
+    'República del Congo'       : {
+                                    'country_en'    : 'Republic of the Congo',
+                                    'country_link'  : 'republica-del-congo',
+                                    'region'        : 'Africa'
+                                  },
+    'República de Macedonia'    : {
+                                    'country_en'    : 'North Macedonia',
+                                    'country_link'  : 'macedonia',
+                                    'region'        : 'Europe'
+                                  },
+    'República Dominicana'      : {
+                                    'country_en'    : 'Dominican Republic',
+                                    'country_link'  : 'republica-dominicana',
+                                    'region'        : 'Asia'
+                                  },
+    'Rusia'                     : {
+                                    'country_en'    : 'Russia',
+                                    'country_link'  : 'rusia',
+                                    'region'        : 'Europe'
+                                  },
+    'Salvador'                  : {
+                                    'country_en'    : 'El Salvador',
+                                    'country_link'  : 'el-salvador',
+                                    'region'        : 'Central America'
+                                  },
+    'Serbia'                    : {
+                                    'country_en'    : 'Serbia',
+                                    'country_link'  : 'serbia',
+                                    'region'        : 'Europe'
+                                  },
+    'Turquía'                   : {
+                                    'country_en'    : 'Turkey',
+                                    'country_link'  : 'turquia',
+                                    'region'        : 'Middle East'
+                                  },
+    'Uruguay'                   : {
+                                    'country_en'    : 'Uruguay',
+                                    'country_link'  : 'uruguay',
+                                    'region'        : 'South America'
+                                  },
+    'Venezuela'                 : {
+                                    'country_en'    : 'Venezuela',
+                                    'country_link'  : 'venezuela',
+                                    'region'        : 'South America'
+                                  }
 }
 
 
@@ -278,16 +417,19 @@ countries_links = {
 # assign links according to the country in their url
 for link in links_list:
     for key in allende_countries.keys():
-        if key.lower() in link:
+        if allende_countries[key]['country_link'] in link:
             countries_links[key].append(link)
 
 
 # enter here the country name (in Spanish) you want to do
-country = 'Dinamarca'
+print('Available countries for processing:\n')
+for key in allende_countries.keys():
+    print(key)
+country = str(input('>>> Please enter one of the countries above: '))
 
 
 # retrieve the links for that country
-print(f'>>> Fetching links for {allende_countries[country]}...')
+print(f'>>> Fetching links for this country...')
 # print(countries_links[country])
 
 
@@ -303,7 +445,7 @@ multi_locale = []
 
 for link in countries_links[country]:
     link_check = re.search(r'(\/calle\/index.php\?\d{4}\/\d{2}\/\d{2}\/\d*(?:-\w*){2,})', link)
-    if isinstance(link_check, NoneType):
+    if link_check is None:
         multi_locale.append(link)
     else:
         single_locale.append(link)
@@ -326,7 +468,7 @@ print(f'Multi-locale links:\n{multi_locale}\n')
 # for each post, let's collect the following and connect them with the existing columns from the current db:
 # name - image_alt - <img alt=[alt]>
 # type - derived from the post's name and/or text
-# _region - derived from country_to_region
+# _region - derived from allende_countries
 # country - country - regex-ed from post title <h2 class="post-title">
 # locale - <strong>
 # oldest_known_year,month,day - scraped from the post's text
@@ -336,15 +478,29 @@ print(f'Multi-locale links:\n{multi_locale}\n')
 
 # create a dictionary of lists that's easily translatable into our existing db
 data = {
+    'id'                         : [],
     'name'                       : [],
     'type'                       : [],
     'region'                     : [],
     'country'                    : [],
     'locale_1'                   : [],
+    'locale_2'                   : [],
+    'locale_3'                   : [],
+    'locale_4'                   : [],
+    'locale_5'                   : [],
+    'zip_code'                   : [],
+    'latitude'                   : [],
+    'longitude'                  : [],
     'oldest_known_year'          : [],
     'oldest_known_month'         : [],
     'oldest_known_day'           : [],
     'desc'                       : [],
+    'desc_language'              : [],
+    'alt_name'                   : [],
+    'former_name'                : [],
+    'verified_in_maps'           : [],
+    'openstreetmap_link'         : [],
+    'google_maps_link'           : [],
     'abacq_reference'            : [],
 }
 
@@ -370,6 +526,12 @@ for (i, link) in enumerate(single_locale, start=1):
     lower_text = text.lower()
     print(text)
     #
+    # get ID (null)
+    #
+    id = ''
+    data['id'].append(id)
+    print(f'ID: {id}')
+    #
     # get NAME
     #
     name = article_soup.find("img", alt=True)
@@ -390,8 +552,8 @@ for (i, link) in enumerate(single_locale, start=1):
     #
     type = ''
     for key, value in types.items():
-        for item in value:
-            if item in name.lower():
+        for type_item in value:
+            if type_item in name.lower():
                 type = key
     data['type'].append(type)
     print(f'Type: {type}')
@@ -402,13 +564,13 @@ for (i, link) in enumerate(single_locale, start=1):
     country_es = str(country_es)
     country_es = re.search(r'(?:\.|,)\s*(.*)<\/h2>', country_es)
     country_es = str(country_es.group(1))
-    country_en = allende_countries[country_es]
+    country_en = allende_countries[country_es]['country_en']
     data['country'].append(country_en)
     print(f'Country: {country_en}')
     #
     # get REGION
     #
-    region = country_to_region[country_es]
+    region = allende_countries[country_es]['region']
     data['region'].append(region)
     print(f'Region: {region}')
     #
@@ -427,7 +589,49 @@ for (i, link) in enumerate(single_locale, start=1):
     else:
         locale_1 = str(locale_1.group(1))
     data['locale_1'].append(locale_1)
-    print(f'Locale: {locale_1}')
+    print(f'Locale 1: {locale_1}')
+    #
+    # get LOCALE_2 (null)
+    #
+    locale_2 = ''
+    data['locale_2'].append(locale_2)
+    print(f'Locale 2: {locale_2}')
+    #
+    # get LOCALE_3 (null)
+    #
+    locale_3 = ''
+    data['locale_3'].append(locale_3)
+    print(f'Locale 3: {locale_3}')
+    #
+    # get LOCALE_4 (null)
+    #
+    locale_4 = ''
+    data['locale_4'].append(locale_4)
+    print(f'Locale 4: {locale_4}')
+    #
+    # get LOCALE_5 (null)
+    #
+    locale_5 = ''
+    data['locale_5'].append(locale_5)
+    print(f'Locale 5: {locale_5}')
+    #
+    # get ZIP_CODE (null)
+    #
+    zip_code = ''
+    data['zip_code'].append(zip_code)
+    print(f'Zip code: {zip_code}')
+    #
+    # get LATITUDE (null)
+    #
+    latitude = ''
+    data['latitude'].append(latitude)
+    print(f'Latitude: {latitude}')
+    #
+    # get LONGITUDE (null)
+    #
+    longitude = ''
+    data['longitude'].append(longitude)
+    print(f'Longitude: {longitude}')
     #
     # get OLDEST_KNOWN_YEAR
     # retrieve the year from the url; when an older year is found within the text, get that instead
@@ -504,12 +708,49 @@ for (i, link) in enumerate(single_locale, start=1):
     desc = ''
     desc_soup = article_soup.find_all("em")
     desc_soup = list(desc_soup)
-    for item in desc_soup:
-        item = str(item)
-        item = item.strip('</em>')
-        desc += item + '\n'
+    for desc_item in desc_soup:
+        desc_item = str(desc_item)
+        desc_item = desc_item.strip('</em>')
+        desc += desc_item + '\n'
     data['desc'].append(desc)
     print(f'Desc: {desc}')
+    #
+    # get DESC_LANGUAGE (null)
+    # won't assume anything here for now because most of the descriptions I see are in Spanish, regardless of the region
+    #
+    desc_language = ''
+    data['desc_language'].append(desc_language)
+    print(f'Desc language: {desc_language}')
+    #
+    # get ALT_NAME (null)
+    #
+    alt_name = ''
+    data['alt_name'].append(alt_name)
+    print(f'Alt name: {alt_name}')
+    #
+    # get FORMER_NAME (null)
+    #
+    former_name = ''
+    data['former_name'].append(former_name)
+    print(f'Former name: {former_name}')
+    #
+    # get VERIFIED_IN_MAPS (default to 0, will get 1 later on when verified)
+    #
+    verified_in_maps = 0
+    data['verified_in_maps'].append(verified_in_maps)
+    print(f'Verified in maps: {verified_in_maps}')
+    #
+    # get OPENSTREETMAP_LINK (null)
+    #
+    openstreetmap_link = ''
+    data['openstreetmap_link'].append(openstreetmap_link)
+    print(f'Openstreetmap link: {openstreetmap_link}')
+    #
+    # get GOOGLE_MAPS_LINK (null)
+    #
+    google_maps_link = ''
+    data['google_maps_link'].append(google_maps_link)
+    print(f'Google Maps link: {google_maps_link}')
     #
     # get ABACQ_REFERENCE
     # basically the url we're working with
@@ -545,14 +786,20 @@ for (i, link) in enumerate(multi_locale, start=1):
     #
     locale_1_soup = article_soup.find_all("strong")
     locale_1_soup = list(locale_1_soup)
-    locale_1 = []
-    for item in locale_1_soup:
-        item = str(item)
-        item = re.search(r'<strong>(.*)<\/strong>', item)
-        item = str(item.group(1))
-        locale_1.append(item)
+    locale_1_list = []
+    for locale_1 in locale_1_soup:
+        locale_1 = str(locale_1)
+        locale_1 = re.search(r'<strong>(.*)<\/strong>', locale_1)
+        locale_1 = str(locale_1.group(1))
+        locale_1_list.append(locale_1)
     # for each LOCALE_1, give them the same information as the rest of the article
-    for item in locale_1:
+    for locale_1 in locale_1_list:
+        #
+        # get ID (null)
+        #
+        id = ''
+        data['id'].append(id)
+        print(f'ID: {id}')
         #
         # get NAME
         #
@@ -561,8 +808,13 @@ for (i, link) in enumerate(multi_locale, start=1):
         print(f'Name: {name}')
         #
         # get TYPE
+        # the dict used here is pretty rudimentary so this is prone to errors and needs human verification
         #
         type = ''
+        for key, value in types.items():
+            for type_item in value:
+                if type_item in lower_text:
+                    type = key
         data['type'].append(type)
         print(f'Type: {type}')
         #
@@ -572,20 +824,62 @@ for (i, link) in enumerate(multi_locale, start=1):
         country_es = str(country_es)
         country_es = re.search(r'<h2 class="post-title">(.*?)(?:\s*\.*)*<\/h2>', country_es)
         country_es = str(country_es.group(1))
-        country_en = allende_countries[country_es]
+        country_en = allende_countries[country_es]['country_en']
         data['country'].append(country_en)
         print(f'Country: {country_en}')
         #
         # get REGION
         #
-        region = country_to_region[country_es]
+        region = allende_countries[country_es]['region']
         data['region'].append(region)
         print(f'Region: {region}')
         #
         # get LOCALE_1
         #
-        data['locale_1'].append(item)
-        print(f'Locale: {item}')
+        data['locale_1'].append(locale_1)
+        print(f'Locale: {locale_1}')
+        #
+        # get LOCALE_2 (null)
+        #
+        locale_2 = ''
+        data['locale_2'].append(locale_2)
+        print(f'Locale 2: {locale_2}')
+        #
+        # get LOCALE_3 (null)
+        #
+        locale_3 = ''
+        data['locale_3'].append(locale_3)
+        print(f'Locale 3: {locale_3}')
+        #
+        # get LOCALE_4 (null)
+        #
+        locale_4 = ''
+        data['locale_4'].append(locale_4)
+        print(f'Locale 4: {locale_4}')
+        #
+        # get LOCALE_5 (null)
+        #
+        locale_5 = ''
+        data['locale_5'].append(locale_5)
+        print(f'Locale 5: {locale_5}')
+        #
+        # get ZIP_CODE (null)
+        #
+        zip_code = ''
+        data['zip_code'].append(zip_code)
+        print(f'Zip code: {zip_code}')
+        #
+        # get LATITUDE (null)
+        #
+        latitude = ''
+        data['latitude'].append(latitude)
+        print(f'Latitude: {latitude}')
+        #
+        # get LONGITUDE (null)
+        #
+        longitude = ''
+        data['longitude'].append(longitude)
+        print(f'Longitude: {longitude}')
         #
         # get OLDEST_KNOWN_YEAR
         # retrieve the year from the url; when an older year is found within the text, get that instead
@@ -663,6 +957,43 @@ for (i, link) in enumerate(multi_locale, start=1):
         data['desc'].append(desc)
         print(f'Desc: {desc}\n')
         #
+        # get DESC_LANGUAGE (null)
+        # won't assume anything here for now because most of the descriptions I see are in Spanish, regardless of the region
+        #
+        desc_language = ''
+        data['desc_language'].append(desc_language)
+        print(f'Desc language: {desc_language}')
+        #
+        # get ALT_NAME (null)
+        #
+        alt_name = ''
+        data['alt_name'].append(alt_name)
+        print(f'Alt name: {alt_name}')
+        #
+        # get FORMER_NAME (null)
+        #
+        former_name = ''
+        data['former_name'].append(former_name)
+        print(f'Former name: {former_name}')
+        #
+        # get VERIFIED_IN_MAPS (default to 0, will get 1 later on when verified)
+        #
+        verified_in_maps = 0
+        data['verified_in_maps'].append(verified_in_maps)
+        print(f'Verified in maps: {verified_in_maps}')
+        #
+        # get OPENSTREETMAP_LINK (null)
+        #
+        openstreetmap_link = ''
+        data['openstreetmap_link'].append(openstreetmap_link)
+        print(f'Openstreetmap link: {openstreetmap_link}')
+        #
+        # get GOOGLE_MAPS_LINK (null)
+        #
+        google_maps_link = ''
+        data['google_maps_link'].append(google_maps_link)
+        print(f'Google Maps link: {google_maps_link}')
+        #
         # get ABACQ_REFERENCE
         # basically the url we're working with
         #
@@ -681,7 +1012,7 @@ print('\nDataFrame created:\n')
 print(data_df)
 
 # export dataframe to csv
-data_df.to_csv(f'a-place-for-salvador-allende/{allende_countries[country]}.csv', index=False)
+data_df.to_csv(f'{country_en}.csv', index=False)
 
 
 
@@ -694,7 +1025,5 @@ data_df.to_csv(f'a-place-for-salvador-allende/{allende_countries[country]}.csv',
 
 # I don't know how to fix the replacement characters (question marks) because the website's encoding is messed up.
 # here https://www.i18nqa.com/debug/utf8-debug.html there is a table for the correct characters vs. how they are printed in the csv.
-
-# Not yet tested for cases when the country name has accents or has more than one word.
 
 
