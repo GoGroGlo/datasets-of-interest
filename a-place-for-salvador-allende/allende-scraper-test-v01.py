@@ -1,3 +1,6 @@
+# allende-scraper-test-v01.py
+# no OpenStreetMap scraper included yet
+
 # web scraping tutorial courtesy of https://www.educative.io/blog/python-web-scraping-tutorial
 
 
@@ -12,246 +15,246 @@ import pandas as pd
 
 # countries with a Salvador Allende presence, according to http://www.abacq.org/calle/index.php?toc/toc
 allende_countries = {
-    'Alemania'                  : {
-                                    'country_en'    : 'Germany',
-                                    'country_link'  : 'alemania',
-                                    'region'        : 'Europe'
-                                  },
-    'Angola'                    : {
-                                    'country_en'    : 'Angola',
-                                    'country_link'  : 'angola',
-                                    'region'        : 'Africa' 
-                                  },
-    'Arabia Saudita'            : {
-                                    'country_en'    : 'Saudi Arabia',
-                                    'country_link'  : 'arabia-saudita',
-                                    'region'        : 'Middle East'
-                                  },
-    'Argelia'                   : {
-                                    'country_en'    : 'Algeria',
-                                    'country_link'  : 'argelia',
-                                    'region'        : 'Africa'
-                                  },
-    'Argentina'                 : {
-                                    'country_en'    : 'Argentina',
-                                    'country_link'  : 'argentina',
-                                    'region'        : 'South America'
-                                  },
-    'Australia'                 : {
-                                    'country_en'    : 'Australia',
-                                    'country_link'  : 'australia',
-                                    'region'        : 'ANZ and Oceania'
-                                  },
-    'Austria'                   : {
-                                    'country_en'    : 'Austria',
-                                    'country_link'  : 'austria',
-                                    'region'        : 'Europe'
-                                  },
-    'Bélgica'                   : {
-                                    'country_en'    : 'Belgium',
-                                    'country_link'  : 'belgica',
-                                    'region'        : 'Europe'
-                                  },
-    'Bosnia-Herzegovina'        : {
-                                    'country_en'    : 'Bosnia and Herzegovina',
-                                    'country_link'  : 'bosnia-herzegovina',
-                                    'region'        : 'Europe'
-                                  },
-    'Brasil'                    : {
-                                    'country_en'    : 'Brazil',
-                                    'country_link'  : 'brasil',
-                                    'region'        : 'South America'
-                                  },
-    'Bulgaria'                  : {
-                                    'country_en'    : 'Bulgaria',
-                                    'country_link'  : 'bulgaria',
-                                    'region'        : 'Europe'
-                                  },
-    'Canadá'                    : {
-                                    'country_en'    : 'Canada',
-                                    'country_link'  : 'canada',
-                                    'region'        : 'North America'
-                                  },
-    'Chile'                     : {
-                                    'country_en'    : 'Chile',
-                                    'country_link'  : 'chile',
-                                    'region'        : 'South America'
-                                  },
-    'Colombia'                  : {
-                                    'country_en'    : 'Colombia',
-                                    'country_link'  : 'colombia',
-                                    'region'        : 'South America'
-                                  },
-    'Cuba'                      : {
-                                    'country_en'    : 'Cuba',
-                                    'country_link'  : 'cuba',
-                                    'region'        : 'Central America'
-                                  },
-    'Dinamarca'                 : {
-                                    'country_en'    : 'Denmark',
-                                    'country_link'  : 'dinamarca',
-                                    'region'        : 'Europe'
-                                  },
-    'Ecuador'                   : {
-                                    'country_en'    : 'Ecuador',
-                                    'country_link'  : 'ecuador',
-                                    'region'        : 'South America'
-                                  },
-    'Eslovaquia'                : {
-                                    'country_en'    : 'Slovakia',
-                                    'country_link'  : 'eslovaquia',
-                                    'region'        : 'Europe'
-                                  },
-    'España'                    : {
-                                    'country_en'    : 'Spain',
-                                    'country_link'  : 'espana',
-                                    'region'        : 'Europe'
-                                  },
-    'Estados Unidos'            : {
-                                    'country_en'    : 'United States',
-                                    'country_link'  : 'estados-unidos',
-                                    'region'        : 'North America'
-                                  },
-    'Francia'                   : {
-                                    'country_en'    : 'France',
-                                    'country_link'  : 'francia',
-                                    'region'        : 'Europe'
-                                  },
-    'Guinea-Bissáu'             : {
-                                    'country_en'    : 'Guinea-Bissau',
-                                    'country_link'  : 'guinea-bissau',
-                                    'region'        : 'Africa'
-                                  },
-    'Holanda'                   : {
-                                    'country_en'    : 'Netherlands',
-                                    'country_link'  : 'holanda',
-                                    'region'        : 'Europe'
-                                  },
-    'Hungría'                   : {
-                                    'country_en'    : 'Hungary',
-                                    'country_link'  : 'hungria',
-                                    'region'        : 'Europe'
-                                  },
-    'India'                     : {
-                                    'country_en'    : 'India',
-                                    'country_link'  : 'india',
-                                    'region'        : 'Asia'
-                                  },
-    'Irán'                      : {
-                                    'country_en'    : 'Iran',
-                                    'country_link'  : 'iran',
-                                    'region'        : 'Asia'
-                                  },
-    'Israel'                    : {
-                                    'country_en'    : 'Israel',
-                                    'country_link'  : 'israel',
-                                    'region'        : 'Middle East'
-                                  },
-    'Italia'                    : {
-                                    'country_en'    : 'Italy',
-                                    'country_link'  : 'italia',
-                                    'region'        : 'Europe'
-                                  },
-    'Luxemburgo'                : {
-                                    'country_en'    : 'Luxembourg',
-                                    'country_link'  : 'luxemburgo',
-                                    'region'        : 'Europe'
-                                  },
-    'México'                    : {
-                                    'country_en'    : 'Mexico',
-                                    'country_link'  : 'mexico',
-                                    'region'        : 'North America'
-                                  },
-    'Mozambique'                : {
-                                    'country_en'    : 'Mozambique',
-                                    'country_link'  : 'mozambique',
-                                    'region'        : 'Africa'
-                                  },
-    'Nicaragua'                 : {
-                                    'country_en'    : 'Nicaragua',
-                                    'country_link'  : 'nicaragua',
-                                    'region'        : 'Central America'
-                                  },
-    'Pakistán'                  : {
-                                    'country_en'    : 'Pakistan',
-                                    'country_link'  : 'pakistan',
-                                    'region'        : 'Asia'
-                                  },
-    'Palestina'                 : {
-                                    'country_en'    : 'Palestine',
-                                    'country_link'  : 'palestina',
-                                    'region'        : 'Middle East'
-                                  },
-    'Paraguay'                  : {
-                                    'country_en'    : 'Paraguay',
-                                    'country_link'  : 'paraguay',
-                                    'region'        : 'South America'
-                                  },
-    'Perú'                      : {
-                                    'country_en'    : 'Peru',
-                                    'country_link'  : 'peru',
-                                    'region'        : 'South America'
-                                  },
-    'Portugal'                  : {
-                                    'country_en'    : 'Portugal',
-                                    'country_link'  : 'portugal',
-                                    'region'        : 'Europe'
-                                  },
-    'Reino Unido'               : {
-                                    'country_en'    : 'United Kingdom',
-                                    'country_link'  : 'reino-unido',
-                                    'region'        : 'Europe'
-                                  },
-    'República Checa'           : {
-                                    'country_en'    : 'Czechia',
-                                    'country_link'  : 'republica-checa',
-                                    'region'        : 'Europe'
-                                  },
-    'República del Congo'       : {
-                                    'country_en'    : 'Republic of the Congo',
-                                    'country_link'  : 'republica-del-congo',
-                                    'region'        : 'Africa'
-                                  },
-    'República de Macedonia'    : {
-                                    'country_en'    : 'North Macedonia',
-                                    'country_link'  : 'macedonia',
-                                    'region'        : 'Europe'
-                                  },
-    'República Dominicana'      : {
-                                    'country_en'    : 'Dominican Republic',
-                                    'country_link'  : 'republica-dominicana',
-                                    'region'        : 'Asia'
-                                  },
-    'Rusia'                     : {
-                                    'country_en'    : 'Russia',
-                                    'country_link'  : 'rusia',
-                                    'region'        : 'Europe'
-                                  },
-    'Salvador'                  : {
-                                    'country_en'    : 'El Salvador',
-                                    'country_link'  : 'el-salvador',
-                                    'region'        : 'Central America'
-                                  },
-    'Serbia'                    : {
-                                    'country_en'    : 'Serbia',
-                                    'country_link'  : 'serbia',
-                                    'region'        : 'Europe'
-                                  },
-    'Turquía'                   : {
-                                    'country_en'    : 'Turkey',
-                                    'country_link'  : 'turquia',
-                                    'region'        : 'Middle East'
-                                  },
-    'Uruguay'                   : {
-                                    'country_en'    : 'Uruguay',
-                                    'country_link'  : 'uruguay',
-                                    'region'        : 'South America'
-                                  },
-    'Venezuela'                 : {
-                                    'country_en'    : 'Venezuela',
-                                    'country_link'  : 'venezuela',
-                                    'region'        : 'South America'
-                                  }
+    'Alemania': {
+        'country_en': 'Germany',
+        'country_link': 'alemania',
+        'region': 'Europe'
+    },
+    'Angola': {
+        'country_en': 'Angola',
+        'country_link': 'angola',
+        'region': 'Africa'
+    },
+    'Arabia Saudita': {
+        'country_en': 'Saudi Arabia',
+        'country_link': 'arabia-saudita',
+        'region': 'Middle East'
+    },
+    'Argelia': {
+        'country_en': 'Algeria',
+        'country_link': 'argelia',
+        'region': 'Africa'
+    },
+    'Argentina': {
+        'country_en': 'Argentina',
+        'country_link': 'argentina',
+        'region': 'South America'
+    },
+    'Australia': {
+        'country_en': 'Australia',
+        'country_link': 'australia',
+        'region': 'ANZ and Oceania'
+    },
+    'Austria': {
+        'country_en': 'Austria',
+        'country_link': 'austria',
+        'region': 'Europe'
+    },
+    'Bélgica': {
+        'country_en': 'Belgium',
+        'country_link': 'belgica',
+        'region': 'Europe'
+    },
+    'Bosnia-Herzegovina': {
+        'country_en': 'Bosnia and Herzegovina',
+        'country_link': 'bosnia-herzegovina',
+        'region': 'Europe'
+    },
+    'Brasil': {
+        'country_en': 'Brazil',
+        'country_link': 'brasil',
+        'region': 'South America'
+    },
+    'Bulgaria': {
+        'country_en': 'Bulgaria',
+        'country_link': 'bulgaria',
+        'region': 'Europe'
+    },
+    'Canadá': {
+        'country_en': 'Canada',
+        'country_link': 'canada',
+        'region': 'North America'
+    },
+    'Chile': {
+        'country_en': 'Chile',
+        'country_link': 'chile',
+        'region': 'South America'
+    },
+    'Colombia': {
+        'country_en': 'Colombia',
+        'country_link': 'colombia',
+        'region': 'South America'
+    },
+    'Cuba': {
+        'country_en': 'Cuba',
+        'country_link': 'cuba',
+        'region': 'Central America'
+    },
+    'Dinamarca': {
+        'country_en': 'Denmark',
+        'country_link': 'dinamarca',
+        'region': 'Europe'
+    },
+    'Ecuador': {
+        'country_en': 'Ecuador',
+        'country_link': 'ecuador',
+        'region': 'South America'
+    },
+    'Eslovaquia': {
+        'country_en': 'Slovakia',
+        'country_link': 'eslovaquia',
+        'region': 'Europe'
+    },
+    'España': {
+        'country_en': 'Spain',
+        'country_link': 'espana',
+        'region': 'Europe'
+    },
+    'Estados Unidos': {
+        'country_en': 'United States',
+        'country_link': 'estados-unidos',
+        'region': 'North America'
+    },
+    'Francia': {
+        'country_en': 'France',
+        'country_link': 'francia',
+        'region': 'Europe'
+    },
+    'Guinea-Bissáu': {
+        'country_en': 'Guinea-Bissau',
+        'country_link': 'guinea-bissau',
+        'region': 'Africa'
+    },
+    'Holanda': {
+        'country_en': 'Netherlands',
+        'country_link': 'holanda',
+        'region': 'Europe'
+    },
+    'Hungría': {
+        'country_en': 'Hungary',
+        'country_link': 'hungria',
+        'region': 'Europe'
+    },
+    'India': {
+        'country_en': 'India',
+        'country_link': 'india',
+        'region': 'Asia'
+    },
+    'Irán': {
+        'country_en': 'Iran',
+        'country_link': 'iran',
+        'region': 'Asia'
+    },
+    'Israel': {
+        'country_en': 'Israel',
+        'country_link': 'israel',
+        'region': 'Middle East'
+    },
+    'Italia': {
+        'country_en': 'Italy',
+        'country_link': 'italia',
+        'region': 'Europe'
+    },
+    'Luxemburgo': {
+        'country_en': 'Luxembourg',
+        'country_link': 'luxemburgo',
+        'region': 'Europe'
+    },
+    'México': {
+        'country_en': 'Mexico',
+        'country_link': 'mexico',
+        'region': 'North America'
+    },
+    'Mozambique': {
+        'country_en': 'Mozambique',
+        'country_link': 'mozambique',
+        'region': 'Africa'
+    },
+    'Nicaragua': {
+        'country_en': 'Nicaragua',
+        'country_link': 'nicaragua',
+        'region': 'Central America'
+    },
+    'Pakistán': {
+        'country_en': 'Pakistan',
+        'country_link': 'pakistan',
+        'region': 'Asia'
+    },
+    'Palestina': {
+        'country_en': 'Palestine',
+        'country_link': 'palestina',
+        'region': 'Middle East'
+    },
+    'Paraguay': {
+        'country_en': 'Paraguay',
+        'country_link': 'paraguay',
+        'region': 'South America'
+    },
+    'Perú': {
+        'country_en': 'Peru',
+        'country_link': 'peru',
+        'region': 'South America'
+    },
+    'Portugal': {
+        'country_en': 'Portugal',
+        'country_link': 'portugal',
+        'region': 'Europe'
+    },
+    'Reino Unido': {
+        'country_en': 'United Kingdom',
+        'country_link': 'reino-unido',
+        'region': 'Europe'
+    },
+    'República Checa': {
+        'country_en': 'Czechia',
+        'country_link': 'republica-checa',
+        'region': 'Europe'
+    },
+    'República del Congo': {
+        'country_en': 'Republic of the Congo',
+        'country_link': 'republica-del-congo',
+        'region': 'Africa'
+    },
+    'República de Macedonia': {
+        'country_en': 'North Macedonia',
+        'country_link': 'macedonia',
+        'region': 'Europe'
+    },
+    'República Dominicana': {
+        'country_en': 'Dominican Republic',
+        'country_link': 'republica-dominicana',
+        'region': 'Asia'
+    },
+    'Rusia': {
+        'country_en': 'Russia',
+        'country_link': 'rusia',
+        'region': 'Europe'
+    },
+    'Salvador': {
+        'country_en': 'El Salvador',
+        'country_link': 'el-salvador',
+        'region': 'Central America'
+    },
+    'Serbia': {
+        'country_en': 'Serbia',
+        'country_link': 'serbia',
+        'region': 'Europe'
+    },
+    'Turquía': {
+        'country_en': 'Turkey',
+        'country_link': 'turquia',
+        'region': 'Middle East'
+    },
+    'Uruguay': {
+        'country_en': 'Uruguay',
+        'country_link': 'uruguay',
+        'region': 'South America'
+    },
+    'Venezuela': {
+        'country_en': 'Venezuela',
+        'country_link': 'venezuela',
+        'region': 'South America'
+    }
 }
 
 
@@ -266,7 +269,8 @@ types = {
     'sports center'         : ['complexe sportif', 'sports complex', 'complejo de deporte'],
     'multipurpose center'   : ['espace', 'hall'],
     'port'                  : ['puerto', 'port'],
-    'neighborhood'          : ['población', 'village']
+    'neighborhood'          : ['población', 'village'],
+    'museum'                : ['museo', 'museum' , 'musée']
 }
 
 
@@ -494,6 +498,7 @@ data = {
     'oldest_known_year'          : [],
     'oldest_known_month'         : [],
     'oldest_known_day'           : [],
+    'oldest_known_source'        : [],
     'desc'                       : [],
     'desc_language'              : [],
     'alt_name'                   : [],
@@ -702,6 +707,12 @@ for (i, link) in enumerate(single_locale, start=1):
         oldest_known_day = list_days
     data['oldest_known_day'].append(oldest_known_day)
     print(f'Oldest known day: {oldest_known_day}')
+    #
+    # get OLDEST_KNOWN_SOURCE (null)
+    #
+    oldest_known_source = ''
+    data['oldest_known_source'].append(oldest_known_source)
+    print(f'Oldest known source: {oldest_known_source}')
     #
     # get DESC
     #
@@ -951,6 +962,12 @@ for (i, link) in enumerate(multi_locale, start=1):
         data['oldest_known_day'].append(oldest_known_day)
         print(f'Oldest known day: {oldest_known_day}')
         #
+        # get OLDEST_KNOWN_SOURCE (null)
+        #
+        oldest_known_source = ''
+        data['oldest_known_source'].append(oldest_known_source)
+        print(f'Oldest known source: {oldest_known_source}')
+        #
         # get DESC
         #
         desc = ''
@@ -1013,7 +1030,7 @@ print('\nDataFrame created:\n')
 print(data_df)
 
 # export dataframe to csv
-data_df.to_csv(f'{country_en}.csv')
+data_df.to_csv(f'{country_en}.csv', index=False)
 
 
 
