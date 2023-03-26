@@ -1,3 +1,6 @@
+# allende-scraper-main.py
+# main script for the scraping process. if a functionality has been tested to work, it goes here.
+
 # web scraping tutorial courtesy of https://www.educative.io/blog/python-web-scraping-tutorial
 
 
@@ -257,16 +260,16 @@ allende_countries = {
 
 # non-exhaustive lists of words that correspond to a specific type of establishment
 types = {
-    'street'                : ['calle', 'avenida', 'pasaje', 'rue', 'rua', 'avenue', 'circunvalación', 'boulevard', 'bulevar', 'street', 'straat', 'strada'],
+    'street'                : ['calle', 'avenida', 'pasaje', 'rue', 'rua', 'road', 'avenue', 'circunvalación', 'boulevard', 'bulevar', 'street', 'straat', 'strada'],
     'monument'              : ['monumento', 'escultura', 'monument', 'sculpture', 'busto', 'bust'],
     'park'                  : ['plaza', 'parque', 'square', 'park', 'place', 'plazoleta'],
-    'school'                : ['escuela', 'colegio', 'school', 'schule', 'école'],
-    'healthcare facility'   : ['hospital', 'salud'],
+    'school'                : ['escuela', 'colegio', 'school', 'college', 'schule', 'école'],
+    'healthcare facility'   : ['hospital', 'salud', 'healthcare', 'health'],
     'bridge'                : ['puente', 'bridge', 'pont', 'brücke'],
-    'sports center'         : ['complexe sportif', 'sports complex', 'complejo de deporte'],
+    'sports center'         : ['complexe sportif', 'sports complex', 'sports center', 'sports centre',  'complejo de deporte'],
     'multipurpose center'   : ['espace', 'hall'],
     'port'                  : ['puerto', 'port'],
-    'neighborhood'          : ['población', 'village'],
+    'neighborhood'          : ['población', 'village', 'hamlet'],
     'museum'                : ['museo', 'museum' , 'musée']
 }
 
@@ -518,47 +521,23 @@ data = {
 # every link is basically an article so we'll retrieve their contents
 for (i, link) in enumerate(single_locale, start=1):
     driver.get(link)
+
     #
     # we are only interested in the article itself, not the comments, sidebar, etc.
     #
-    article_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer(
-        "div", class_="post"), from_encoding='windows-1252', exclude_encodings=['unicode', 'utf-8'])
+    article_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer("div", class_="post")) #, from_encoding='windows-1252', exclude_encodings=['unicode', 'utf-8'])
     print(f'\n>>> Parsing single-locale article {str(i)} of {str(len(single_locale))}: {link}...\n')
     text = article_soup.get_text()
     lower_text = text.lower()
     print(text)
+
     #
     # get ID (null)
     #
     id = ''
     data['id'].append(id)
     print(f'ID: {id}')
-    #
-    # get NAME
-    #
-    name = article_soup.find("img", alt=True)
-    name = str(name)
-    name = re.search(r'alt="(.*?)"\s*', name)
-    try:
-        str(name.group(1))
-    except:
-        # fallback for when the article has no alt text for the main image for some reason
-        name = 'A memorial to Salvador Allende'
-    else:
-        name = str(name.group(1))
-    data['name'].append(name)
-    print(f'Name: {name}')
-    #
-    # get TYPE
-    # the dict used here is pretty rudimentary so this is prone to errors and needs human verification
-    #
-    type = ''
-    for key, value in types.items():
-        for type_item in value:
-            if type_item in name.lower():
-                type = key
-    data['type'].append(type)
-    print(f'Type: {type}')
+
     #
     # get COUNTRY
     #
@@ -569,14 +548,17 @@ for (i, link) in enumerate(single_locale, start=1):
     country_en = allende_countries[country_es]['country_en']
     data['country'].append(country_en)
     print(f'Country: {country_en}')
+
     #
     # get REGION
     #
     region = allende_countries[country_es]['region']
     data['region'].append(region)
     print(f'Region: {region}')
+
     #
     # get LOCALE_1
+    # we'll take the locale found in abacq as the default locale_1
     #
     locale_1 = article_soup.find("strong")
     locale_1 = str(locale_1)
@@ -590,50 +572,190 @@ for (i, link) in enumerate(single_locale, start=1):
         locale_1 = str(locale_1.group(1))
     else:
         locale_1 = str(locale_1.group(1))
-    data['locale_1'].append(locale_1)
-    print(f'Locale 1: {locale_1}')
     #
-    # get LOCALE_2 (null)
+    # when we have this abacq locale, we then cross-check this with OpenStreetMap
     #
-    locale_2 = ''
+    locale_link = f'https://www.openstreetmap.org/search?query=Salvador%20Allende%20{locale_1}%20{country_en}'
+    driver.get(locale_link)
+    osm_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer("div", class_="search_results_entry mx-n3"))
+    osm_text = osm_soup.get_text()
+    #
+    # if there are no results found, keep the default locale=1
+    #
+    if 'No results found' in osm_text:
+        print('No addresses found in OpenStreetMap. Will use the locale derived from the article...')
+        data['locale_1'].append(locale_1)
+        print(f'Locale 1: {locale_1}')
+    #
+    # else, go through each search result and have the user verify it
+    #
+    else:
+        locale_results_list = osm_soup.find_all("a")
+        # a single result looks like this - we can derive lots of info from here once user verifies that it looks good
+        #
+        # <a class="set_position" data-lat="-12.1102763" data-lon="-77.0104283" 
+        # data-min-lat="-12.1103037" data-max-lat="-12.1102452" data-min-lon="-77.0109212" data-max-lon="-77.0097999" 
+        # data-prefix="Residential Road" data-name="Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru" 
+        # data-type="way" data-id="426845566" href="/way/426845566">Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru</a>
+        #
+        if len(locale_results_list) == 0:
+            print('No addresses found in OpenStreetMap. Will use the locale derived from the article...')
+            data['locale_1'].append(locale_1)
+            print(f'Locale 1: {locale_1}')
+        else:
+            print(f'{str(len(locale_results_list)-1)} possible address(es) found in OpenStreetMap.')
+            for result in locale_results_list:
+                result = str(result)
+                osm_address = re.search(r'data-name="(.*?)"', result)
+                osm_address = str(osm_address.group(1))
+                #
+                # have user verify the address - this decides what this loop should do next
+                #
+                print(f'Please verify if this address matches the place in this article:\n{osm_address}')
+                user_verification = input('>>> Type y if yes, n if no: ')
+                if user_verification == 'n' and len(locale_results_list) == 1:
+                    print('OpenStreetMap address does not match the place in this article. Will use the locale derived from the article...')
+                    data['locale_1'].append(locale_1)
+                    print(f'Locale 1: {locale_1}')
+                elif user_verification == 'n' and len(locale_results_list) > 1:
+                    continue
+                elif user_verification == 'y':
+                    # we'll save the whole result in a variable for later parsing. we can then close the loop.
+                    osm_info = result
+                    break
+
+        #
+        # when we have osm_info, we'll take locale details from its osm_address by splitting it.
+        # sample split:
+        # ['Salvador Allende', 'Villa Victoria', 'Surquillo', 'Province of Lima', 'Lima Metropolitan Area', 'Lima', '15000', 'Peru']
+        # index 0 is the place's name, -1 is the country, -2 is the zip code, -3 is locale_1, etc...
+        #
+        try:
+            osm_address = osm_address.split(', ')
+            locale_1 = osm_address[-3]
+            data['locale_1'].append(locale_1)
+            print(f'Locale 1: {locale_1}')
+        except:
+            pass
+
+    #
+    # if the place has an OSM link, we'll get values from there. otherwise, we'll take from the article or make the value null.
+    #
+
+    #
+    # get LOCALE_2
+    #
+    try:
+        locale_2 = osm_address[-4]
+    except:
+        locale_2 = ''
     data['locale_2'].append(locale_2)
     print(f'Locale 2: {locale_2}')
+
     #
-    # get LOCALE_3 (null)
+    # get LOCALE_3
     #
-    locale_3 = ''
+    try:
+        locale_3 = osm_address[-5]
+    except:
+        locale_3 = ''
     data['locale_3'].append(locale_3)
     print(f'Locale 3: {locale_3}')
+
     #
-    # get LOCALE_4 (null)
+    # get LOCALE_4
     #
-    locale_4 = ''
+    try:
+        locale_4 = osm_address[-6]
+    except:
+        locale_4 = ''
     data['locale_4'].append(locale_4)
     print(f'Locale 4: {locale_4}')
+
     #
-    # get LOCALE_5 (null)
+    # get LOCALE_5
     #
-    locale_5 = ''
+    try:
+        locale_5 = osm_address[-7]
+    except:
+        locale_5 = ''
     data['locale_5'].append(locale_5)
     print(f'Locale 5: {locale_5}')
+
     #
-    # get ZIP_CODE (null)
+    # get ZIP_CODE
     #
-    zip_code = ''
+    try:
+        zip_code = osm_address[-2]
+    except:
+        zip_code = ''
     data['zip_code'].append(zip_code)
     print(f'Zip code: {zip_code}')
+
     #
     # get LATITUDE (null)
     #
-    latitude = ''
+    try:
+        latitude = re.search(r'data-lat="(.*?)"', osm_info)
+        latitude = float(latitude.group(1))
+    except:
+        latitude = ''
     data['latitude'].append(latitude)
     print(f'Latitude: {latitude}')
+
     #
     # get LONGITUDE (null)
     #
-    longitude = ''
+    try:
+        longitude = re.search(r'data-lon="(.*?)"', osm_info)
+        longitude = float(longitude.group(1))
+    except:
+        longitude = ''
     data['longitude'].append(longitude)
     print(f'Longitude: {longitude}')
+
+    #
+    # get NAME
+    #
+    try:
+        # get OSM name if available
+        name = osm_address[0]
+    except:
+        # if not, get it from the alt text of the article's main image
+        name = article_soup.find("img", alt=True)
+        name = str(name)
+        name = re.search(r'alt="(.*?)"\s*', name)
+        try:
+            name = str(name.group(1))
+        except:
+            # fallback for when there's neither OSM name nor alt text
+            name = 'A memorial to Salvador Allende'
+    data['name'].append(name)
+    print(f'Name: {name}')
+
+    #
+    # get TYPE
+    # the dict used here is pretty rudimentary so this is prone to errors and needs human verification
+    #
+    type = ''
+    # get OSM type if available
+    try:
+        type = re.search(r'data-prefix="(.*?)"', osm_info)
+        type = str(type.group(1))
+    except:
+        # if not, derive it from NAME (which itself is either from OSM or the article)
+        for key, value in types.items():
+            for type_item in value:
+                if type_item in name.lower():
+                    type = key
+    else:
+        for key, value in types.items():
+            for type_item in value:
+                if type_item in type.lower():
+                    type = key
+    data['type'].append(type)
+    print(f'Type: {type}')
+
     #
     # get OLDEST_KNOWN_YEAR
     # retrieve the year from the url; when an older year is found within the text, get that instead
@@ -648,6 +770,7 @@ for (i, link) in enumerate(single_locale, start=1):
             oldest_known_year = year
     data['oldest_known_year'].append(oldest_known_year)
     print(f'Oldest known year: {oldest_known_year}')
+
     #
     # get OLDEST_KNOWN_MONTH
     # retrieve the month from the url; when another month is found within the text, get that instead
@@ -655,8 +778,10 @@ for (i, link) in enumerate(single_locale, start=1):
     #
     oldest_known_month = re.search(r'\d{4}\/(\d{2})\/\d{2}', link)
     oldest_known_month = months[oldest_known_month.group(1)]
+    #
     # compare oldest_known_year to the year in the url.
     # if they're different (i.e. we derived the year from the text), we'll proceed with collecting months_in_text.
+    #
     year_in_url = re.search(r'(\d{4})', link)
     year_in_url = int(year_in_url.group(1))
     months_in_text = re.findall(
@@ -672,6 +797,7 @@ for (i, link) in enumerate(single_locale, start=1):
         oldest_known_month = list_months
     data['oldest_known_month'].append(oldest_known_month)
     print(f'Oldest known month: {oldest_known_month}')
+
     #
     # get OLDEST_KNOWN_DAY
     # retrieve the day from the url; when another day is found within the text, get that instead
@@ -683,11 +809,15 @@ for (i, link) in enumerate(single_locale, start=1):
         oldest_known_day = days[oldest_known_day]
     else:
         oldest_known_day = int(oldest_known_day)
+    #
     # compare oldest_known_year to the year in the url.
     # if they're different (i.e. we derived the year from the text), we'll proceed with collecting days_in_text.
+    #
     days_in_text = re.findall(r'(\d{1,2})\s+', lower_text)
     days_in_text = list(days_in_text)
+    #
     # remove numbers that are invalid days of a month
+    #
     for day in days_in_text:
         if int(day) > int(31):
             days_in_text.remove(day)
@@ -704,12 +834,14 @@ for (i, link) in enumerate(single_locale, start=1):
         oldest_known_day = list_days
     data['oldest_known_day'].append(oldest_known_day)
     print(f'Oldest known day: {oldest_known_day}')
+
     #
     # get OLDEST_KNOWN_SOURCE (null)
     #
     oldest_known_source = ''
     data['oldest_known_source'].append(oldest_known_source)
     print(f'Oldest known source: {oldest_known_source}')
+
     #
     # get DESC
     #
@@ -722,6 +854,7 @@ for (i, link) in enumerate(single_locale, start=1):
         desc += desc_item + '\n'
     data['desc'].append(desc)
     print(f'Desc: {desc}')
+
     #
     # get DESC_LANGUAGE (null)
     # won't assume anything here for now because most of the descriptions I see are in Spanish, regardless of the region
@@ -729,36 +862,49 @@ for (i, link) in enumerate(single_locale, start=1):
     desc_language = ''
     data['desc_language'].append(desc_language)
     print(f'Desc language: {desc_language}')
+
     #
     # get ALT_NAME (null)
     #
     alt_name = ''
     data['alt_name'].append(alt_name)
     print(f'Alt name: {alt_name}')
+
     #
     # get FORMER_NAME (null)
     #
     former_name = ''
     data['former_name'].append(former_name)
     print(f'Former name: {former_name}')
+
     #
-    # get VERIFIED_IN_MAPS (default to 0, will get 1 later on when verified)
+    # get VERIFIED_IN_MAPS (default to 0, will get 1 when it has OSM info)
     #
-    verified_in_maps = 0
+    if 'osm_info' in globals():
+        verified_in_maps = 1
+    else:
+        verified_in_maps = 0
     data['verified_in_maps'].append(verified_in_maps)
     print(f'Verified in maps: {verified_in_maps}')
+
     #
-    # get OPENSTREETMAP_LINK (null)
+    # get OPENSTREETMAP_LINK
     #
-    openstreetmap_link = ''
+    try:
+        openstreetmap_link = re.search(r'href="(.*?)"', osm_info)
+        openstreetmap_link = f'https://www.openstreetmap.org{str(openstreetmap_link.group(1))}'
+    except:
+        openstreetmap_link = ''
     data['openstreetmap_link'].append(openstreetmap_link)
     print(f'OpenStreetMap link: {openstreetmap_link}')
+
     #
     # get GOOGLE_MAPS_LINK (null)
     #
     google_maps_link = ''
     data['google_maps_link'].append(google_maps_link)
     print(f'Google Maps link: {google_maps_link}')
+
     #
     # get ABACQ_REFERENCE
     # basically the url we're working with
@@ -777,18 +923,21 @@ for (i, link) in enumerate(single_locale, start=1):
 # every link is basically an article so we'll retrieve their contents
 for (i, link) in enumerate(multi_locale, start=1):
     driver.get(link)
+
     #
     # we are only interested in the article itself, not the comments, sidebar, etc.
     #
-    article_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer(
-        "div", class_="post"), from_encoding='windows-1252', exclude_encodings=['unicode', 'utf-8'])
+    article_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer("div", class_="post")) #, from_encoding='windows-1252', exclude_encodings=['unicode', 'utf-8'])
     print(f'\n>>> Parsing multi-locale article {str(i)} of {str(len(multi_locale))}: {link}...\n')
     text = article_soup.get_text()
     lower_text = text.lower()
     print(text)
+
     #
     # honestly, the multi-locale articles are less organized but are concise enough for manual human investigation.
     # each locale is still within <strong> tags so we'll take advantage of those
+    #
+
     #
     # get all LOCALE_1
     #
@@ -800,31 +949,19 @@ for (i, link) in enumerate(multi_locale, start=1):
         locale_1 = re.search(r'<strong>(.*)<\/strong>', locale_1)
         locale_1 = str(locale_1.group(1))
         locale_1_list.append(locale_1)
-    # for each LOCALE_1, give them the same information as the rest of the article
+
+    #
+    # for each LOCALE_1, give them the same base information as the rest of the article
+    #
     for locale_1 in locale_1_list:
+
         #
         # get ID (null)
         #
         id = ''
         data['id'].append(id)
         print(f'ID: {id}')
-        #
-        # get NAME
-        #
-        name = 'A memorial to Salvador Allende'
-        data['name'].append(name)
-        print(f'Name: {name}')
-        #
-        # get TYPE
-        # the dict used here is pretty rudimentary so this is prone to errors and needs human verification
-        #
-        type = ''
-        for key, value in types.items():
-            for type_item in value:
-                if type_item in lower_text:
-                    type = key
-        data['type'].append(type)
-        print(f'Type: {type}')
+
         #
         # get COUNTRY
         #
@@ -835,59 +972,203 @@ for (i, link) in enumerate(multi_locale, start=1):
         country_en = allende_countries[country_es]['country_en']
         data['country'].append(country_en)
         print(f'Country: {country_en}')
+
         #
         # get REGION
         #
         region = allende_countries[country_es]['region']
         data['region'].append(region)
         print(f'Region: {region}')
+
         #
-        # get LOCALE_1
+        # cross-check LOCALE_1 with OSM
         #
-        data['locale_1'].append(locale_1)
-        print(f'Locale: {locale_1}')
+        locale_link = f'https://www.openstreetmap.org/search?query=Salvador%20Allende%20{locale_1}%20{country_en}'
+        driver.get(locale_link)
+        osm_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer(
+            "div", class_="search_results_entry mx-n3"))
+        osm_text = osm_soup.get_text()
         #
-        # get LOCALE_2 (null)
+        # if there are no results found, keep the default locale_1
         #
-        locale_2 = ''
+        if 'No results found' in osm_text:
+            print('No addresses found in OpenStreetMap. Will use the locale derived from the article...')
+            data['locale_1'].append(locale_1)
+            print(f'Locale 1: {locale_1}')
+        #
+        # else, go through each search result and have the user verify it
+        #
+        else:
+            locale_results_list = osm_soup.find_all("a")
+            # a single result looks like this - we can derive lots of info from here once user verifies that it looks good
+            #
+            # <a class="set_position" data-lat="-12.1102763" data-lon="-77.0104283"
+            # data-min-lat="-12.1103037" data-max-lat="-12.1102452" data-min-lon="-77.0109212" data-max-lon="-77.0097999"
+            # data-prefix="Residential Road" data-name="Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru"
+            # data-type="way" data-id="426845566" href="/way/426845566">Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru</a>
+            #
+            if len(locale_results_list) == 0:
+                print(
+                    'No addresses found in OpenStreetMap. Will use the locale derived from the article...')
+                data['locale_1'].append(locale_1)
+                print(f'Locale 1: {locale_1}')
+            else:
+                print(
+                    f'{str(len(locale_results_list)-1)} possible address(es) found in OpenStreetMap.')
+                for result in locale_results_list:
+                    result = str(result)
+                    osm_address = re.search(r'data-name="(.*?)"', result)
+                    osm_address = str(osm_address.group(1))
+                    #
+                    # have user verify the address - this decides what this loop should do next
+                    #
+                    print(
+                        f'Please verify if this address matches the place in this article:\n{osm_address}')
+                    user_verification = input('>>> Type y if yes, n if no: ')
+                    if user_verification == 'n' and len(locale_results_list) == 1:
+                        print(
+                            'OpenStreetMap address does not match the place in this article. Will use the locale derived from the article...')
+                        data['locale_1'].append(locale_1)
+                        print(f'Locale 1: {locale_1}')
+                    elif user_verification == 'n' and len(locale_results_list) > 1:
+                        continue
+                    elif user_verification == 'y':
+                        # we'll save the whole result in a variable for later parsing. we can then close the loop.
+                        osm_info = result
+                        break
+
+            #
+            # when we have osm_info, we'll take locale details from its osm_address by splitting it.
+            # sample split:
+            # ['Salvador Allende', 'Villa Victoria', 'Surquillo', 'Province of Lima', 'Lima Metropolitan Area', 'Lima', '15000', 'Peru']
+            # index 0 is the place's name, -1 is the country, -2 is the zip code, -3 is locale_1, etc...
+            #
+            try:
+                osm_address = osm_address.split(', ')
+                locale_1 = osm_address[-3]
+                data['locale_1'].append(locale_1)
+                print(f'Locale 1: {locale_1}')
+            except:
+                pass
+
+        #
+        # if the place has an OSM link, we'll get values from there. otherwise, we'll take from the article or make the value null.
+        #
+
+        #
+        # get LOCALE_2
+        #
+        try:
+            locale_2 = osm_address[-4]
+        except:
+            locale_2 = ''
         data['locale_2'].append(locale_2)
         print(f'Locale 2: {locale_2}')
+
         #
-        # get LOCALE_3 (null)
+        # get LOCALE_3
         #
-        locale_3 = ''
+        try:
+            locale_3 = osm_address[-5]
+        except:
+            locale_3 = ''
         data['locale_3'].append(locale_3)
         print(f'Locale 3: {locale_3}')
+
         #
-        # get LOCALE_4 (null)
+        # get LOCALE_4
         #
-        locale_4 = ''
+        try:
+            locale_4 = osm_address[-6]
+        except:
+            locale_4 = ''
         data['locale_4'].append(locale_4)
         print(f'Locale 4: {locale_4}')
+
         #
-        # get LOCALE_5 (null)
+        # get LOCALE_5
         #
-        locale_5 = ''
+        try:
+            locale_5 = osm_address[-7]
+        except:
+            locale_5 = ''
         data['locale_5'].append(locale_5)
         print(f'Locale 5: {locale_5}')
+
         #
-        # get ZIP_CODE (null)
+        # get ZIP_CODE
         #
-        zip_code = ''
+        try:
+            zip_code = osm_address[-2]
+        except:
+            zip_code = ''
         data['zip_code'].append(zip_code)
         print(f'Zip code: {zip_code}')
+
         #
         # get LATITUDE (null)
         #
-        latitude = ''
+        try:
+            latitude = re.search(r'data-lat="(.*?)"', osm_info)
+            latitude = float(latitude.group(1))
+        except:
+            latitude = ''
         data['latitude'].append(latitude)
         print(f'Latitude: {latitude}')
+
         #
         # get LONGITUDE (null)
         #
-        longitude = ''
+        try:
+            longitude = re.search(r'data-lon="(.*?)"', osm_info)
+            longitude = float(longitude.group(1))
+        except:
+            longitude = ''
         data['longitude'].append(longitude)
         print(f'Longitude: {longitude}')
+
+        #
+        # get NAME
+        #
+        try:
+            # get OSM name if available
+            name = osm_address[0]
+        except:
+            # if not, get it from the alt text of the article's main image
+            name = article_soup.find("img", alt=True)
+            name = str(name)
+            name = re.search(r'alt="(.*?)"\s*', name)
+            try:
+                name = str(name.group(1))
+            except:
+                # fallback for when there's neither OSM name nor alt text
+                name = 'A memorial to Salvador Allende'
+        data['name'].append(name)
+        print(f'Name: {name}')
+
+        #
+        # get TYPE
+        # the dict used here is pretty rudimentary so this is prone to errors and needs human verification
+        #
+        type = ''
+        # get OSM type if available
+        try:
+            type = re.search(r'data-prefix="(.*?)"', osm_info)
+            type = str(type.group(1))
+        except:
+            # if not, derive it from NAME (which itself is either from OSM or the article)
+            for key, value in types.items():
+                for type_item in value:
+                    if type_item in name.lower():
+                        type = key
+        else:
+            for key, value in types.items():
+                for type_item in value:
+                    if type_item in type.lower():
+                        type = key
+        data['type'].append(type)
+        print(f'Type: {type}')
+
         #
         # get OLDEST_KNOWN_YEAR
         # retrieve the year from the url; when an older year is found within the text, get that instead
@@ -902,6 +1183,7 @@ for (i, link) in enumerate(multi_locale, start=1):
                 oldest_known_year = year
         data['oldest_known_year'].append(oldest_known_year)
         print(f'Oldest known year: {oldest_known_year}')
+
         #
         # get OLDEST_KNOWN_MONTH
         # retrieve the month from the url; when another month is found within the text, get that instead
@@ -909,8 +1191,10 @@ for (i, link) in enumerate(multi_locale, start=1):
         #
         oldest_known_month = re.search(r'\d{4}\/(\d{2})\/\d{2}', link)
         oldest_known_month = months[oldest_known_month.group(1)]
+        #
         # compare oldest_known_year to the year in the url.
         # if they're different (i.e. we derived the year from the text), we'll proceed with collecting months_in_text.
+        #
         year_in_url = re.search(r'(\d{4})', link)
         year_in_url = int(year_in_url.group(1))
         months_in_text = re.findall(
@@ -926,6 +1210,7 @@ for (i, link) in enumerate(multi_locale, start=1):
             oldest_known_month = list_months
         data['oldest_known_month'].append(oldest_known_month)
         print(f'Oldest known month: {oldest_known_month}')
+
         #
         # get OLDEST_KNOWN_DAY
         # retrieve the day from the url; when another day is found within the text, get that instead
@@ -937,11 +1222,15 @@ for (i, link) in enumerate(multi_locale, start=1):
             oldest_known_day = days[oldest_known_day]
         else:
             oldest_known_day = int(oldest_known_day)
+        #
         # compare oldest_known_year to the year in the url.
         # if they're different (i.e. we derived the year from the text), we'll proceed with collecting days_in_text.
+        #
         days_in_text = re.findall(r'(\d{1,2})\s+', lower_text)
         days_in_text = list(days_in_text)
+        #
         # remove numbers that are invalid days of a month
+        #
         for day in days_in_text:
             if int(day) > int(31):
                 days_in_text.remove(day)
@@ -958,18 +1247,21 @@ for (i, link) in enumerate(multi_locale, start=1):
             oldest_known_day = list_days
         data['oldest_known_day'].append(oldest_known_day)
         print(f'Oldest known day: {oldest_known_day}')
+
         #
         # get OLDEST_KNOWN_SOURCE (null)
         #
         oldest_known_source = ''
         data['oldest_known_source'].append(oldest_known_source)
         print(f'Oldest known source: {oldest_known_source}')
+
         #
         # get DESC
         #
         desc = ''
         data['desc'].append(desc)
         print(f'Desc: {desc}\n')
+
         #
         # get DESC_LANGUAGE (null)
         # won't assume anything here for now because most of the descriptions I see are in Spanish, regardless of the region
@@ -977,41 +1269,55 @@ for (i, link) in enumerate(multi_locale, start=1):
         desc_language = ''
         data['desc_language'].append(desc_language)
         print(f'Desc language: {desc_language}')
+
         #
         # get ALT_NAME (null)
         #
         alt_name = ''
         data['alt_name'].append(alt_name)
         print(f'Alt name: {alt_name}')
+
         #
         # get FORMER_NAME (null)
         #
         former_name = ''
         data['former_name'].append(former_name)
         print(f'Former name: {former_name}')
+
         #
-        # get VERIFIED_IN_MAPS (default to 0, will get 1 later on when verified)
+        # get VERIFIED_IN_MAPS (default to 0, will get 1 when it has OSM info)
         #
-        verified_in_maps = 0
+        if 'osm_info' in globals():
+            verified_in_maps = 1
+        else:
+            verified_in_maps = 0
         data['verified_in_maps'].append(verified_in_maps)
         print(f'Verified in maps: {verified_in_maps}')
+
         #
-        # get OPENSTREETMAP_LINK (null)
+        # get OPENSTREETMAP_LINK
         #
-        openstreetmap_link = ''
+        try:
+            openstreetmap_link = re.search(r'href="(.*?)"', osm_info)
+            openstreetmap_link = f'https://www.openstreetmap.org{str(openstreetmap_link.group(1))}'
+        except:
+            openstreetmap_link = ''
         data['openstreetmap_link'].append(openstreetmap_link)
         print(f'OpenStreetMap link: {openstreetmap_link}')
+
         #
         # get GOOGLE_MAPS_LINK (null)
         #
         google_maps_link = ''
         data['google_maps_link'].append(google_maps_link)
         print(f'Google Maps link: {google_maps_link}')
+
         #
         # get ABACQ_REFERENCE
         # basically the url we're working with
         #
         data['abacq_reference'].append(link)
+
 
 
 # ------------------------------------------------------ #
@@ -1026,19 +1332,11 @@ data_df = pd.DataFrame(data=data)
 print('\nDataFrame created:\n')
 print(data_df)
 
-# export dataframe to csv
-data_df.to_csv(f'{country_en}.csv', index=False)
+# export dataframe - xlsx supports unicode, so no more encoding fiascos compared to saving to csv
+data_df.to_excel(f'{country_en}.xlsx', index=False)
 
 
 
 # ------------------------------------------------------ #
-
-
-
-### REMARKS ###
-
-
-# I don't know how to fix the replacement characters (question marks) because the website's encoding is messed up.
-# here https://www.i18nqa.com/debug/utf8-debug.html there is a table for the correct characters vs. how they are printed in the csv.
 
 

@@ -575,7 +575,7 @@ for (i, link) in enumerate(single_locale, start=1):
     #
     # when we have this abacq locale, we then cross-check this with OpenStreetMap
     #
-    locale_link = f'https://www.openstreetmap.org/search?query=Salvador%20Allende%20{country_en}%20{locale_1}'
+    locale_link = f'https://www.openstreetmap.org/search?query=Salvador%20Allende%20{locale_1}%20{country_en}'
     driver.get(locale_link)
     osm_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer("div", class_="search_results_entry mx-n3"))
     osm_text = osm_soup.get_text()
@@ -623,7 +623,7 @@ for (i, link) in enumerate(single_locale, start=1):
                     # we'll save the whole result in a variable for later parsing. we can then close the loop.
                     osm_info = result
                     break
-                
+
         #
         # when we have osm_info, we'll take locale details from its osm_address by splitting it.
         # sample split:
@@ -688,7 +688,7 @@ for (i, link) in enumerate(single_locale, start=1):
     try:
         zip_code = osm_address[-2]
     except:
-        locale_2 = ''
+        zip_code = ''
     data['zip_code'].append(zip_code)
     print(f'Zip code: {zip_code}')
 
@@ -937,6 +937,8 @@ for (i, link) in enumerate(multi_locale, start=1):
     # honestly, the multi-locale articles are less organized but are concise enough for manual human investigation.
     # each locale is still within <strong> tags so we'll take advantage of those
     #
+
+    #
     # get all LOCALE_1
     #
     locale_1_soup = article_soup.find_all("strong")
@@ -948,7 +950,9 @@ for (i, link) in enumerate(multi_locale, start=1):
         locale_1 = str(locale_1.group(1))
         locale_1_list.append(locale_1)
 
-    # for each LOCALE_1, give them the same information as the rest of the article
+    #
+    # for each LOCALE_1, give them the same base information as the rest of the article
+    #
     for locale_1 in locale_1_list:
 
         #
@@ -957,25 +961,6 @@ for (i, link) in enumerate(multi_locale, start=1):
         id = ''
         data['id'].append(id)
         print(f'ID: {id}')
-
-        #
-        # get NAME
-        #
-        name = 'A memorial to Salvador Allende'
-        data['name'].append(name)
-        print(f'Name: {name}')
-
-        #
-        # get TYPE
-        # the dict used here is pretty rudimentary so this is prone to errors and needs human verification
-        #
-        type = ''
-        for key, value in types.items():
-            for type_item in value:
-                if type_item in lower_text:
-                    type = key
-        data['type'].append(type)
-        print(f'Type: {type}')
 
         #
         # get COUNTRY
@@ -996,59 +981,193 @@ for (i, link) in enumerate(multi_locale, start=1):
         print(f'Region: {region}')
 
         #
-        # get LOCALE_1
+        # cross-check LOCALE_1 with OSM
         #
-        data['locale_1'].append(locale_1)
-        print(f'Locale 1: {locale_1}')
+        locale_link = f'https://www.openstreetmap.org/search?query=Salvador%20Allende%20{locale_1}%20{country_en}'
+        driver.get(locale_link)
+        osm_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer(
+            "div", class_="search_results_entry mx-n3"))
+        osm_text = osm_soup.get_text()
+        #
+        # if there are no results found, keep the default locale_1
+        #
+        if 'No results found' in osm_text:
+            print('No addresses found in OpenStreetMap. Will use the locale derived from the article...')
+            data['locale_1'].append(locale_1)
+            print(f'Locale 1: {locale_1}')
+        #
+        # else, go through each search result and have the user verify it
+        #
+        else:
+            locale_results_list = osm_soup.find_all("a")
+            # a single result looks like this - we can derive lots of info from here once user verifies that it looks good
+            #
+            # <a class="set_position" data-lat="-12.1102763" data-lon="-77.0104283"
+            # data-min-lat="-12.1103037" data-max-lat="-12.1102452" data-min-lon="-77.0109212" data-max-lon="-77.0097999"
+            # data-prefix="Residential Road" data-name="Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru"
+            # data-type="way" data-id="426845566" href="/way/426845566">Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru</a>
+            #
+            if len(locale_results_list) == 0:
+                print(
+                    'No addresses found in OpenStreetMap. Will use the locale derived from the article...')
+                data['locale_1'].append(locale_1)
+                print(f'Locale 1: {locale_1}')
+            else:
+                print(
+                    f'{str(len(locale_results_list)-1)} possible address(es) found in OpenStreetMap.')
+                for result in locale_results_list:
+                    result = str(result)
+                    osm_address = re.search(r'data-name="(.*?)"', result)
+                    osm_address = str(osm_address.group(1))
+                    #
+                    # have user verify the address - this decides what this loop should do next
+                    #
+                    print(
+                        f'Please verify if this address matches the place in this article:\n{osm_address}')
+                    user_verification = input('>>> Type y if yes, n if no: ')
+                    if user_verification == 'n' and len(locale_results_list) == 1:
+                        print(
+                            'OpenStreetMap address does not match the place in this article. Will use the locale derived from the article...')
+                        data['locale_1'].append(locale_1)
+                        print(f'Locale 1: {locale_1}')
+                    elif user_verification == 'n' and len(locale_results_list) > 1:
+                        continue
+                    elif user_verification == 'y':
+                        # we'll save the whole result in a variable for later parsing. we can then close the loop.
+                        osm_info = result
+                        break
+
+            #
+            # when we have osm_info, we'll take locale details from its osm_address by splitting it.
+            # sample split:
+            # ['Salvador Allende', 'Villa Victoria', 'Surquillo', 'Province of Lima', 'Lima Metropolitan Area', 'Lima', '15000', 'Peru']
+            # index 0 is the place's name, -1 is the country, -2 is the zip code, -3 is locale_1, etc...
+            #
+            try:
+                osm_address = osm_address.split(', ')
+                locale_1 = osm_address[-3]
+                data['locale_1'].append(locale_1)
+                print(f'Locale 1: {locale_1}')
+            except:
+                pass
 
         #
-        # get LOCALE_2 (null)
+        # if the place has an OSM link, we'll get values from there. otherwise, we'll take from the article or make the value null.
         #
-        locale_2 = ''
+
+        #
+        # get LOCALE_2
+        #
+        try:
+            locale_2 = osm_address[-4]
+        except:
+            locale_2 = ''
         data['locale_2'].append(locale_2)
         print(f'Locale 2: {locale_2}')
 
         #
-        # get LOCALE_3 (null)
+        # get LOCALE_3
         #
-        locale_3 = ''
+        try:
+            locale_3 = osm_address[-5]
+        except:
+            locale_3 = ''
         data['locale_3'].append(locale_3)
         print(f'Locale 3: {locale_3}')
 
         #
-        # get LOCALE_4 (null)
+        # get LOCALE_4
         #
-        locale_4 = ''
+        try:
+            locale_4 = osm_address[-6]
+        except:
+            locale_4 = ''
         data['locale_4'].append(locale_4)
         print(f'Locale 4: {locale_4}')
 
         #
-        # get LOCALE_5 (null)
+        # get LOCALE_5
         #
-        locale_5 = ''
+        try:
+            locale_5 = osm_address[-7]
+        except:
+            locale_5 = ''
         data['locale_5'].append(locale_5)
         print(f'Locale 5: {locale_5}')
 
         #
-        # get ZIP_CODE (null)
+        # get ZIP_CODE
         #
-        zip_code = ''
+        try:
+            zip_code = osm_address[-2]
+        except:
+            zip_code = ''
         data['zip_code'].append(zip_code)
         print(f'Zip code: {zip_code}')
 
         #
         # get LATITUDE (null)
         #
-        latitude = ''
+        try:
+            latitude = re.search(r'data-lat="(.*?)"', osm_info)
+            latitude = float(latitude.group(1))
+        except:
+            latitude = ''
         data['latitude'].append(latitude)
         print(f'Latitude: {latitude}')
 
         #
         # get LONGITUDE (null)
         #
-        longitude = ''
+        try:
+            longitude = re.search(r'data-lon="(.*?)"', osm_info)
+            longitude = float(longitude.group(1))
+        except:
+            longitude = ''
         data['longitude'].append(longitude)
         print(f'Longitude: {longitude}')
+
+        #
+        # get NAME
+        #
+        try:
+            # get OSM name if available
+            name = osm_address[0]
+        except:
+            # if not, get it from the alt text of the article's main image
+            name = article_soup.find("img", alt=True)
+            name = str(name)
+            name = re.search(r'alt="(.*?)"\s*', name)
+            try:
+                name = str(name.group(1))
+            except:
+                # fallback for when there's neither OSM name nor alt text
+                name = 'A memorial to Salvador Allende'
+        data['name'].append(name)
+        print(f'Name: {name}')
+
+        #
+        # get TYPE
+        # the dict used here is pretty rudimentary so this is prone to errors and needs human verification
+        #
+        type = ''
+        # get OSM type if available
+        try:
+            type = re.search(r'data-prefix="(.*?)"', osm_info)
+            type = str(type.group(1))
+        except:
+            # if not, derive it from NAME (which itself is either from OSM or the article)
+            for key, value in types.items():
+                for type_item in value:
+                    if type_item in name.lower():
+                        type = key
+        else:
+            for key, value in types.items():
+                for type_item in value:
+                    if type_item in type.lower():
+                        type = key
+        data['type'].append(type)
+        print(f'Type: {type}')
 
         #
         # get OLDEST_KNOWN_YEAR
@@ -1166,16 +1285,23 @@ for (i, link) in enumerate(multi_locale, start=1):
         print(f'Former name: {former_name}')
 
         #
-        # get VERIFIED_IN_MAPS (default to 0, will get 1 later on when verified)
+        # get VERIFIED_IN_MAPS (default to 0, will get 1 when it has OSM info)
         #
-        verified_in_maps = 0
+        if 'osm_info' in globals():
+            verified_in_maps = 1
+        else:
+            verified_in_maps = 0
         data['verified_in_maps'].append(verified_in_maps)
         print(f'Verified in maps: {verified_in_maps}')
 
         #
-        # get OPENSTREETMAP_LINK (null)
+        # get OPENSTREETMAP_LINK
         #
-        openstreetmap_link = ''
+        try:
+            openstreetmap_link = re.search(r'href="(.*?)"', osm_info)
+            openstreetmap_link = f'https://www.openstreetmap.org{str(openstreetmap_link.group(1))}'
+        except:
+            openstreetmap_link = ''
         data['openstreetmap_link'].append(openstreetmap_link)
         print(f'OpenStreetMap link: {openstreetmap_link}')
 
@@ -1191,6 +1317,7 @@ for (i, link) in enumerate(multi_locale, start=1):
         # basically the url we're working with
         #
         data['abacq_reference'].append(link)
+
 
 
 # ------------------------------------------------------ #

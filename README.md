@@ -3,6 +3,14 @@ Some Python-based investigations about datasets I'm personally interested in.
 
 Most of my notes are in Jupyter notebooks (.ipynb). The notes and datasets are included in every dataset folder.
 
+## [A Place for Salvador Allende](a-place-for-salvador-allende)
+**Source:** Based on the previous work at http://www.abacq.org/calle/, which compiled places sent by users from around the world.
+
+At first, I've manually gathered a few places from Chile and elsewhere, but right now I'm creating a scraper for http://www.abacq.org/calle/ and OpenStreetMap instead and then manually verifying the data using OpenStreetMap and Google Maps. Data collection will be done by country.
+
+**Questions to answer:**
+* Prove that there are more places named after Salvador Allende, President of Chile from 1970 to 1973, _outside_ of Chile than there are _inside_ of Chile. There is a historical reason behind this which is worth elaborating on when the dataset is more matured.
+
 ## [Presidents of Chile](presidents-of-chile)
 **Source:** `persons`, `tenures` and `deaths` datasets manually gathered from Wikipedia in [English](https://en.wikipedia.org/wiki/List_of_presidents_of_Chile) and [Spanish](https://es.wikipedia.org/wiki/Anexo:Presidentes_de_Chile)
 
@@ -15,14 +23,6 @@ Most of my notes are in Jupyter notebooks (.ipynb). The notes and datasets are i
     * Did Salvador Allende run the most number of elections before becoming president?
 
 **Content warning:** Contains various methods of death in the `deaths` dataset and `tenures` notes.
-
-## [A Place for Salvador Allende](a-place-for-salvador-allende)
-**Source:** Based on the previous work at http://www.abacq.org/calle/, which compiled places sent by users from around the world.
-
-At first, I've manually gathered a few places from Chile and elsewhere, but I'm thinking of scraping http://www.abacq.org/calle/ instead and then verifying the data using OpenStreetMap and Google Maps.
-
-**Questions to answer:**
-* Prove that there are more places named after Salvador Allende, President of Chile from 1970 to 1973, _outside_ of Chile than there are _inside_ of Chile. There is a historical reason behind this which is worth elaborating on when the dataset is more matured.
 
 ## [Mobile Phones](mobile-phones)
 **Source:** GSMArena Phone Dataset at https://www.kaggle.com/datasets/arwinneil/gsmarena-phone-dataset
