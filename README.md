@@ -4,6 +4,8 @@ Some Python-based investigations about datasets I'm personally interested in.
 Most of my notes are in Jupyter notebooks (.ipynb). The notes and datasets are included in every dataset folder.
 
 ## [A Place for Salvador Allende](a-place-for-salvador-allende)
+**Main repository:** https://github.com/GoGroGlo/a-place-for-salvador-allende
+
 **Source:** Based on the previous work at http://www.abacq.org/calle/, which compiled places sent by users from around the world.
 
 At first, I've manually gathered a few places from Chile and elsewhere, but right now I'm creating a scraper for http://www.abacq.org/calle/ and OpenStreetMap instead and then manually verifying the data using OpenStreetMap and Google Maps. Data collection will be done by country.
