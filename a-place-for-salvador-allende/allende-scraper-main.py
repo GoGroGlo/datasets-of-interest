@@ -1,5 +1,5 @@
-# allende-scraper-main.py
-# main script for the scraping process. if a functionality has been tested to work, it goes here.
+# allende-scraper-test-main.py
+# 'production' script
 
 # web scraping tutorial courtesy of https://www.educative.io/blog/python-web-scraping-tutorial
 
@@ -8,7 +8,6 @@ from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-import os
 import re
 import pandas as pd
 
@@ -261,12 +260,12 @@ allende_countries = {
 # non-exhaustive lists of words that correspond to a specific type of establishment
 types = {
     'street'                : ['calle', 'avenida', 'pasaje', 'rue', 'rua', 'road', 'avenue', 'circunvalación', 'boulevard', 'bulevar', 'street', 'straat', 'strada'],
-    'monument'              : ['monumento', 'escultura', 'monument', 'sculpture', 'busto', 'bust'],
+    'monument'              : ['monumento', 'escultura', 'monument', 'sculpture', 'busto', 'bust', 'statue'],
     'park'                  : ['plaza', 'parque', 'square', 'park', 'place', 'plazoleta'],
     'school'                : ['escuela', 'colegio', 'school', 'college', 'schule', 'école'],
     'healthcare facility'   : ['hospital', 'salud', 'healthcare', 'health'],
     'bridge'                : ['puente', 'bridge', 'pont', 'brücke'],
-    'sports center'         : ['complexe sportif', 'sports complex', 'sports center', 'sports centre',  'complejo de deporte'],
+    'sports center'         : ['complexe sportif', 'sports complex', 'sport', 'sports', 'sports center', 'sports centre',  'complejo de deporte'],
     'multipurpose center'   : ['espace', 'hall'],
     'port'                  : ['puerto', 'port'],
     'neighborhood'          : ['población', 'village', 'hamlet'],
@@ -430,6 +429,9 @@ print('Available countries for processing:\n')
 for key in allende_countries.keys():
     print(key)
 country = str(input('>>> Please enter one of the countries above: '))
+
+if country not in allende_countries.keys():
+    raise Exception(f'{country} is not available.')
 
 
 # retrieve the links for that country
@@ -1333,7 +1335,7 @@ print('\nDataFrame created:\n')
 print(data_df)
 
 # export dataframe - xlsx supports unicode, so no more encoding fiascos compared to saving to csv
-data_df.to_excel(f'{country_en}.xlsx', index=False)
+data_df.to_excel(f'countries/{country_en}.xlsx', index=False)
 
 
 
