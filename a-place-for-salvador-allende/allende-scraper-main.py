@@ -1,4 +1,4 @@
-# allende-scraper-test-main.py
+# allende-scraper-main.py
 # 'production' script
 
 # web scraping tutorial courtesy of https://www.educative.io/blog/python-web-scraping-tutorial
