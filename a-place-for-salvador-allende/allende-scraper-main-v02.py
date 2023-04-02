@@ -351,6 +351,7 @@ def humanizer(timer):
     time.sleep(timer)
     print('Okay, let\'s continue.\n')
 
+
 # OpenStreetMap checker of locale_1
 def osm_check():
     #
@@ -1084,76 +1085,7 @@ for (i, link) in enumerate(multi_locale, start=1):
         #
         # cross-check LOCALE_1 with OSM
         #
-        locale_link = f'https://www.openstreetmap.org/search?query=Salvador%20Allende%20{locale_1}%20{country_en}'
-        driver.get(locale_link)
-        osm_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer("div", class_="search_results_entry mx-n3"))
-
-        #
-        # go through each search result and have the user verify it
-        #
-        locale_results_list = list(osm_soup.find_all("a"))
-            #
-            # a single result looks like this - we can derive lots of info from here once user verifies that it looks good
-            #
-            # <a class="set_position" data-lat="-12.1102763" data-lon="-77.0104283"
-            # data-min-lat="-12.1103037" data-max-lat="-12.1102452" data-min-lon="-77.0109212" data-max-lon="-77.0097999"
-            # data-prefix="Residential Road" data-name="Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru"
-            # data-type="way" data-id="426845566" href="/way/426845566">Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru</a>
-            #
-        if len(locale_results_list) == 0:
-            print('No addresses found in OpenStreetMap. Will use the locale derived from the article...')
-            data['locale_1'].append(locale_1)
-            print(f'Locale 1: {locale_1}')
-            # clear the previous entry's osm_address and osm_info so that it doesn't get copied into the current entry
-            osm_address = ''
-            osm_info = ''
-        else:
-            print(f'{str(len(locale_results_list)-1)} possible address(es) found in OpenStreetMap.')
-            for result in locale_results_list:
-                result = str(result)
-                osm_address = re.search(r'data-name="(.*?)"', result)
-                osm_address = str(osm_address.group(1))
-                #
-                # have user verify the address - this decides what this loop should do next
-                #
-                print(f'Please verify if this address matches the place in this article:\n{osm_address}')
-                user_verification = input('>>> Type y if yes, n if no: ')
-                if user_verification == 'n' and len(locale_results_list)-1 == 1:
-                    print('OpenStreetMap address does not match the place in this article. Will use the locale derived from the article...')
-                    # clear the previous entry's osm_address and osm_info so that it doesn't get copied into the current entry
-                    osm_address = ''
-                    osm_info = ''
-                    data['locale_1'].append(locale_1)
-                    print(f'Locale 1: {locale_1}')
-                    break
-                elif user_verification == 'n' and len(locale_results_list)-1 > 1:
-                    # clear the previous entry's osm_address and osm_info so that it doesn't get copied into the current entry
-                    osm_address = ''
-                    osm_info = ''
-                    continue
-                elif user_verification == 'y':
-                    # we'll save the whole result in a variable for later parsing. we can then close the loop.
-                    osm_info = result
-                    break
-            #
-            # stay in the web page like a normal human would
-            #
-            humanizer(timer)
-            #
-            # then go on with our automated lives
-            #
-            # when we have osm_info, we'll take locale details from its osm_address by splitting it.
-            # sample split:
-            # ['Salvador Allende', 'Villa Victoria', 'Surquillo', 'Province of Lima', 'Lima Metropolitan Area', 'Lima', '15000', 'Peru']
-            # index 0 is the place's name, -1 is the country, -2 is the zip code, -3 is locale_1, etc...
-            #
-            try:
-                osm_address = osm_address.split(', ')
-                locale_1 = osm_address[-3]
-                data['locale_1'].append(locale_1)
-                print(f'Locale 1: {locale_1}')
-            except:
-                pass
+        osm_check()
 
         #
         # if the place has an OSM link, we'll get values from there. otherwise, we'll take from the article or make the value null.
