@@ -278,7 +278,7 @@ allende_countries = {
 types = {
     'street'                : ['calle', 'avenida', 'pasaje', 'rue', 'rua', 'road', 'avenue', 'circunvalación', 'boulevard', 'bulevar', 'street', 'straat', 'strada'],
     'monument'              : ['monumento', 'escultura', 'monument', 'sculpture', 'busto', 'bust', 'statue'],
-    'park'                  : ['plaza', 'parque', 'square', 'park', 'place', 'plazoleta'],
+    'park'                  : ['plaza', 'parque', 'square', 'park', 'place', 'plazoleta', 'praça'],
     'school'                : ['escuela', 'colegio', 'school', 'college', 'schule', 'école'],
     'healthcare facility'   : ['hospital', 'salud', 'healthcare', 'health'],
     'bridge'                : ['puente', 'bridge', 'pont', 'brücke'],
