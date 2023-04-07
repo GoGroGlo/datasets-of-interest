@@ -1,0 +1,3 @@
+user_verification = input('>>> Type y if yes, n if no: ')
+if user_verification != 'n' and user_verification != 'y':
+    user_verification = input('>>> Try again - Type y if yes, n if no: ')
