@@ -306,7 +306,6 @@ types = {
     'museum'                : ['museo', 'museum' , 'musée'],
     'interior'              : ['aula', 'auditorio', 'auditorium'],
     'memorial plate'        : ['placa', 'plate', 'plaque'],
-    'government facility'   : ['governmental office']
 }
 
 
@@ -416,7 +415,7 @@ def osm_check(locale_1, data):
     osm_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer("ul", class_="results-list list-group list-group-flush"))
 
     #
-    # collect search results
+    # go through each search result and have the user verify it
     #
     locale_results_list = []
     locale_results_list.extend(list(osm_soup.find_all("a", class_="set_position")))
@@ -617,11 +616,11 @@ def get_name(article_soup, data):
         try:
             name = str(name.group(1))
         except:
-            # name is blank there's neither OSM name nor alt text
-            name = ''
-    # if name ends up being just 'foto' (meaning there's no usable alt text in the article), then make it blank as well
+            # fallback for when there's neither OSM name nor alt text
+            name = 'A tribute to Salvador Allende'
+    # if name ends up being just 'foto' (meaning there's no usable alt text in the article), then fallback to the generic name as well
     if name == 'foto':
-        name = ''
+        name = 'A tribute to Salvador Allende'
     data['name'].append(name)
     print(f'Name: {name}')
 
@@ -1412,12 +1411,12 @@ if __name__ == "__main__":
 
     # export dataframe - xlsx supports unicode, so no more encoding fiascos compared to saving to csv
     if chunk_number is not None:
-        # data_df.to_excel(f'test_files/{country_en}_{target_chunk}.xlsx', index=False) # for test files
-        data_df.to_excel(f'countries/{country_en}_{target_chunk}.xlsx', index=False) # for main files
+        data_df.to_excel(f'test_files/{country_en}_{target_chunk}.xlsx', index=False) # for test files
+        # data_df.to_excel(f'countries/{country_en}_{target_chunk}.xlsx', index=False) # for main files
         print(f'DataFrame saved in \'countries/{country_en}_{target_chunk}.xlsx\'.')
     else:
-        # data_df.to_excel(f'test_files/{country_en}.xlsx', index=False) # for test files
-        data_df.to_excel(f'countries/{country_en}.xlsx', index=False) # for main files
+        data_df.to_excel(f'test_files/{country_en}.xlsx', index=False) # for test files
+        # data_df.to_excel(f'countries/{country_en}.xlsx', index=False) # for main files
         print(f'DataFrame saved in \'countries/{country_en}.xlsx\'.')
 
 
