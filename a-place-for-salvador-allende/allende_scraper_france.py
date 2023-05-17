@@ -20,15 +20,15 @@ if allende_in_france_links.txt doesn't exist yet:
     save in a new file allende_in_france_links.txt and close
 
 open allende_in_france_locales.txt
-split lines into groups of 20
+split lines into groups of 10
 make dict to store results
-for locale in locale_20s:
+for locale in locale_10s:
     search in OSM using 'salvador allende [postcode] [locale]'
     if there are results:
         [A] load more results if present
         if all results are loaded:
             convert each result into data items in dict
-            [B] using the raw address, check allende_in_france_links.txt for any matching article
+            [B] using locale, check allende_in_france_links.txt for any matching article
             if article(s) are found:
                 have user verify if this matches
                 if yes:
@@ -67,9 +67,10 @@ import pandas as pd
 import re
 import os
 import math
+import unidecode
 
 
-# local import - I hope this works
+# local import
 import allende_scraper_main as asm
 
 
@@ -80,6 +81,7 @@ import allende_scraper_main as asm
 
 
 country_en = 'France'
+region = 'Europe'
 
 
 # how long (in seconds) would you like sleep timers to wait before continuing with the scraping?
@@ -88,12 +90,17 @@ timer = 30
 
 # URLs
 homepage = 'http://www.abacq.org'
+
 toc = 'http://www.abacq.org/calle/index.php?toc/toc'
+
 links_exceptions = ['http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia', 
                     'http://www.abacq.org/calle/index.php?2007/02/18/2-francia-le-blanc-mesnil', 
                     'http://www.abacq.org/calle/index.php?2009/12/08/445-victor-jara-francia', 
                     'http://www.abacq.org/calle/index.php?2007/02/18/56-pablo-neruda-en-francia', 
                     'http://www.abacq.org/calle/index.php?2007/02/18/22-victor-jara']
+
+# the source of allende_in_france_locales.txt
+default_link = 'http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia'
 
 
 # create a dictionary of lists that's easily translatable into our existing db
@@ -145,80 +152,313 @@ def browser_window(link):
     driver.maximize_window()
 
 
-# Modified OpenStreetMap checker of LOCALE_1
-def osm_check(locale_1):
+# Modified OpenStreetMap checker of locale from allende_in_france_locales.txt
+def osm_check(locale_1, data):
 
-    # store search results here
-    global locale_results_list
-    locale_results_list = []
-
-
+    # cross-check locale with OpenStreetMap
     # first, do a specific search for 'Salvador Allende'
-    print(f'Searching OpenStreetMap for \'Salvador Allende {locale_1} France\'...')
     locale_link = f'https://www.openstreetmap.org/search?query=Salvador%20Allende%20{locale_1}%20{country_en}'
     browser_window(locale_link)
 
     # humanizer fixes the problem of the script getting no OSM info sometimes when you can see in the browser that there actually is
     asm.humanizer(timer)
 
-    # press 'More results' button while it's present
-    try:
-        driver.find_element(By.CSS_SELECTOR, '.search_more > a:nth-child(1)')
-    except:
-        pass
-    else:
-        driver.find_element(By.CSS_SELECTOR, '.search_more > a:nth-child(1)').send_keys(Keys.ENTER)
-
-    # collect search results - at this point, it looks like this
-
-    # <a class="set_position" data-lat="-12.1102763" data-lon="-77.0104283"
-    # data-min-lat="-12.1103037" data-max-lat="-12.1102452" data-min-lon="-77.0109212" data-max-lon="-77.0097999"
-    # data-prefix="Residential Road" data-name="Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru"
-    # data-type="way" data-id="426845566" href="/way/426845566">Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru</a>
-    
     osm_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer(
         "ul", class_="results-list list-group list-group-flush"))
+
+    # collect search results
+    locale_results_list = []
     locale_results_list.extend(
         list(osm_soup.find_all("a", class_="set_position")))
-    print(f'{len(locale_results_list)} results found.')
 
-    # if there are no results for 'Salvador Allende', try a more general search for 'Allende'
+    # if the first search has no results, try a more general search for 'Allende'
     if len(locale_results_list) == 0:
-        print(f'Searching OpenStreetMap for \'Allende {locale_1} France\'...')
         locale_link = f'https://www.openstreetmap.org/search?query=Allende%20{locale_1}%20{country_en}'
         browser_window(locale_link)
 
         # humanizer fixes the problem of the script getting no OSM info sometimes when you can see in the browser that there actually is
         asm.humanizer(timer)
 
-        # press 'More results' button while it's present
-        try:
-            driver.find_element(By.CSS_SELECTOR, '.search_more > a:nth-child(1)')
-        except:
-            pass
-        else:
-            driver.find_element(By.CSS_SELECTOR, '.search_more > a:nth-child(1)').send_keys(Keys.ENTER)
-
-        # collect search results - at this point, it looks like this
-
-        # <a class="set_position" data-lat="-12.1102763" data-lon="-77.0104283"
-        # data-min-lat="-12.1103037" data-max-lat="-12.1102452" data-min-lon="-77.0109212" data-max-lon="-77.0097999"
-        # data-prefix="Residential Road" data-name="Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru"
-        # data-type="way" data-id="426845566" href="/way/426845566">Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru</a>
-        
         osm_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer(
             "ul", class_="results-list list-group list-group-flush"))
         locale_results_list.extend(
             list(osm_soup.find_all("a", class_="set_position")))
-        print(f'{len(locale_results_list)} results found.')
 
-    return locale_results_list
+    # a single result looks like this - we can derive lots of info from here once user verifies that it looks good
+
+    # <a class="set_position" data-lat="-12.1102763" data-lon="-77.0104283"
+    # data-min-lat="-12.1103037" data-max-lat="-12.1102452" data-min-lon="-77.0109212" data-max-lon="-77.0097999"
+    # data-prefix="Residential Road" data-name="Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru"
+    # data-type="way" data-id="426845566" href="/way/426845566">Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru</a>
+    
+    # if there are no search results for both 'Salvador Allende' and 'Allende'
+    if len(locale_results_list) == 0:
+        print('No addresses found in OpenStreetMap. Will use the locale derived from the article...')
+        data['locale_1'].append(locale_1)
+        print(f'Locale 1: {locale_1}')
+        # clear the previous entry's osm_address and osm_info so that it doesn't get copied into the current entry
+        global osm_address
+        osm_address = ''
+        global osm_info
+        osm_info = ''
+
+    # else, if there is at least one search result
+    else:
+        print(
+            f'{str(len(locale_results_list))} possible address(es) found in OpenStreetMap.')
+        for result in locale_results_list:
+            result = str(result)
+            osm_address = re.search(r'>\"*(.*)\"*<\/a>', result)
+            osm_address = str(osm_address.group(1))
+            
+            # have user verify the address - this decides what this loop should do next
+            print(f'Please verify if this address matches the place in this article:\n{osm_address}')
+            user_verification = input('>>> Type y if yes, n if no: ')
+            # typo prevention
+            while user_verification != 'n' and user_verification != 'y':
+                user_verification = input('>>> Try again - Type y if yes, n if no: ')
+            
+            # if there is only one result and it doesn't match the article's place
+            if user_verification == 'n' and len(locale_results_list) == 1:
+                print('OpenStreetMap address does not match the place in this article. Will use the locale derived from the article...')
+                # clear the previous entry's osm_address and osm_info so that it doesn't get copied into the current entry
+                osm_address = ''
+                osm_info = ''
+                data['locale_1'].append(locale_1)
+                print(f'Locale 1: {locale_1}')
+                break
+            
+            # if result matches article's place
+            elif user_verification == 'y':
+                # we'll save the whole result in a variable for later parsing. we can then close the loop.
+                osm_info = result
+                break
+            
+            # if there are more than one result and we haven't exhausted the loop yet
+            elif user_verification == 'n' and len(locale_results_list) > 1:
+                # clear the previous entry's osm_address and osm_info so that it doesn't get copied into the current entry
+                osm_address = ''
+                osm_info = ''
+                continue
+    
+        # if we have exhausted all list items and none of them matches the place
+        else:
+            print('All OpenStreetMap addresses do not match the place in this article. Will use the locale derived from the article...')
+            # clear the previous entry's osm_address and osm_info so that it doesn't get copied into the current entry
+            osm_address = ''
+            osm_info = ''
+            # nothing else we can do but add the default locale_1
+            data['locale_1'].append(locale_1)
+            print(f'Locale 1: {locale_1}')
+
+        # stay in the web page like a normal human would
+        asm.humanizer(timer)
+        # then go on with our automated lives
+        
+        # when we have osm_info, we'll take locale details from its osm_address by splitting it.
+        # sample split:
+        # ['Salvador Allende', 'Villa Victoria', 'Surquillo', 'Province of Lima', 'Lima Metropolitan Area', 'Lima', '15000', 'Peru']
+        # index 0 is the place's name, -1 is the country, -2 is the zip code, -3 is locale_1, etc...
+        try:
+            osm_address = osm_address.split(', ')
+            locale_1 = osm_address[-3]
+            data['locale_1'].append(locale_1)
+            print(f'Locale 1: {locale_1}')
+        except:
+            pass
 
 
+# Modified extract_osm_info
+def extract_osm_info(data):
+
+    # get LOCALE_2
+    global locale_2
+    try:
+        locale_2 = osm_address[-4]
+    except:
+        locale_2 = ''
+    data['locale_2'].append(locale_2)
+    print(f'Locale 2: {locale_2}')
+    
+    # get LOCALE_3
+    global locale_3
+    try:
+        locale_3 = osm_address[-5]
+    except:
+        locale_3 = ''
+    data['locale_3'].append(locale_3)
+    print(f'Locale 3: {locale_3}')
+    
+    # get LOCALE_4
+    global locale_4
+    try:
+        locale_4 = osm_address[-6]
+    except:
+        locale_4 = ''
+    data['locale_4'].append(locale_4)
+    print(f'Locale 4: {locale_4}')
+    
+    # get LOCALE_5
+    global locale_5
+    try:
+        locale_5 = osm_address[-7]
+    except:
+        locale_5 = ''
+    data['locale_5'].append(locale_5)
+    print(f'Locale 5: {locale_5}')
+
+    # get ZIP_CODE
+    # if there is no OSM result, get the zip code from allende_in_france_locales.txt
+    # if there is still none from that file, leave zip_code blank
+    global zip_code
+    try:
+        zip_code = osm_address[-2]
+    except:
+        try:
+            zip_code = re.search(r'(\d{5})', locale)
+            zip_code = str(zip_code.group(1))
+        except:
+            zip_code = ''
+    data['zip_code'].append(zip_code)
+    print(f'Zip code: {zip_code}')
+
+    # get LATITUDE
+    global latitude
+    try:
+        latitude = re.search(r'data-lat="(.*?)"', osm_info)
+        latitude = float(latitude.group(1))
+    except:
+        latitude = ''
+    data['latitude'].append(latitude)
+    print(f'Latitude: {latitude}')
+
+    # get LONGITUDE
+    global longitude
+    try:
+        longitude = re.search(r'data-lon="(.*?)"', osm_info)
+        longitude = float(longitude.group(1))
+    except:
+        longitude = ''
+    data['longitude'].append(longitude)
+    print(f'Longitude: {longitude}')
+
+
+# get corresponding abacq link for a locale
+def get_abacq_link(locale):
+
+    # make text searchable within the URL by lowercasing and doing substitutions
+    search_in_url = locale.lower()
+    search_in_url = locale.replace('\'', '-')
+    search_in_url = locale.replace(' / ', '-')
+    search_in_url = locale.replace(' ', '-')
+    search_in_url = unidecode.unidecode(locale)
+
+    # create a list of links for review
+    links_for_review = []
+
+    # look for URL matches
+    with open('france\\allende_in_france_links.txt','r') as f:
+        for l in f.readlines():
+            if search_in_url in l:
+                links_for_review.append(l)
+
+    # review the links
+    if len(links_for_review) == 0:
+        print('\nNo abacq links found, though this could be wrong - please review later.')
+    else:
+        print(f'\n{len(links_for_review)} abacq links found - please review the following:')
+        for (i, l) in enumerate(links_for_review, start=1):
+            print(f'{i} : {l}')
+
+        # let user choose which link to put in abacq_reference
+        # usually this would be the link that gives the most information about the locale
+        user_choice = int(input('>>> Which link to put as abacq_reference? (type one of the numbers above or Enter for the default link): '))
+
+        global abacq_reference
+
+        # if Enter was pressed, assign default_link as abacq_reference
+        if user_choice is None:
+            abacq_reference = default_link
+            data['abacq_reference'].append(abacq_reference)
+            print(f'abacq reference: {abacq_reference}')
+        else:
+            # else, assign a specific link to abacq_reference
+            try:
+                abacq_reference = links_for_review[user_choice-1]
+            except:
+                # typo prevention
+                user_choice = int(input('>>> Try again - Which link to put as abacq_reference? (type one of the numbers above or Enter for the default link): '))
+            else:
+                data['abacq_reference'].append(abacq_reference)
+                print(f'abacq reference: {abacq_reference}')
+
+    # create another list of links that were caught here
+    # anything not caught here will be reviewed separately
+    global links_in_locales
+    links_in_locales = []
+    if len(links_for_review) != 0:
+        links_in_locales.extend(links_for_review)
+        # clear links_for_review for the next locale iteration
+        links_for_review.clear()
+
+
+# browse abacq_reference only if it's not the default link
+def browse_abacq(abacq_reference):
+
+    if str(abacq_reference) != str(default_link):
+
+        browser_window(abacq_reference)
+
+        # we are only interested in the article itself, not the comments, sidebar, etc.
+        global article_soup
+        article_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer(
+            "div", class_="post"))
+        
+        # stay in the web page like a normal human would
+        asm.humanizer(timer)
+
+        # then go on with our automated lives
+        global text
+        text = article_soup.get_text()
+        global lower_text
+        lower_text = text.lower()
+        print(f'\n{text}')
+
+    # fallback if abacq_reference happens to be the default link (we don't want to load this over and over again)
+    else:
+        article_soup = ''
+        text = ''
+        lower_text = ''
+
+
+# get DESC
+def get_desc(article_soup, data):
+    
+    # default to blank
+    global desc
+    desc = ''
+
+    # search the abacq for any text that is in italics
+    global desc_soup
+    desc_soup = article_soup.find_all("em")
+    desc_soup = list(desc_soup)
+
+    # format the text
+    for desc_item in desc_soup:
+        desc_item = str(desc_item)
+        desc_item = desc_item.strip('</em>')
+        desc += desc_item + '\n'
+    desc = desc.replace('<br/>', '')
+    
+    # assign desc into the data
+    data['desc'].append(desc)
+    print(f'Desc: {desc}')
 
 
 # ------------------------------------------------------ #
 
+
+### MAIN ###
 
 ### PREPARE LISTS ###
 
@@ -309,15 +549,15 @@ else:
 # ------------------------------------------------------ #
 
 
-### SPLIT LOCALE LIST INTO GROUPS OF 20 ###
+### SPLIT LOCALE LIST INTO GROUPS OF 10 ###
 
 
 with open('france\\allende_in_france_locales.txt','r', encoding="utf=8") as f:
     f = f.readlines()
 
 
-    # number of items in a chunk (default 20 for France)
-    chunk_number = 1
+    # number of items in a chunk (default 10 for France)
+    chunk_number = 2
 
 
     # ask user which chunk to work on
@@ -347,7 +587,7 @@ with open('france\\allende_in_france_locales.txt','r', encoding="utf=8") as f:
 
 
     # for debuging purposes
-    print(locale_chunk)
+    # print(locale_chunk)
 
 
 # ------------------------------------------------------ #
@@ -366,12 +606,104 @@ for (i, locale) in enumerate(locale_chunk, start=1):
 
     # sanitize and print current locale
     locale = locale.strip()
-    print(f'\nProcessing locale {i} of {len(locale_chunk)} : {locale}')
+    print('\n')
+    print('--------------------------------------------------------------------------------------------')
+    print(f'Processing locale {i} of {len(locale_chunk)} : {locale}')
+    print('--------------------------------------------------------------------------------------------')
+    print('\n')
+
+
+    # get ID (null)
+    id = ''
+    data['id'].append(id)
+    print(f'ID: {id}')
+
+
+    # get COUNTRY and REGION
+    data['country'].append(country_en)
+    print(f'Country: {country_en}')
+
+    data['region'].append(region)
+    print(f'Region: {region}')
 
 
     # load OSM and search for the locale
     create_driver()
     osm_check(locale, data)
+
+
+    # extract OSM info if any
+    extract_osm_info(data)
+
+
+    # get and review abacq links if any
+    # abacq_reference also gets assigned here
+    get_abacq_link(locale)
+
+
+    # browse the chosen abacq link
+    browse_abacq(abacq_reference)
+
+
+    # get NAME
+    asm.get_name(article_soup, data)
+
+    
+    # get TYPE
+    asm.get_type(data)
+
+
+    # get DESC
+    get_desc(article_soup, data)
+
+
+    # get DESC_LANGUAGE (null)
+    # won't assume anything here for now because most of the descriptions I see are in Spanish, regardless of the region
+    desc_language = ''
+    data['desc_language'].append(desc_language)
+    print(f'Desc language: {desc_language}')
+
+    
+    # get OLDEST_KNOWN_YEAR
+    asm.get_oldest_known_year(abacq_reference, text, data)
+
+    
+    # get OLDEST_KNOWN_MONTH
+    asm.get_oldest_known_month(abacq_reference, lower_text, data)
+
+    
+    # get OLDEST_KNOWN_DAY
+    asm.get_oldest_known_day(abacq_reference, lower_text, data)
+
+    
+    # get OLDEST_KNOWN_SOURCE
+    asm.get_oldest_known_source(desc, data)
+
+    
+    # get ALT_NAME (null)
+    alt_name = ''
+    data['alt_name'].append(alt_name)
+    print(f'Alt name: {alt_name}')
+
+    
+    # get FORMER_NAME (null)
+    former_name = ''
+    data['former_name'].append(former_name)
+    print(f'Former name: {former_name}')
+
+    
+    # get VERIFIED_IN_MAPS and OPENSTREETMAP_LINK
+    asm.get_verified_in_maps_and_osm_link(data)
+
+    
+    # get GOOGLE_MAPS_LINK (null)
+    google_maps_link = ''
+    data['google_maps_link'].append(google_maps_link)
+    print(f'Google Maps link: {google_maps_link}')
+
+    
+    # stay in the web page like a normal human would
+    asm.humanizer(timer)
 
 
 # ------------------------------------------------------ #
@@ -381,7 +713,28 @@ for (i, locale) in enumerate(locale_chunk, start=1):
 
 
 # quit the browser
-# driver.quit()
+driver.quit()
+
+
+# save links_in_locales to exclude from future scraping
+with open('france\\allende_in_france_links_in_locales.txt','a') as f:
+    for l in links_in_locales:
+        f.write(f'{l}\n')
+
+# print for logging purposes
+print('\nallende_in_france_links_in_locales.txt modified.')
+
+
+# create a dataframe of all info collected
+data_df = pd.DataFrame(data=data)
+print('\nDataFrame created:\n')
+print(data_df)
+
+
+# export dataframe - xlsx supports unicode, so no more encoding fiascos compared to saving to csv
+data_df.to_excel(f'test_files/{country_en}_{target_chunk}.xlsx', index=False) # for test files
+# data_df.to_excel(f'countries/{country_en}_{target_chunk}.xlsx', index=False) # for main files
+print(f'DataFrame saved in \'countries/{country_en}_{target_chunk}.xlsx\'.')
 
 
 # ------------------------------------------------------ #
