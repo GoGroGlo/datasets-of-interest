@@ -2,51 +2,6 @@
 # Main repo: https://github.com/GoGroGlo/a-place-for-salvador-allende
 # Automates the data collection by verifying the list from http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia using https://www.openstreetmap.org
 
-'''
-PSEUDOCODE
-
-use firefox driver
-
-if allende_in_france_locales.txt doesn't exist yet:
-    open allende_in_france.txt
-    for each line in allende_in_france.txt:
-        extract postal code and locale and save in list
-        if postal code + locale already exists in list, skip
-        save list in a new file allende_in_france_locales.txt and close
-    
-if allende_in_france_links.txt doesn't exist yet:
-    retrieve list of abacq france links from TOC using bs4
-    remove exclusions from list
-    save in a new file allende_in_france_links.txt and close
-
-open allende_in_france_locales.txt
-split lines into groups of 10
-make dict to store results
-for locale in locale_10s:
-    search in OSM using 'salvador allende [postcode] [locale]'
-    if there are results:
-        [A] load more results if present
-        if all results are loaded:
-            convert each result into data items in dict
-            [B] using locale, check allende_in_france_links.txt for any matching article
-            if article(s) are found:
-                have user verify if this matches
-                if yes:
-                    put as abacq_reference
-                else:
-                    skip
-            if exact specific place + locale already exists in dict, skip
-            save whatever we can in dict
-    if there are no results:
-        search in OSM using 'allende [postcode] [locale]'
-        if there are results:
-            do [A]
-        if there are no results:
-            do [B]
-            save whatever we can in dict
-export dict into excel file
-
-'''
 
 # ------------------------------------------------------ #
 
@@ -152,11 +107,19 @@ def browser_window(link):
     driver.maximize_window()
 
 
-# Modified OpenStreetMap checker of locale from allende_in_france_locales.txt
+# modified OpenStreetMap checker of locale from allende_in_france_locales.txt
 def osm_check(locale_1, data):
 
+    # trim the zip code away for later use
+    global locale_1_no_zip
+    locale_1_no_zip = re.search(r'(?:\d{5})? *(.+)', locale_1)
+    locale_1_no_zip = str(locale_1_no_zip.group(1))
+    
+    # store search results here 
+    locale_results_list = []
+
     # cross-check locale with OpenStreetMap
-    # first, do a specific search for 'Salvador Allende'
+    # first, do a specific search for 'Salvador Allende [zip code] [locale] France'
     locale_link = f'https://www.openstreetmap.org/search?query=Salvador%20Allende%20{locale_1}%20{country_en}'
     browser_window(locale_link)
 
@@ -167,11 +130,10 @@ def osm_check(locale_1, data):
         "ul", class_="results-list list-group list-group-flush"))
 
     # collect search results
-    locale_results_list = []
     locale_results_list.extend(
         list(osm_soup.find_all("a", class_="set_position")))
 
-    # if the first search has no results, try a more general search for 'Allende'
+    # if the first search has no results, try a more general search for 'Allende [zip code] [locale] France'
     if len(locale_results_list) == 0:
         locale_link = f'https://www.openstreetmap.org/search?query=Allende%20{locale_1}%20{country_en}'
         browser_window(locale_link)
@@ -181,6 +143,38 @@ def osm_check(locale_1, data):
 
         osm_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer(
             "ul", class_="results-list list-group list-group-flush"))
+        
+        # collect search results
+        locale_results_list.extend(
+            list(osm_soup.find_all("a", class_="set_position")))
+        
+    # if still no results, try 'Salvador Allende [locale] France' (without the zip code)
+    if len(locale_results_list) == 0:
+        locale_link = f'https://www.openstreetmap.org/search?query=Salvador%20Allende%20{locale_1_no_zip}%20{country_en}'
+        browser_window(locale_link)
+
+        # humanizer fixes the problem of the script getting no OSM info sometimes when you can see in the browser that there actually is
+        asm.humanizer(timer)
+
+        osm_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer(
+            "ul", class_="results-list list-group list-group-flush"))
+        
+        # collect search results
+        locale_results_list.extend(
+            list(osm_soup.find_all("a", class_="set_position")))
+        
+    # and then 'Allende [locale] France' (without the zip code)
+    if len(locale_results_list) == 0:
+        locale_link = f'https://www.openstreetmap.org/search?query=Allende%20{locale_1_no_zip}%20{country_en}'
+        browser_window(locale_link)
+
+        # humanizer fixes the problem of the script getting no OSM info sometimes when you can see in the browser that there actually is
+        asm.humanizer(timer)
+
+        osm_soup = BeautifulSoup(driver.page_source, 'html.parser', parse_only=SoupStrainer(
+            "ul", class_="results-list list-group list-group-flush"))
+        
+        # collect search results
         locale_results_list.extend(
             list(osm_soup.find_all("a", class_="set_position")))
 
@@ -191,11 +185,11 @@ def osm_check(locale_1, data):
     # data-prefix="Residential Road" data-name="Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru"
     # data-type="way" data-id="426845566" href="/way/426845566">Salvador Allende, Villa Victoria, Surquillo, Province of Lima, Lima Metropolitan Area, Lima, 15000, Peru</a>
     
-    # if there are no search results for both 'Salvador Allende' and 'Allende'
+    # if there are no search results at all
     if len(locale_results_list) == 0:
         print('No addresses found in OpenStreetMap. Will use the locale derived from the article...')
-        data['locale_1'].append(locale_1)
-        print(f'Locale 1: {locale_1}')
+        data['locale_1'].append(locale_1_no_zip)
+        print(f'Locale 1: {locale_1_no_zip}')
         # clear the previous entry's osm_address and osm_info so that it doesn't get copied into the current entry
         global osm_address
         osm_address = ''
@@ -204,8 +198,7 @@ def osm_check(locale_1, data):
 
     # else, if there is at least one search result
     else:
-        print(
-            f'{str(len(locale_results_list))} possible address(es) found in OpenStreetMap.')
+        print(f'{str(len(locale_results_list))} possible address(es) found in OpenStreetMap.')
         for result in locale_results_list:
             result = str(result)
             osm_address = re.search(r'>\"*(.*)\"*<\/a>', result)
@@ -224,8 +217,8 @@ def osm_check(locale_1, data):
                 # clear the previous entry's osm_address and osm_info so that it doesn't get copied into the current entry
                 osm_address = ''
                 osm_info = ''
-                data['locale_1'].append(locale_1)
-                print(f'Locale 1: {locale_1}')
+                data['locale_1'].append(locale_1_no_zip)
+                print(f'Locale 1: {locale_1_no_zip}')
                 break
             
             # if result matches article's place
@@ -248,8 +241,8 @@ def osm_check(locale_1, data):
             osm_address = ''
             osm_info = ''
             # nothing else we can do but add the default locale_1
-            data['locale_1'].append(locale_1)
-            print(f'Locale 1: {locale_1}')
+            data['locale_1'].append(locale_1_no_zip)
+            print(f'Locale 1: {locale_1_no_zip}')
 
         # stay in the web page like a normal human would
         asm.humanizer(timer)
@@ -268,7 +261,7 @@ def osm_check(locale_1, data):
             pass
 
 
-# Modified extract_osm_info
+# modified extract_osm_info
 def extract_osm_info(data):
 
     # get LOCALE_2
@@ -356,6 +349,9 @@ def get_abacq_link(locale):
     # create a list of links for review
     links_for_review = []
 
+    # create variable
+    global abacq_reference
+
     # look for URL matches
     with open('france\\allende_in_france_links.txt','r') as f:
         for l in f.readlines():
@@ -365,6 +361,9 @@ def get_abacq_link(locale):
     # review the links
     if len(links_for_review) == 0:
         print('\nNo abacq links found, though this could be wrong - please review later.')
+        abacq_reference = default_link
+        data['abacq_reference'].append(abacq_reference)
+        print(f'abacq reference: {abacq_reference}')
     else:
         print(f'\n{len(links_for_review)} abacq links found - please review the following:')
         for (i, l) in enumerate(links_for_review, start=1):
@@ -374,7 +373,6 @@ def get_abacq_link(locale):
         # usually this would be the link that gives the most information about the locale
         user_choice = int(input('>>> Which link to put as abacq_reference? (type one of the numbers above or Enter for the default link): '))
 
-        global abacq_reference
 
         # if Enter was pressed, assign default_link as abacq_reference
         if user_choice is None:
@@ -396,7 +394,7 @@ def get_abacq_link(locale):
     # anything not caught here will be reviewed separately
     global links_in_locales
     links_in_locales = []
-    if len(links_for_review) != 0:
+    if len(links_for_review) > 0:
         links_in_locales.extend(links_for_review)
         # clear links_for_review for the next locale iteration
         links_for_review.clear()
@@ -431,24 +429,42 @@ def browse_abacq(abacq_reference):
         lower_text = ''
 
 
+# modified get_name
+def get_name(data):
+    global name
+    try:
+        # get OSM name if available
+        name = osm_address[0]
+    except:
+        # if not, get it from allende_in_france.txt
+        with open('france\\allende_in_france.txt', 'r') as f:
+            for l in f.readlines():
+                if locale_1_no_zip in l:
+                    name = re.search(r'(.+)\s+(?:\d{5})?\s+.+(?=\.)', l)
+                    name = name.group(1).strip()
+    data['name'].append(name)
+    print(f'Name: {name}')
+
+
 # get DESC
 def get_desc(article_soup, data):
-    
-    # default to blank
     global desc
-    desc = ''
-
-    # search the abacq for any text that is in italics
     global desc_soup
-    desc_soup = article_soup.find_all("em")
-    desc_soup = list(desc_soup)
 
-    # format the text
-    for desc_item in desc_soup:
-        desc_item = str(desc_item)
-        desc_item = desc_item.strip('</em>')
-        desc += desc_item + '\n'
-    desc = desc.replace('<br/>', '')
+    try:
+        # search the abacq for any text that is in italics
+        desc_soup = article_soup.find_all("em")
+        desc_soup = list(desc_soup)
+    except:
+        # default value is blank (no desc)
+        desc = ''
+    else:
+        # format the text if there is a corresponding abacq article
+        for desc_item in desc_soup:
+            desc_item = str(desc_item)
+            desc_item = desc_item.strip('</em>')
+            desc += desc_item + '\n'
+        desc = desc.replace('<br/>', '')
     
     # assign desc into the data
     data['desc'].append(desc)
@@ -549,15 +565,15 @@ else:
 # ------------------------------------------------------ #
 
 
-### SPLIT LOCALE LIST INTO GROUPS OF 10 ###
+### SPLIT LOCALE LIST INTO CHUNKS ###
 
 
 with open('france\\allende_in_france_locales.txt','r', encoding="utf=8") as f:
     f = f.readlines()
 
 
-    # number of items in a chunk (default 10 for France)
-    chunk_number = 2
+    # number of items in a chunk (default 20 for France)
+    chunk_number = 10
 
 
     # ask user which chunk to work on
@@ -596,6 +612,10 @@ with open('france\\allende_in_france_locales.txt','r', encoding="utf=8") as f:
 ### WORK WITH EACH LOCALE ###
 
 
+# start the browser
+create_driver()
+
+
 for (i, locale) in enumerate(locale_chunk, start=1):
 
 
@@ -628,7 +648,6 @@ for (i, locale) in enumerate(locale_chunk, start=1):
 
 
     # load OSM and search for the locale
-    create_driver()
     osm_check(locale, data)
 
 
@@ -646,11 +665,11 @@ for (i, locale) in enumerate(locale_chunk, start=1):
 
 
     # get NAME
-    asm.get_name(article_soup, data)
+    get_name(data)
 
     
     # get TYPE
-    asm.get_type(data)
+    asm.get_type(osm_info, data)
 
 
     # get DESC
@@ -717,12 +736,12 @@ driver.quit()
 
 
 # save links_in_locales to exclude from future scraping
-with open('france\\allende_in_france_links_in_locales.txt','a') as f:
-    for l in links_in_locales:
-        f.write(f'{l}\n')
-
-# print for logging purposes
-print('\nallende_in_france_links_in_locales.txt modified.')
+if len(links_in_locales) > 0:
+    with open('france\\allende_in_france_links_in_locales.txt','a') as f:
+        for l in links_in_locales:
+            f.write(f'{l}\n')
+    # print for logging purposes
+    print('\nallende_in_france_links_in_locales.txt modified.')
 
 
 # create a dataframe of all info collected
@@ -732,8 +751,8 @@ print(data_df)
 
 
 # export dataframe - xlsx supports unicode, so no more encoding fiascos compared to saving to csv
-data_df.to_excel(f'test_files/{country_en}_{target_chunk}.xlsx', index=False) # for test files
-# data_df.to_excel(f'countries/{country_en}_{target_chunk}.xlsx', index=False) # for main files
+# data_df.to_excel(f'test_files/{country_en}_{target_chunk}.xlsx', index=False) # for test files
+data_df.to_excel(f'countries/{country_en}_{target_chunk}.xlsx', index=False) # for main files
 print(f'DataFrame saved in \'countries/{country_en}_{target_chunk}.xlsx\'.')
 
 
