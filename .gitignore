@@ -1,2 +1,4 @@
 /a-place-for-salvador-allende/__pycache__/*
 /a-place-for-salvador-allende/geckodriver.log
+/a-place-for-salvador-allende/test_files/test.py
+a-place-for-salvador-allende/test_files/*.txt
