@@ -1,0 +1,992 @@
+PS C:\Users\GoGro\Desktop\Repos\datasets-of-interest\a-place-for-salvador-allende> python .\allende_scraper_france_streets.py
+allende_in_france_locales.txt found.
+allende_in_france_links.txt found.
+>>> 33 chunks generated - Enter the number of the chunk you want to work on: 1
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 1 of 10 : 93450 L'Ile-Saint-Denis
+--------------------------------------------------------------------------------------------
+
+
+ID: 
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+No addresses found in OpenStreetMap. Will use the locale derived from the article...
+Locale 1: L'Ile-Saint-Denis
+Locale 2: 
+Locale 3: 
+Locale 4: 
+Locale 5: 
+Zip code: 93450
+Latitude: 
+Longitude: 
+1 abacq links found - please review the following:
+1 : http://www.abacq.org/calle/index.php?2008/07/14/230-l-ile-saint-denis-francia
+>>> Which link to put as abacq_reference? (type one of the numbers above or Enter for the default link): 1
+abacq reference: http://www.abacq.org/calle/index.php?2008/07/14/230-l-ile-saint-denis-francia
+Taking a break for 30 seconds...
+
+
+L'Île-Saint-Denis. Francia
+ 
+
+
+Después de visitar París, el Sena en uno de sus numerosos meandros en su recorrido hacia el mar, crea un larga y estrecha isla llamada L'Île-Saint-Denis justo frente a la comuna de ese nombre, Saint-Denis.
+ 
+En el cartel puede leerse: "Pasaje del Presidente Salvador Allende, 1908-1973, Presidente del Chile democrático asesinado"
+
+ 
+(Se entiende que tanto el Presidente Allende como la democracia en Chile fueron asesinados)
+
+
+
+Entre sus callejas hay un pasaje y un conjunto habitacional que perpetuan el nombre del Presidente visionario. He aquí una vista del Sena en ese lugar. Frente a la construcción de color azul se encuentran el pasaje y la residencia Salvador Allende.
+
+
+
+Fraternalmente. Juan Carlos Cartagena
+
+
+Name: Allée du Président Salvador Allende
+Type: street
+Desc: "Pasaje del Presidente Salvador Allende, 1908-1973, Presidente del Chile democrático asesinado"
+
+Desc language:
+Oldest known year: 2008
+Oldest known month: 7
+Oldest known day: 14
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 0
+OpenStreetMap link: 
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 2 of 10 : 33600 Pessac
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Allée Salvador Allende, Magonty, Pessac, Bordeaux, Gironde, Nouvelle-Aquitaine, Metropolitan France, 33600, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Nouvelle-Aquitaine
+Locale 3: Gironde
+Locale 4: Bordeaux
+Locale 5: Pessac
+Zip code: 33600
+Latitude: 44.7884138
+Longitude: -0.7134998
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Allée Salvador Allende
+Type: street
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name: 
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/27597484
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 3 of 10 : 45100 Orléans
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+2 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Square Salvador Allende, Gobson, Orléans, Loiret, Centre-Val de Loire, Metropolitan France, 45100, France
+>>> Type y if yes, n if no: n
+Please verify if this address matches the place in this article:
+Allée Salvador Allende, Gobson, Orléans, Loiret, Centre-Val de Loire, Metropolitan France, 45100, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Centre-Val de Loire
+Locale 3: Loiret
+Locale 4: Orléans
+Locale 5: Gobson
+Zip code: 45100
+Latitude: 47.8380758
+Longitude: 1.9351117
+1 abacq links found - please review the following:
+1 : http://www.abacq.org/calle/index.php?2011/08/25/533-orleans-francia
+>>> Which link to put as abacq_reference? (type one of the numbers above or Enter for the default link): 1
+abacq reference: http://www.abacq.org/calle/index.php?2011/08/25/533-orleans-francia
+Taking a break for 30 seconds...
+
+
+Orléans. Francia
+
+
+
+El pasaje Salvador Allende en la ciudad de Orléans. Está situado en el barrio de Orléans-la-Source.
+
+
+
+
+Ver además: Salvador Allende en Francia ...
+Fotografías: M. O. -  2011
+
+
+
+
+Une rue Salvador Allende ... dans le monde
+
+
+Envoyez-nous vos photographies  ...
+
+
+Name: Allée Salvador Allende
+Type: Pedestrian Way
+Desc: 
+Desc language:
+Oldest known year: 2011
+Oldest known month: 8
+Oldest known day: 25
+Oldest known source: desc abacq
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/151997509
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 4 of 10 : 51120 Sézanne
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+2 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Rue Salvador Allende, Sézanne, Épernay, Marne, Grand Est, Metropolitan France, 51120, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Grand Est
+Locale 3: Marne
+Locale 4: Épernay
+Locale 5: Sézanne
+Zip code: 51120
+Latitude: 48.7207487
+Longitude: 3.7311459
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Rue Salvador Allende
+Type: street
+Desc:
+Desc language: 
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/112619513
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 5 of 10 : 72230 Arnage
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Allée Salvador Allende, Arnage, Le Mans, Sarthe, Pays de la Loire, Metropolitan France, 72230, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Pays de la Loire
+Locale 3: Sarthe
+Locale 4: Le Mans
+Locale 5: Arnage
+Zip code: 72230
+Latitude: 47.9323697
+Longitude: 0.185274
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Allée Salvador Allende
+Type: Footpath
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/256023864
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 6 of 10 : 84000 Avignon
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+2 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Allende, Avenue Allende, Quartier Ouest, Avignon, Vaucluse, Provence-Alpes-Côte d'Azur, Metropolitan France, 84000, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Provence-Alpes-Côte d'Azur
+Locale 3: Vaucluse
+Locale 4: Avignon
+Locale 5: Quartier Ouest
+Zip code: 84000
+Latitude: 43.9289864
+Longitude: 4.802683
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Allende
+Type: Bus Stop
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/node/7525437662
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 7 of 10 : 03600 Commentry
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue du Président Allende, Cité Léon Lévy, Commentry, Montluçon, Allier, Auvergne-Rhône-Alpes, Metropolitan France, 03600, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Auvergne-Rhône-Alpes
+Locale 3: Allier
+Locale 4: Montluçon
+Locale 5: Commentry
+Zip code: 03600
+Latitude: 46.288178
+Longitude: 2.7305769
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue du Président Allende
+Type: street
+Desc:
+Desc language: 
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/86335763
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 8 of 10 : 13500 Martigues
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+4 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Martigues - Place des Aires, Boulevard Salvador Allende, Martigues, Istres, Bouches-du-Rhône, Provence-Alpes-Côte d'Azur, Metropolitan France, 13500, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Provence-Alpes-Côte d'Azur
+Locale 3: Bouches-du-Rhône
+Locale 4: Istres
+Locale 5: Martigues
+Zip code: 13500
+Latitude: 43.4071157
+Longitude: 5.0565322
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Martigues - Place des Aires
+Type: Platform
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name: 
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/node/7444263166
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 9 of 10 : 29480 Le Relecq-Kerhuon
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+3 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue du Président Allende, Ty Oc'h Traon, Le Relecq-Kerhuon, Brest, Finistère, Brittany, Metropolitan France, 29480, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Brittany
+Locale 3: Finistère
+Locale 4: Brest
+Locale 5: Le Relecq-Kerhuon
+Zip code: 29480
+Latitude: 48.4030736
+Longitude: -4.4131787
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue du Président Allende
+Type: street
+Desc:
+Desc language: 
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name: 
+Former name: 
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/15822680
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 10 of 10 : 37540 Saint-Cyr-sur-Loire
+--------------------------------------------------------------------------------------------
+
+
+ID: 
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+2 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Allende, Rue du Docteur Guérin, La Renardière, Saint-Cyr-sur-Loire, Arrondissement de Tours, Indre-et-Loire, Centre-Val de Loire, Metropolitan France, 37540, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Centre-Val de Loire
+Locale 3: Indre-et-Loire
+Locale 4: Arrondissement de Tours
+Locale 5: Saint-Cyr-sur-Loire
+Zip code: 37540
+Latitude: 47.4083683
+Longitude: 0.6500912
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Allende
+Type: Platform
+Desc:
+Desc language: 
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/283825774
+Google Maps link:
+Taking a break for 30 seconds...
+
+DataFrame created:
+
+  id                                 name            type  region country  ... former_name verified_in_maps                             openstreetmap_link google_maps_link                                    abacq_reference
+0     Allée du Président Salvador Allende          street  Europe  France  ...                            0                                                                  http://www.abacq.org/calle/index.php?2008/07/1...       
+1                  Allée Salvador Allende          street  Europe  France  ...                            1     https://www.openstreetmap.org/way/27597484                   http://www.abacq.org/calle/index.php?2009/05/1...       
+2                  Allée Salvador Allende  Pedestrian Way  Europe  France  ...                            1    https://www.openstreetmap.org/way/151997509                   http://www.abacq.org/calle/index.php?2011/08/2...       
+3                    Rue Salvador Allende          street  Europe  France  ...                            1    https://www.openstreetmap.org/way/112619513                   http://www.abacq.org/calle/index.php?2009/05/1...       
+4                  Allée Salvador Allende        Footpath  Europe  France  ...                            1    https://www.openstreetmap.org/way/256023864                   http://www.abacq.org/calle/index.php?2009/05/1...       
+5                                 Allende        Bus Stop  Europe  France  ...                            1  https://www.openstreetmap.org/node/7525437662                   http://www.abacq.org/calle/index.php?2009/05/1...       
+6             Avenue du Président Allende          street  Europe  France  ...                            1     https://www.openstreetmap.org/way/86335763                   http://www.abacq.org/calle/index.php?2009/05/1...       
+7             Martigues - Place des Aires        Platform  Europe  France  ...                            1  https://www.openstreetmap.org/node/7444263166                   http://www.abacq.org/calle/index.php?2009/05/1...       
+8             Avenue du Président Allende          street  Europe  France  ...                            1     https://www.openstreetmap.org/way/15822680                   http://www.abacq.org/calle/index.php?2009/05/1...       
+9                                 Allende        Platform  Europe  France  ...                            1    https://www.openstreetmap.org/way/283825774                   http://www.abacq.org/calle/index.php?2009/05/1...       
+
+[10 rows x 25 columns]
+DataFrame saved in 'countries/France_1.xlsx'.
+
+PS C:\Users\GoGro\Desktop\Repos\datasets-of-interest\a-place-for-salvador-allende> python .\allende_scraper_france_streets.py
+allende_in_france_locales.txt found.
+allende_in_france_links.txt found.
+>>> 33 chunks generated - Enter the number of the chunk you want to work on: 2
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 1 of 10 : 56700 Hennebont
+--------------------------------------------------------------------------------------------
+
+
+ID: 
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+7 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue Salvador Allende, Résidence Gérard Philipe, Le Quimpéro, Hennebont, Lorient, Morbihan, Brittany, Metropolitan France, 56700, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Brittany
+Locale 3: Morbihan
+Locale 4: Lorient
+Locale 5: Hennebont
+Zip code: 56700
+Latitude: 47.8042266
+Longitude: -3.2626319
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue Salvador Allende
+Type: street
+Desc: 
+Desc language: 
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name: 
+Former name: 
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/1173687879
+Google Maps link: 
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 2 of 10 : 59113 Seclin
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue du Président Allende, Burgault, Seclin, Lille, Nord, Hauts-de-France, Metropolitan France, 59113, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Hauts-de-France
+Locale 3: Nord
+Locale 4: Lille
+Locale 5: Seclin
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/46917217
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 3 of 10 : 76380 Canteleu
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue du Président Allende, Canteleu, Rouen, Seine-Maritime, Normandy, Metropolitan France, 76380, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Normandy
+Locale 3: Seine-Maritime
+Locale 4: Rouen
+Locale 5: Canteleu
+Zip code: 76380
+Latitude: 49.4497358
+Longitude: 1.0351993
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue du Président Allende
+Type: street
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/1111718055
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 4 of 10 : 91560 Crosne
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Salvador Allende, Avenue du Président Salvador Allende, Crosne, Arrondissement d'Évry, Essonne, Ile-de-France, Metropolitan France, 91560, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Ile-de-France
+Locale 3: Essonne
+Locale 4: Arrondissement d'Évry
+Locale 5: Crosne
+Zip code: 91560
+Latitude: 48.7207825
+Longitude: 2.4715337
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Salvador Allende
+Type: Bus Stop
+Desc: 
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name: 
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/node/2688946607
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 5 of 10 : 94800 Villejuif
+--------------------------------------------------------------------------------------------
+
+
+ID: 
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue du Président Salvador Allende, Villejuif, Arrondissement de L'Haÿ-les-Roses, Val-de-Marne, Ile-de-France, Metropolitan France, 94800, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Ile-de-France
+Locale 3: Val-de-Marne
+Locale 4: Arrondissement de L'Haÿ-les-Roses
+Locale 5: Villejuif
+Zip code: 94800
+Latitude: 48.797438
+Longitude: 2.3487093
+2 abacq links found - please review the following:
+1 : http://www.abacq.org/calle/index.php?2007/03/20/72-villejuif-francia
+2 : http://www.abacq.org/calle/index.php?2019/09/11/620-villejuif-francia
+>>> Which link to put as abacq_reference? (type one of the numbers above or Enter for the default link): 2
+abacq reference: http://www.abacq.org/calle/index.php?2019/09/11/620-villejuif-francia
+Taking a break for 30 seconds...
+
+
+Villejuif, Francia
+
+"Ciudad de Villejuif
+Avenida del presidente Allende
+asesinado por los fascistas
+el 11 de septiembre 1973".
+
+Érase una vez,
+hace ya muchos años,
+en la ciudad de Villejuif, Francia.
+Una expedición nocturna
+dirigida por Ernesto "Tito" Kaiser,
+exiliado chileno, refugiado político, rojo reivindicado.
+
+Su misión,
+aceptada sin vacilaciones,
+(puesto que era su iniciativa),
+acompañado por un par de cómplices,
+de cuyos nombres no logro acordarme :
+Expropiar, para las generaciones futuras
+una de las innumerables muestras de solidaridad con Chile
+que entonces florecían en las calles, avenidas, plazas,
+y otros espacios públicos del país de Los Tres Mosqueteros.
+(Que como todo el mundo sabe,
+eran cuatro).
+
+Recuperar,
+y conservar.
+
+Pasaron otros tantos años,
+incluso algunos más,
+y la placa en cuestión,
+la reponsabilidad de su conservación,
+fue confiada a manos de Mariano Rojas Olivera,
+exiliado chileno, refugiado político, rojo reivindicado.
+En Zeist, Holanda.
+
+Mariano falleció en los Países Bajos,
+este mes de julio del 2019,
+al fin de una maldita enfermedad.
+
+Soy yo el que hoy guarda la placa,
+en Francia.
+Yo, exiliado chileno, refugiado político, rojo reivindicado.
+Aquí está,
+esperando que las generaciones futuras,
+levanten la cabeza de sus pantallas,
+la miren,
+distraídamente,
+y pregunten :
+ #allende
+   kes eso?
+   |o
+Fernando Orellana. Agosto de 2019
+
+
+...
+
+
+
+... En la casa de Mariano Rojas, en Zeist, Holanda, el año 2007.
+"Ville de Villejuif
+Avenue du président Allende
+assassiné par les fascistes
+le 11 septembre 1973."
+
+
+Ver: http://www.abacq.org/calle/index.php?2007/03/20/72-villejuif-francia
+Fotografía: Fernando Orellana - 2007
+
+
+
+Une rue Salvador Allende ... dans le monde
+
+Envoyez-nous vos photographies  ...
+
+
+
+Name: Avenue du Président Salvador Allende
+Type: street
+Desc: "Ciudad de Villejuif
+Avenida del presidente Allende
+asesinado por los fascistas
+el 11 de septiembre 1973".
+"Tito"
+Expropiar,
+Los Tres Mosqueteros
+Aquí está,
+ #allend
+"Ville de Villejuif
+Avenue du président Allende
+assassiné par les fascistes
+le 11 septembre 1973."
+
+Desc language: 
+Oldest known year: 2007
+Oldest known month: 8
+Oldest known day: 7
+Oldest known source: desc abacq
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/129453867
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 6 of 10 : 13200 Arles
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+3 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Allende, Rue de Cascina, Barriol, Arles, Bouches-du-Rhône, Provence-Alpes-Côte d'Azur, Metropolitan France, 13200, France
+>>> Type y if yes, n if no: n
+Please verify if this address matches the place in this article:
+Allende, Avenue du Président Salvador Allende, Barriol, Arles, Bouches-du-Rhône, Provence-Alpes-Côte d'Azur, Metropolitan France, 13200, France
+>>> Type y if yes, n if no: n
+Please verify if this address matches the place in this article:
+Allende, Avenue du Président Salvador Allende, Barriol, Arles, Bouches-du-Rhône, Provence-Alpes-Côte d'Azur, Metropolitan France, 13200, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Provence-Alpes-Côte d'Azur
+Locale 3: Bouches-du-Rhône
+Locale 4: Arles
+Locale 5: Barriol
+Zip code: 13200
+Latitude: 43.6692949
+Longitude: 4.6151957
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Allende
+Type: Bus Stop
+Desc:
+Desc language: 
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/node/9043766709
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 7 of 10 : 17100 Saintes
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Boulangerie Le Moulin de Saintes, 15, Avenue du Président Salvador Allende, Bellevue, Saintes, Charente-Maritime, Nouvelle-Aquitaine, Metropolitan France, 17100, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Nouvelle-Aquitaine
+Locale 3: Charente-Maritime
+Locale 4: Saintes
+Locale 5: Bellevue
+Zip code: 17100
+Latitude: 45.7362998
+Longitude: -0.6441173298664011
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Boulangerie Le Moulin de Saintes
+Type: Bakery
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/263821424
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 8 of 10 : 26800 Portes-lès-Valence
+--------------------------------------------------------------------------------------------
+
+
+ID: 
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+3 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue du Président Salvador Allende, Portes-lès-Valence, Valence, Drôme, Auvergne-Rhône-Alpes, Metropolitan France, 26800, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Auvergne-Rhône-Alpes
+Locale 3: Drôme
+Locale 4: Valence
+Locale 5: Portes-lès-Valence
+Zip code: 26800
+Latitude: 44.8932016
+Longitude: 4.8806956
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue du Président Salvador Allende
+Type: street
+Desc:
+Desc language: 
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/108377413
+Google Maps link: 
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 9 of 10 : 40990 Saint-Paul-lès-Dax
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+2 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue du Président Allende, Gouaillard, Saint-Paul-lès-Dax, District of Dax, Landes, Nouvelle-Aquitaine, Metropolitan France, 40990, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Nouvelle-Aquitaine
+Locale 3: Landes
+Locale 4: District of Dax
+Locale 5: Saint-Paul-lès-Dax
+Zip code: 40990
+Latitude: 43.733735
+Longitude: -1.0779299
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue du Président Allende
+Type: street
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name: 
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/533186117
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 10 of 10 : 56600 Lanester
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+3 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue Président Allende, Kergal, Lanester, Lorient, Morbihan, Brittany, Metropolitan France, 56600, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/30438722
+Google Maps link:
+Taking a break for 30 seconds...
+
+DataFrame created:
+
+  id                                  name      type  region country  ... former_name verified_in_maps                             openstreetmap_link google_maps_link                                    abacq_reference
+0                  Avenue Salvador Allende    street  Europe  France  ...                            1   https://www.openstreetmap.org/way/1173687879                   http://www.abacq.org/calle/index.php?2009/05/1...
+1              Avenue du Président Allende    street  Europe  France  ...                            1     https://www.openstreetmap.org/way/46917217                   http://www.abacq.org/calle/index.php?2009/05/1...
+2              Avenue du Président Allende    street  Europe  France  ...                            1   https://www.openstreetmap.org/way/1111718055                   http://www.abacq.org/calle/index.php?2009/05/1...
+3                         Salvador Allende  Bus Stop  Europe  France  ...                            1  https://www.openstreetmap.org/node/2688946607                   http://www.abacq.org/calle/index.php?2009/05/1...
+4     Avenue du Président Salvador Allende    street  Europe  France  ...                            1    https://www.openstreetmap.org/way/129453867                   http://www.abacq.org/calle/index.php?2019/09/1...
+5                                  Allende  Bus Stop  Europe  France  ...                            1  https://www.openstreetmap.org/node/9043766709                   http://www.abacq.org/calle/index.php?2009/05/1...
+6         Boulangerie Le Moulin de Saintes    Bakery  Europe  France  ...                            1    https://www.openstreetmap.org/way/263821424                   http://www.abacq.org/calle/index.php?2009/05/1...
+7     Avenue du Président Salvador Allende    street  Europe  France  ...                            1    https://www.openstreetmap.org/way/108377413                   http://www.abacq.org/calle/index.php?2009/05/1...
+8              Avenue du Président Allende    street  Europe  France  ...                            1    https://www.openstreetmap.org/way/533186117                   http://www.abacq.org/calle/index.php?2009/05/1...
+9                 Avenue Président Allende    street  Europe  France  ...                            1     https://www.openstreetmap.org/way/30438722                   http://www.abacq.org/calle/index.php?2009/05/1...
+
+[10 rows x 25 columns]
+DataFrame saved in 'countries/France_2.xlsx'.
+

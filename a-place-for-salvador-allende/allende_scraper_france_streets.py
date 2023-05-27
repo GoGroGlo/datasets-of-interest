@@ -375,6 +375,9 @@ def get_abacq_link(locale_1_no_zip):
     # create a list of links for review
     links_for_review = []
 
+    # clear links_for_review from the previous locale iteration
+    links_for_review.clear()
+
     # create variable
     global abacq_reference
 
@@ -428,8 +431,6 @@ def get_abacq_link(locale_1_no_zip):
     links_in_locales = []
     if len(links_for_review) > 0:
         links_in_locales.extend(links_for_review)
-        # clear links_for_review for the next locale iteration
-        links_for_review.clear()
 
 
 # browse abacq_reference only if it's not the default link
@@ -613,7 +614,7 @@ with open('france\\allende_in_france_locales.txt','r', encoding="utf=8") as f:
 
 
     # number of items in a chunk (default 20 for France)
-    chunk_number = 10
+    chunk_number = 20
 
 
     # ask user which chunk to work on
