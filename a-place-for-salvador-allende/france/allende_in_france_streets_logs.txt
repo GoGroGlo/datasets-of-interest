@@ -990,3 +990,989 @@ DataFrame created:
 [10 rows x 25 columns]
 DataFrame saved in 'countries/France_2.xlsx'.
 
+PS C:\Users\GoGro\Desktop\Repos\datasets-of-interest\a-place-for-salvador-allende> python .\allende_scraper_france_streets.py
+allende_in_france_locales.txt found.
+allende_in_france_links.txt found.
+>>> 17 chunks generated - Enter the number of the chunk you want to work on: 2
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 1 of 20 : 77100 Meaux
+--------------------------------------------------------------------------------------------
+
+
+ID: 
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+2 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Hôtel de Police, Avenue du Président Salvador Allende, Meaux, Seine-et-Marne, Ile-de-France, Metropolitan France, 77100, France
+>>> Type y if yes, n if no: n
+Please verify if this address matches the place in this article:
+Meaux Principal, Avenue du Président Salvador Allende, Meaux, Seine-et-Marne, Ile-de-France, Metropolitan France, 77100, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Ile-de-France
+Locale 3: Seine-et-Marne
+Locale 4: Meaux
+Locale 5: Avenue du Président Salvador Allende
+Zip code: 77100
+Latitude: 48.9571361
+Longitude: 2.8825055
+2 abacq links found - please review the following:
+1 : http://www.abacq.org/calle/index.php?2011/09/21/556-magny-les-hameaux-francia
+2 : http://www.abacq.org/calle/index.php?2011/09/17/552-meaux-francia
+>>> Which link to put as abacq_reference? (type one of the numbers above or Enter for the default link): 2
+abacq reference: http://www.abacq.org/calle/index.php?2011/09/17/552-meaux-francia
+Taking a break for 30 seconds...
+
+
+Meaux. Francia
+ 
+
+
+Monolito en la avenida Salvador Allende de la ciudad de Meaux.
+
+
+
+"Le samedi 10 décembre 1977 le Conseil Municipal de Meaux
+ a donné officiellement à cette avenue le nom de Salvador Allende, Président de la République du Chili, 1908 - 1973
+A la mémoire du grand homme d'Etat assassiné"
+
+"El sábado 10 diciembre 1977 el Consejo Municipal de Meaux
+ dió oficialmente a esta avenida el nombre de Salvador Allende, Presidente de la República de Chile 1908 - 1973
+En memoria del gran hombre de Estado asesinado"
+
+
+
+Durante el homenaje a Salvador Allende
+  en este mes de septiembre 2011 ...
+
+
+Más informaciones y fotografías: Salvador Allende en Francia ...
+
+Fotografías: Patricio Rodríguez  - 2011
+
+
+
+Une rue Salvador Allende ... dans le monde
+
+
+Envoyez-nous vos photographies  ...
+
+
+Name: Meaux Principal
+Type: Post Office
+Desc: "Le samedi 10 décembre 1977 le Conseil Municipal de Meaux
+ a donné officiellement à cette avenue le nom de Salvador Allende, Président de la République du Chili, 1908 - 1973
+A la mémoire du grand homme d'Etat assassiné"
+"El sábado 10 diciembre 1977 el Consejo Municipal de Meaux
+ dió oficialmente a esta avenida el nombre de Salvador Allende, Presidente de la República de Chile 1908 - 1973
+En memoria del gran hombre de Estado asesinado"
+
+Desc language:
+Oldest known year: 1977
+Oldest known month: 9
+Oldest known day: 11
+Oldest known source: desc place
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/node/3356988321
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 2 of 20 : 91100 Corbeil-Essonnes
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Salvador Allende, Avenue du Président Salvador Allende, Corbeil-Essonnes, Arrondissement d'Évry, Essonne, Ile-de-France, Metropolitan France, 91100, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Ile-de-France
+Locale 3: Essonne
+Locale 4: Arrondissement d'Évry
+Locale 5: Corbeil-Essonnes
+Zip code: 91100
+Latitude: 48.5974049
+Longitude: 2.4766071
+1 abacq links found - please review the following:
+1 : http://www.abacq.org/calle/index.php?2008/05/08/187-corbeil-essonnes-francia
+>>> Which link to put as abacq_reference? (type one of the numbers above or Enter for the default link): 1
+abacq reference: http://www.abacq.org/calle/index.php?2008/05/08/187-corbeil-essonnes-francia
+Taking a break for 30 seconds...
+
+
+Corbeil-Essonnes. Francia
+
+
+
+Homenaje a Salvador Allende en la avenida del mismo nombre, barrio de Montconseil de la ciudad de Corbeil-Essonnes (Île-de-France).
+Septiembre del 2007.
+
+
+Fotografía: Génération citoyenne
+
+
+Name: Salvador Allende
+Type: Bus Stop
+Desc:
+Desc language:
+Oldest known year: 2007
+Oldest known month: 9
+Oldest known day:
+Oldest known source: desc abacq
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/node/5830966886
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 3 of 20 : 93000 Bobigny
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Salvador Allende, Avenue du Président Salvador Allende, Cité du Chemin Vert, Bobigny, Seine-Saint-Denis, Ile-de-France, Metropolitan France, 93000, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Ile-de-France
+Locale 3: Seine-Saint-Denis
+Locale 4: Bobigny
+Locale 5: Cité du Chemin Vert
+Zip code: 93000
+Latitude: 48.9040403
+Longitude: 2.4457707
+1 abacq links found - please review the following:
+1 : http://www.abacq.org/calle/index.php?2008/07/23/237-bobigny-francia
+>>> Which link to put as abacq_reference? (type one of the numbers above or Enter for the default link): 1
+abacq reference: http://www.abacq.org/calle/index.php?2008/07/23/237-bobigny-francia
+Taking a break for 30 seconds...
+
+
+Bobigny. Francia
+
+
+La avenida del Presidente Salvador Allende en la ciudad de Bobigny, departamento de Hauts-de-Seine.
+Bobigny tiene además una sala Pablo Neruda.
+
+
+
+
+Vista de la avenida Salvador Allende al lado de la Municipalidad.
+
+
+
+
+
+Carteles que anuncian la direccion de la Municipalidad y la sala Pablo Neruda.
+
+
+
+Sala Pablo Neruda en los basamentos de la Municipalidad, perpendicular a la avenida Allende.
+
+Fraternalmente. Juan Carlos Cartagena
+
+
+Name: Salvador Allende
+Type: Bus Stop
+Desc:
+Desc language:
+Oldest known year: 2008
+Oldest known month: 7
+Oldest known day: 23
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/node/2485272962
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 4 of 20 : 11300 Limoux
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue Salavador Allende, Limoux, Aude, Occitania, Metropolitan France, 11300, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Occitania
+Locale 3: Aude
+Locale 4: Limoux
+Locale 5: Avenue Salavador Allende
+Zip code: 11300
+Latitude: 43.04798685
+Longitude: 2.2237303250590728
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue Salavador Allende
+Type: street
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/37448038
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 5 of 20 : 12300 Firmi
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue Allende, Lestrunie, Firmi, Villefranche-de-Rouergue, Aveyron, Occitania, Metropolitan France, 12300, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Occitania
+Locale 3: Aveyron
+Locale 4: Villefranche-de-Rouergue
+Locale 5: Firmi
+Zip code: 12300
+Latitude: 44.5403608
+Longitude: 2.3029931
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue Allende
+Type: street
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/71896770
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 6 of 20 : 12700 Capdenac-Gare
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+2 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue Salvador Allende, Saint-Julien d'Empare, Capdenac-Gare, Villefranche-de-Rouergue, Aveyron, Occitania, Metropolitan France, 12700, France
+>>> Type y if yes, n if no: n
+Please verify if this address matches the place in this article:
+Avenue Salvador Allende, Saint-Julien d'Empare, Capdenac-Gare, Villefranche-de-Rouergue, Aveyron, Occitania, Metropolitan France, 12700, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Occitania
+Locale 3: Aveyron
+Locale 4: Villefranche-de-Rouergue
+Locale 5: Capdenac-Gare
+Zip code: 12700
+Latitude: 44.5628212
+Longitude: 2.0762274
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue Salvador Allende
+Type: street
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/79652436
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 7 of 20 : 13127 Vitrolles
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue Salvador Allende, Vitrolles, Istres, Bouches-du-Rhône, Provence-Alpes-Côte d'Azur, Metropolitan France, 13127, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Provence-Alpes-Côte d'Azur
+Locale 3: Bouches-du-Rhône
+Locale 4: Istres
+Locale 5: Vitrolles
+Zip code: 13127
+Latitude: 43.4509583
+Longitude: 5.245232
+1 abacq links found - please review the following:
+1 : http://www.abacq.org/calle/index.php?2009/02/10/321-vitrolles-francia
+>>> Which link to put as abacq_reference? (type one of the numbers above or Enter for the default link): 1
+abacq reference: http://www.abacq.org/calle/index.php?2009/02/10/321-vitrolles-francia
+Taking a break for 30 seconds...
+
+
+Vitrolles. Francia
+
+
+
+La rotonda Salvador Allende de la ciudad de Vitrolles.
+
+Vitrolles está en el departamento de Bouches-du-Rhône, región Provence-Alpes-Côte d'Azur, a orillas del lago de Berre (étang de Berre). Tiene 37.190 habitantes.
+
+
+Eine Straße Salvador Allende ... in der Welt
+
+
+Schicken Sie uns Ihre Fotos ...
+
+
+
+Name: Avenue Salvador Allende
+Type: street
+Desc: étang de Berr
+
+Desc language:
+Oldest known year: 2009
+Oldest known month: 2
+Oldest known day: 10
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/38939701
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 8 of 20 : 13190 Allauch
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+2 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue Salvador Allende, La Bourdonnière, Allauch, Marseille, Bouches-du-Rhône, Provence-Alpes-Côte d'Azur, Metropolitan France, 13190, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Provence-Alpes-Côte d'Azur
+Locale 3: Bouches-du-Rhône
+Locale 4: Marseille
+Locale 5: Allauch
+Zip code: 13190
+Latitude: 43.3534233
+Longitude: 5.4841426
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue Salvador Allende
+Type: street
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/426189105
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 9 of 20 : 18000 Bourges
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Allende, Rue Eirik Labonne, Val d'Auron, Bourges, Cher, Centre-Val de Loire, Metropolitan France, 18000, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Centre-Val de Loire
+Locale 3: Cher
+Locale 4: Bourges
+Locale 5: Val d'Auron
+Zip code: 18000
+Latitude: 47.064319
+Longitude: 2.4026852
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Allende
+Type: Bus Stop
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/node/4334752686
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 10 of 20 : 21800 Quetigny
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+2 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Allende, Boulevard de l'Europe, Quetigny, Dijon, Côte-d'Or, Bourgogne-Franche-Comté, Metropolitan France, 21800, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Bourgogne-Franche-Comté
+Locale 3: Côte-d'Or
+Locale 4: Dijon
+Locale 5: Quetigny
+Zip code: 21800
+Latitude: 47.32103
+Longitude: 5.1057292
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Allende
+Type: Bus Stop
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/node/2646526191
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 11 of 20 : 31120 Portet-sur-Garonne
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+4 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue Salvador Allende, Portet-sur-Garonne, Muret, Haute-Garonne, Occitania, Metropolitan France, 31120, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Occitania
+Locale 3: Haute-Garonne
+Locale 4: Muret
+Locale 5: Portet-sur-Garonne
+Zip code: 31120
+Latitude: 43.5329685
+Longitude: 1.413976
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue Salvador Allende
+Type: street
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/107377780
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 12 of 20 : 31140 Aucamville
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+2 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Salvy, Route/Avenue de Fronton, Lalande - Grand Selve, Toulouse Nord, Aucamville, Toulouse, Haute-Garonne, Occitania, Metropolitan France, 31140, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Occitania
+Locale 3: Haute-Garonne
+Locale 4: Toulouse
+Locale 5: Aucamville
+Zip code: 31140
+Latitude: 43.6636373
+Longitude: 1.4306698
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Salvy
+Type: Bus Stop
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/node/1737071710
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 13 of 20 : 31200 Toulouse
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Salvador Allende, Avenue des États-Unis, Zone d'activité de Gratian, Toulouse Nord, Toulouse, Haute-Garonne, Occitania, Metropolitan France, 31200, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Occitania
+Locale 3: Haute-Garonne
+Locale 4: Toulouse
+Locale 5: Toulouse Nord
+Zip code: 31200
+Latitude: 43.659534
+Longitude: 1.4185076
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Salvador Allende
+Type: Bus Stop
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/node/1737071838
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 14 of 20 : 31210 Montréjeau
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Club Canin de Montréjeau, Rue Salvador Allende, Montréjeau, Saint-Gaudens, Haute-Garonne, Occitania, Metropolitan France, 31210, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Occitania
+Locale 3: Haute-Garonne
+Locale 4: Saint-Gaudens
+Locale 5: Montréjeau
+Zip code: 31210
+Latitude: 43.0796129
+Longitude: 0.5650435272058834
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Club Canin de Montréjeau
+Type: park
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/1013572856
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 15 of 20 : 31320 Castanet-Tolosan
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+3 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue Salvador Allende, Castanet-Tolosan, Toulouse, Haute-Garonne, Occitania, Metropolitan France, 31320, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Occitania
+Locale 3: Haute-Garonne
+Locale 4: Toulouse
+Locale 5: Castanet-Tolosan
+Zip code: 31320
+Latitude: 43.5154363
+Longitude: 1.5016786
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue Salvador Allende
+Type: street
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/33713039
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 16 of 20 : 33270 Floirac
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+3 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Floirac Dravemont, Avenue Salvador Allende, Dravemont, Floirac, Bordeaux, Gironde, Nouvelle-Aquitaine, Metropolitan France, 33270, France
+>>> Type y if yes, n if no: n
+Please verify if this address matches the place in this article:
+Floirac Dravemont (av Allende), Avenue Salvador Allende, Dravemont, Floirac, Bordeaux, Gironde, Nouvelle-Aquitaine, Metropolitan France, 33270, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Nouvelle-Aquitaine
+Locale 3: Gironde
+Locale 4: Bordeaux
+Locale 5: Floirac
+Zip code: 33270
+Latitude: 44.845975
+Longitude: -0.510558
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Floirac Dravemont (av Allende)
+Type: Bus Stop
+Desc:
+Desc language: 
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/node/10876274039
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 17 of 20 : 33610 Cestas
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+4 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue Salvador Allende, Bouzet, Cestas, Bordeaux, Gironde, Nouvelle-Aquitaine, Metropolitan France, 33610, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Nouvelle-Aquitaine
+Locale 3: Gironde
+Locale 4: Bordeaux
+Locale 5: Cestas
+Zip code: 33610
+Latitude: 44.7587988
+Longitude: -0.6870249
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue Salvador Allende
+Type: street
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/193774048
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 18 of 20 : 38130 Echirolles
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+7 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue Salvador Allende, Échirolles, Grenoble, Isère, Auvergne-Rhône-Alpes, Metropolitan France, 38130, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Auvergne-Rhône-Alpes
+Locale 3: Isère
+Locale 4: Grenoble
+Locale 5: Échirolles
+Zip code: 38130
+Latitude: 45.1533114
+Longitude: 5.7234818
+1 abacq links found - please review the following:
+1 : http://www.abacq.org/calle/index.php?2007/09/22/104-echirolles-francia
+>>> Which link to put as abacq_reference? (type one of the numbers above or Enter for the default link): 1
+abacq reference: http://www.abacq.org/calle/index.php?2007/09/22/104-echirolles-francia
+Taking a break for 30 seconds...
+
+
+Echirolles, Francia
+
+
+
+Avenida Salvador Allende en la ciudad de Echirolles, cerca de Grenoble (Isère). La avenida está al lado de un centro comercial en el barrio Les Granges.
+
+
+
+En Echirolles también, la biblioteca Pablo Neruda, en la planta baja de un edificio en donde hay oficinas de pequeñas empresas.
+
+
+
+Fotografías de Claude Drouillas
+
+( Soy un joven que llegué ya hace casi 5 meses a Francia, y bueno, es para aportarles informacion ...
+Y de verdad mi apellido es Drouillas ya que tengo nacionalidad francesa gracias a mi abuelo )
+
+
+Name: Avenue Salvador Allende
+Type: street
+Desc: Les Granges
+
+Desc language:
+Oldest known year: 2007
+Oldest known month: 9
+Oldest known day: 22
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/190921499
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 19 of 20 : 40220 Tarnos
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avenue Salvador Allende, Tarnos, District of Dax, Landes, Nouvelle-Aquitaine, Metropolitan France, 40220, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Nouvelle-Aquitaine
+Locale 3: Landes
+Locale 4: District of Dax
+Locale 5: Tarnos
+Zip code: 40220
+Latitude: 43.5372298
+Longitude: -1.4573689
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avenue Salvador Allende
+Type: street
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/way/604021344
+Google Maps link:
+Taking a break for 30 seconds...
+
+
+--------------------------------------------------------------------------------------------
+Processing locale 20 of 20 : 49240 Avrillé
+--------------------------------------------------------------------------------------------
+
+
+ID:
+Country: France
+Region: Europe
+Taking a break for 30 seconds...
+1 possible address(es) found in OpenStreetMap.
+Please verify if this address matches the place in this article:
+Avrillé Adézière, Avenue Salvador Allende, Mauny, Avrillé, Angers, Maine-et-Loire, Pays de la Loire, Metropolitan France, 49240, France
+>>> Type y if yes, n if no: y
+Taking a break for 30 seconds...
+Locale 1: Metropolitan France
+Locale 2: Pays de la Loire
+Locale 3: Maine-et-Loire
+Locale 4: Angers
+Locale 5: Avrillé
+Zip code: 49240
+Latitude: 47.5049441
+Longitude: -0.6050903
+No abacq links found, though this could be wrong - please review later.
+abacq reference: http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia
+Name: Avrillé Adézière
+Type: Bus Stop
+Desc:
+Desc language:
+Oldest known year: 2009
+Oldest known month: 5
+Oldest known day: 13
+Oldest known source: abacq date posted
+Alt name:
+Former name:
+Verified in maps: 1
+OpenStreetMap link: https://www.openstreetmap.org/node/7040082748
+Google Maps link:
+Taking a break for 30 seconds...
+
+DataFrame created:
+
+   id                            name         type  region country  ... former_name verified_in_maps                              openstreetmap_link google_maps_link                                    abacq_reference
+0                     Meaux Principal  Post Office  Europe  France  ...                            1   https://www.openstreetmap.org/node/3356988321                   http://www.abacq.org/calle/index.php?2011/09/1...      
+1                    Salvador Allende     Bus Stop  Europe  France  ...                            1   https://www.openstreetmap.org/node/5830966886                   http://www.abacq.org/calle/index.php?2008/05/0...      
+2                    Salvador Allende     Bus Stop  Europe  France  ...                            1   https://www.openstreetmap.org/node/2485272962                   http://www.abacq.org/calle/index.php?2008/07/2...      
+.org/way/71896770                   http://www.abacq.org/calle/index.php?2009/05/1...
+5             Avenue Salvador Allende       street  Europe  France  ...                            1      https://www.openstreetmap.org/way/79652436                   http://www.abacq.org/calle/index.php?2009/05/1...
+6             Avenue Salvador Allende       street  Europe  France  ...                            1      https://www.openstreetmap.org/way/38939701                   http://www.abacq.org/calle/index.php?2009/02/1...
+7             Avenue Salvador Allende       street  Europe  France  ...                            1     https://www.openstreetmap.org/way/426189105                   http://www.abacq.org/calle/index.php?2009/05/1...
+8                             Allende     Bus Stop  Europe  France  ...                            1   https://www.openstreetmap.org/node/4334752686                   http://www.abacq.org/calle/index.php?2009/05/1...
+9                             Allende     Bus Stop  Europe  France  ...                            1   https://www.openstreetmap.org/node/2646526191                   http://www.abacq.org/calle/index.php?2009/05/1...
+10            Avenue Salvador Allende       street  Europe  France  ...                            1     https://www.openstreetmap.org/way/107377780                   http://www.abacq.org/calle/index.php?2009/05/1...
+11                              Salvy     Bus Stop  Europe  France  ...                            1   https://www.openstreetmap.org/node/1737071710                   http://www.abacq.org/calle/index.php?2009/05/1...
+12                   Salvador Allende     Bus Stop  Europe  France  ...                            1   https://www.openstreetmap.org/node/1737071838                   http://www.abacq.org/calle/index.php?2009/05/1...
+13           Club Canin de Montréjeau         park  Europe  France  ...                            1    https://www.openstreetmap.org/way/1013572856                   http://www.abacq.org/calle/index.php?2009/05/1...
+14            Avenue Salvador Allende       street  Europe  France  ...                            1      https://www.openstreetmap.org/way/33713039                   http://www.abacq.org/calle/index.php?2009/05/1...
+15     Floirac Dravemont (av Allende)     Bus Stop  Europe  France  ...                            1  https://www.openstreetmap.org/node/10876274039                   http://www.abacq.org/calle/index.php?2009/05/1...
+16            Avenue Salvador Allende       street  Europe  France  ...                            1     https://www.openstreetmap.org/way/193774048                   http://www.abacq.org/calle/index.php?2009/05/1...
+17            Avenue Salvador Allende       street  Europe  France  ...                            1     https://www.openstreetmap.org/way/190921499                   http://www.abacq.org/calle/index.php?2007/09/2...
+[20 rows x 25 columns]
+DataFrame saved in 'countries/France_2.xlsx'.
+
