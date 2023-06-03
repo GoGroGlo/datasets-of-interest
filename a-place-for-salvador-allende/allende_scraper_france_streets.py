@@ -427,10 +427,16 @@ def get_abacq_link(locale_1_no_zip):
 
     # create another list of links that were caught here
     # anything not caught here will be reviewed separately
-    global links_in_locales
-    links_in_locales = []
-    if len(links_for_review) > 0:
-        links_in_locales.extend(links_for_review)
+    #
+    # edit: can't seem to get this working as intended;
+    # commenting this out for now.
+    # let's just collect the distinct links from France_all.xlsx 
+    # and compare them with allende_in_france_links.txt for future scraping
+    #
+    # global links_in_locales
+    # links_in_locales = []
+    # if len(links_for_review) > 0:
+    #     links_in_locales.extend(links_for_review)
 
 
 # browse abacq_reference only if it's not the default link
@@ -780,12 +786,14 @@ finally:
 
 
 # save links_in_locales to exclude from future scraping
-if len(links_in_locales) > 0:
-    with open('france\\allende_in_france_links_in_locales.txt', 'a', encoding="utf=8") as f:
-        for l in links_in_locales:
-            f.write(f'{l}\n')
-    # print for logging purposes
-    print('\nallende_in_france_links_in_locales.txt modified.')
+# edit: commented out because not working as intended
+# 
+# if len(links_in_locales) > 0:
+#     with open('france\\allende_in_france_links_in_locales.txt', 'a', encoding="utf=8") as f:
+#         for l in links_in_locales:
+#             f.write(f'{l}\n')
+#     # print for logging purposes
+#     print('\nallende_in_france_links_in_locales.txt modified.')
 
 
 # create a dataframe of all info collected
