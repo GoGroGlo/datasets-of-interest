@@ -404,11 +404,11 @@ def get_abacq_link(locale_1_no_zip):
         # usually this would be the link that gives the most information about the locale
         user_choice = int(
             input(
-            '>>> Which link to put as abacq_reference? (type one of the numbers above or Enter for the default link): '))
+            '>>> Which link to put as abacq_reference? (type one of the numbers above or zero (0) for the default link): '))
 
 
-        # if Enter was pressed, assign default_link as abacq_reference
-        if user_choice is None:
+        # if zero was pressed, assign default_link as abacq_reference
+        if user_choice == 0:
             abacq_reference = default_link
             data['abacq_reference'].append(abacq_reference)
             print(f'abacq reference: {abacq_reference}')
@@ -420,7 +420,7 @@ def get_abacq_link(locale_1_no_zip):
                 # typo prevention
                 user_choice = int(
                     input(
-                    '>>> Try again - Which link to put as abacq_reference? (type one of the numbers above or Enter for the default link): '))
+                    '>>> Try again - Which link to put as abacq_reference? (type one of the numbers above or zero (0) for the default link): '))
             else:
                 data['abacq_reference'].append(abacq_reference)
                 print(f'abacq reference: {abacq_reference}')
