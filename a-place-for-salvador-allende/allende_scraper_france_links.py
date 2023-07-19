@@ -162,8 +162,8 @@ print('allende_in_france_links_18.txt created.')
 
 
 # allende_in_france_links_18.txt says there are 93 links
-# 47 links per day on one weekend seems manageable
-# but we'll just copy the chunks generator from allende_scraper_main.py
+# I'll do 3 sets of 31 each this week
+# we'll just copy the chunks generator from allende_scraper_main.py
 
 # let user decide how many links each chunk should have
 try:
@@ -364,10 +364,10 @@ print(data_df)
 
 # export dataframe - xlsx supports unicode, 
 # so no more encoding fiascos compared to saving to csv
-data_df.to_excel(
-    f'test_files/{country_en}_{target_chunk+17}.xlsx', index=False) # for test files
 # data_df.to_excel(
-#     f'countries/{country_en}_{target_chunk}.xlsx', index=False) # for main files
+#     f'test_files/{country_en}_{target_chunk+17}.xlsx', index=False) # for test files
+data_df.to_excel(
+    f'countries/{country_en}_{target_chunk+17}.xlsx', index=False) # for main files
 print(
     f'DataFrame saved in \'countries/{country_en}_{target_chunk+17}.xlsx\'.')
 
