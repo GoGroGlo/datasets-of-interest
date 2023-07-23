@@ -527,18 +527,18 @@ def get_desc(article_soup, data):
 
 # open and save list of locales and zip codes in the Paris region sourced from
 # http://www.abacq.org/calle/index.php?2007/03/09/49-la-region-parisina-francia
+# len(allende_in_france_paris) = 92
 with open('france\\allende_in_france_paris.txt', 'r', encoding="utf-8") as f:
     allende_in_france_paris = []
     for l in f.readlines():
         l = l.strip()
         allende_in_france_paris.append(l)
 
-print(allende_in_france_paris)
-print(len(allende_in_france_paris))
 
 # compare their zip codes against those in allende_in_france_locales.txt
 # if the zip code is already in allende_in_france_locales.txt,
 # we've done that place so it can be removed
+# len(allende_in_france_paris) = 68
 with open('france\\allende_in_france_locales.txt', 'r', encoding="utf-8") as g:
     l_zip_codes = []
     for l in g.readlines():
@@ -552,235 +552,190 @@ for l_zip_code in l_zip_codes:
         if l_zip_code in locale:
             allende_in_france_paris.remove(locale)
 
-print(allende_in_france_paris)
-print(len(allende_in_france_paris))
-
 
 # now, compare the locale name against those in allende_in_france_links.txt
 # if the locale name is already in allende_in_france_links.txt
 # we've done that place so it can be removed
+# len(allende_in_france_paris) = 26, good enough for one sitting
 with open('france\\allende_in_france_links.txt','r') as h:
-    l_locale_names = h.readlines()
-    # skip links_exceptions
-    for i in links_exceptions[:]:
-        for l in l_locale_names[:]:
-            if i in l:
-                l_locale_names.remove(l)
-    for l in l_locale_names:
-        # extract the locale name
-        l = re.search(r'\/\d+-(.*)-francia', l)
-        l = str(l.group(1))
-        # remove leading articles l-, les-, la-, le-
-        try:
-            l = re.search(r'^l\w*-(.*)', l)
-            l = str(l.group(1))
-        except:
-            pass
-        l_locale_names.append(l)
+    l_locale_urls = []
+    for l in h.readlines():
+        l = l.strip()
+        l_locale_urls.append(l)
 
-print(l_locale_names)
+# skip links_exceptions
+for i in links_exceptions[:]:
+    for l in l_locale_urls[:]:
+        if i in l:
+            l_locale_urls.remove(l)
+
+# # test
+# print(l_locale_urls)
+
+# compare sanitized locales against every url
+for l in l_locale_urls[:]:
+    # extract and sanitize locale names from allende_in_france_paris
+    for locale in allende_in_france_paris[:]:
+        # extract part
+        _i = re.search(r'\d+\.\s+(.*?),*\s+', locale)
+        _i = str(_i.group(1))
+        # sanitize part
+        _i = _i.lower()
+        _i = unidecode.unidecode(_i)
+        _i = _i.replace('\'', '-')
+        _i = _i.replace(' / ', '-')
+        _i = _i.replace(' ', '-')
+        # remove if a match is found
+        if _i in l:
+            allende_in_france_paris.remove(locale)
+
 
 # ------------------------------------------------------ #
 
 
-### SPLIT LOCALE LIST INTO CHUNKS ###
+### WORK WITH EACH LOCALE ###
 
 
-# with open('france\\allende_in_france_locales.txt','r', encoding="utf=8") as f:
-#     f = f.readlines()
+# start the browser
+try:
+    create_driver()
 
 
-#     # number of items in a chunk (default 20 for France)
-#     chunk_number = 20
+    for (i, locale) in enumerate(locale_chunk, start=1):
 
 
-#     # ask user which chunk to work on
-#     try:
-#         target_chunk = int(input(
-#             f'>>> {math.ceil(len(f) / chunk_number)} chunks generated - Enter the number of the chunk you want to work on: '))
-#     # typo prevention
-#     except:
-#         target_chunk = int(input(
-#             f'>>> Try again - {math.ceil(len(f) / chunk_number)} chunks generated - Enter the number of the chunk you want to work on: '))
-#     while target_chunk > math.ceil(len(f) / 20):
-#         target_chunk = int(input(
-#             f'>>> Try again - {math.ceil(len(f) / chunk_number)} chunks generated - Enter the number of the chunk you want to work on: '))
-        
-
-#     # do the split
-#     locale_chunk = asm.chunks(f, chunk_number)
+        # skip if whitespace
+        if locale == '' or locale == '\n':
+            continue
 
 
-#     # skip through chunks that we don't need
-#     _i = 1
-#     while _i < target_chunk:
-#         next(locale_chunk)
-#         _i += 1
-#     # this next iteration is the chunk we want to work with
-#     locale_chunk = next(locale_chunk)
+        # sanitize and print current locale
+        locale = locale.strip()
+        print('\n')
+        print('--------------------------------------------------------------------------------------------')
+        print(f'Processing locale {i} of {len(locale_chunk)} : {locale}')
+        print('--------------------------------------------------------------------------------------------')
+        print('\n')
 
 
-#     # for debuging purposes
-#     # print(locale_chunk)
+        # get ID (null)
+        id = ''
+        data['id'].append(id)
+        print(f'ID: {id}')
 
 
-# # ------------------------------------------------------ #
+        # get COUNTRY and REGION
+        data['country'].append(country_en)
+        print(f'Country: {country_en}')
+
+        data['region'].append(region)
+        print(f'Region: {region}')
 
 
-# ### WORK WITH EACH LOCALE ###
+        # load OSM and search for the locale
+        osm_check(locale, data)
 
 
-# # start the browser
-# try:
-#     create_driver()
+        # extract OSM info if any
+        extract_osm_info(data)
 
 
-#     for (i, locale) in enumerate(locale_chunk, start=1):
+        # get and review abacq links if any
+        # abacq_reference also gets assigned here
+        get_abacq_link(locale_1_no_zip)
 
 
-#         # skip if whitespace
-#         if locale == '' or locale == '\n':
-#             continue
+        # browse the chosen abacq link
+        browse_abacq(abacq_reference)
 
 
-#         # sanitize and print current locale
-#         locale = locale.strip()
-#         print('\n')
-#         print('--------------------------------------------------------------------------------------------')
-#         print(f'Processing locale {i} of {len(locale_chunk)} : {locale}')
-#         print('--------------------------------------------------------------------------------------------')
-#         print('\n')
-
-
-#         # get ID (null)
-#         id = ''
-#         data['id'].append(id)
-#         print(f'ID: {id}')
-
-
-#         # get COUNTRY and REGION
-#         data['country'].append(country_en)
-#         print(f'Country: {country_en}')
-
-#         data['region'].append(region)
-#         print(f'Region: {region}')
-
-
-#         # load OSM and search for the locale
-#         osm_check(locale, data)
-
-
-#         # extract OSM info if any
-#         extract_osm_info(data)
-
-
-#         # get and review abacq links if any
-#         # abacq_reference also gets assigned here
-#         get_abacq_link(locale_1_no_zip)
-
-
-#         # browse the chosen abacq link
-#         browse_abacq(abacq_reference)
-
-
-#         # get NAME
-#         get_name(data)
+        # get NAME
+        get_name(data)
 
         
-#         # get TYPE
-#         asm.get_type(osm_info, name, data)
+        # get TYPE
+        asm.get_type(osm_info, name, data)
 
 
-#         # get DESC
-#         get_desc(article_soup, data)
+        # get DESC
+        get_desc(article_soup, data)
 
 
-#         # get DESC_LANGUAGE (null)
-#         # won't assume anything here for now because 
-#         # most of the descriptions I see are in Spanish, regardless of the region
-#         desc_language = ''
-#         data['desc_language'].append(desc_language)
-#         print(f'Desc language: {desc_language}')
-
-        
-#         # get OLDEST_KNOWN_YEAR
-#         asm.get_oldest_known_year(abacq_reference, text, data)
+        # get DESC_LANGUAGE (null)
+        # won't assume anything here for now because 
+        # most of the descriptions I see are in Spanish, regardless of the region
+        desc_language = ''
+        data['desc_language'].append(desc_language)
+        print(f'Desc language: {desc_language}')
 
         
-#         # get OLDEST_KNOWN_MONTH
-#         asm.get_oldest_known_month(abacq_reference, lower_text, data)
+        # get OLDEST_KNOWN_YEAR
+        asm.get_oldest_known_year(abacq_reference, text, data)
 
         
-#         # get OLDEST_KNOWN_DAY
-#         asm.get_oldest_known_day(abacq_reference, lower_text, data)
+        # get OLDEST_KNOWN_MONTH
+        asm.get_oldest_known_month(abacq_reference, lower_text, data)
 
         
-#         # get OLDEST_KNOWN_SOURCE
-#         asm.get_oldest_known_source(desc, data)
+        # get OLDEST_KNOWN_DAY
+        asm.get_oldest_known_day(abacq_reference, lower_text, data)
 
         
-#         # get ALT_NAME (null)
-#         alt_name = ''
-#         data['alt_name'].append(alt_name)
-#         print(f'Alt name: {alt_name}')
+        # get OLDEST_KNOWN_SOURCE
+        asm.get_oldest_known_source(desc, data)
 
         
-#         # get FORMER_NAME (null)
-#         former_name = ''
-#         data['former_name'].append(former_name)
-#         print(f'Former name: {former_name}')
+        # get ALT_NAME (null)
+        alt_name = ''
+        data['alt_name'].append(alt_name)
+        print(f'Alt name: {alt_name}')
 
         
-#         # get VERIFIED_IN_MAPS and OPENSTREETMAP_LINK
-#         asm.get_verified_in_maps_and_osm_link(osm_info, data)
+        # get FORMER_NAME (null)
+        former_name = ''
+        data['former_name'].append(former_name)
+        print(f'Former name: {former_name}')
 
         
-#         # get GOOGLE_MAPS_LINK (null)
-#         google_maps_link = ''
-#         data['google_maps_link'].append(google_maps_link)
-#         print(f'Google Maps link: {google_maps_link}')
+        # get VERIFIED_IN_MAPS and OPENSTREETMAP_LINK
+        asm.get_verified_in_maps_and_osm_link(osm_info, data)
 
         
-#         # stay in the web page like a normal human would
-#         asm.humanizer(timer)
+        # get GOOGLE_MAPS_LINK (null)
+        google_maps_link = ''
+        data['google_maps_link'].append(google_maps_link)
+        print(f'Google Maps link: {google_maps_link}')
+
+        
+        # stay in the web page like a normal human would
+        asm.humanizer(timer)
 
 
-# # quit the browser properly regardless of whether it returns an exception
-# finally:
-#     driver.quit()
+# quit the browser properly regardless of whether it returns an exception
+finally:
+    driver.quit()
 
 
-# # ------------------------------------------------------ #
+# ------------------------------------------------------ #
 
 
-# ### EXPORT THE DATA ###
+### EXPORT THE DATA ###
 
 
-# # save links_in_locales to exclude from future scraping
-# # edit: commented out because not working as intended
-# # 
-# # if len(links_in_locales) > 0:
-# #     with open('france\\allende_in_france_links_in_locales.txt', 'a', encoding="utf=8") as f:
-# #         for l in links_in_locales:
-# #             f.write(f'{l}\n')
-# #     # print for logging purposes
-# #     print('\nallende_in_france_links_in_locales.txt modified.')
+# create a dataframe of all info collected
+data_df = pd.DataFrame(data=data)
+print('\nDataFrame created:\n')
+print(data_df)
 
 
-# # create a dataframe of all info collected
-# data_df = pd.DataFrame(data=data)
-# print('\nDataFrame created:\n')
-# print(data_df)
-
-
-# # export dataframe - xlsx supports unicode, 
-# # so no more encoding fiascos compared to saving to csv
-# # data_df.to_excel(
-# #     f'test_files/{country_en}_{target_chunk}.xlsx', index=False) # for test files
+# export dataframe - xlsx supports unicode, 
+# so no more encoding fiascos compared to saving to csv
 # data_df.to_excel(
-#     f'countries/{country_en}_{target_chunk}.xlsx', index=False) # for main files
-# print(
-#     f'DataFrame saved in \'countries/{country_en}_{target_chunk}.xlsx\'.')
+#     f'test_files/{country_en}_{target_chunk}.xlsx', index=False) # for test files
+data_df.to_excel(
+    f'countries/{country_en}_21.xlsx', index=False) # for main files
+print(
+    f'DataFrame saved in \'countries/{country_en}_21.xlsx\'.')
 
 
-# # ------------------------------------------------------ #
+# ------------------------------------------------------ #
