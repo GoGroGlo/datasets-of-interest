@@ -162,7 +162,7 @@ print('allende_in_france_links_18.txt created.')
 
 
 # allende_in_france_links_18.txt says there are 93 links
-# I'll do 3 sets of 31 each this week
+# I did 3 sets of 31 each
 # we'll just copy the chunks generator from allende_scraper_main.py
 
 # let user decide how many links each chunk should have

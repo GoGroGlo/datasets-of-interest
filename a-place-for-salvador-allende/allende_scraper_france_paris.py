@@ -1,9 +1,10 @@
-# allende-scraper-france-streets.py
+# allende-scraper-france-paris.py
 # Main repo: https://github.com/GoGroGlo/a-place-for-salvador-allende
 
-# Automates the data collection by verifying the list from 
-# http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia 
-# using https://www.openstreetmap.org
+# Automates the data collection by verifying using https://www.openstreetmap.org
+# the list of links that weren't already captured in 
+# allende_scraper_france_streets.py and allende_scraper_france_links.py via 
+# http://www.abacq.org/calle/index.php?2007/03/09/49-la-region-parisina-francia 
 
 
 # ------------------------------------------------------ #
@@ -17,8 +18,6 @@
 
 # standard library imports
 import re
-import os
-import math
 
 # third party imports
 import unidecode
@@ -48,10 +47,6 @@ timer = 30
 
 
 # URLs
-homepage = 'http://www.abacq.org'
-
-toc = 'http://www.abacq.org/calle/index.php?toc/toc'
-
 links_exceptions = [
                     'http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia', 
                     'http://www.abacq.org/calle/index.php?2007/02/18/2-francia-le-blanc-mesnil', 
@@ -62,8 +57,8 @@ links_exceptions = [
                     'http://www.abacq.org/calle/index.php?2007/03/13/54-en-la-reunion-oceano-indico-francia',
 ]
 
-# the source of allende_in_france_locales.txt
-default_link = 'http://www.abacq.org/calle/index.php?2009/05/13/349-salvador-allende-en-francia'
+# the source of allende_in_france_paris.txt
+default_link = 'http://www.abacq.org/calle/index.php?2007/03/09/49-la-region-parisina-francia'
 
 
 # create a dictionary of lists that's easily translatable into our existing db
@@ -120,7 +115,7 @@ def osm_check(locale_1, data):
 
     # trim the zip code away for later use
     global locale_1_no_zip
-    locale_1_no_zip = re.search(r'(?:\d{5})? *(.+)', locale_1)
+    locale_1_no_zip = re.search(r'\d+\.\s+(.*?),*\s+', locale_1)
     locale_1_no_zip = str(locale_1_no_zip.group(1))
     
     # store search results here 
@@ -569,8 +564,6 @@ for i in links_exceptions[:]:
         if i in l:
             l_locale_urls.remove(l)
 
-# # test
-# print(l_locale_urls)
 
 # compare sanitized locales against every url
 for l in l_locale_urls[:]:
@@ -601,7 +594,7 @@ try:
     create_driver()
 
 
-    for (i, locale) in enumerate(locale_chunk, start=1):
+    for (i, locale) in enumerate(allende_in_france_paris, start=1):
 
 
         # skip if whitespace
@@ -613,7 +606,7 @@ try:
         locale = locale.strip()
         print('\n')
         print('--------------------------------------------------------------------------------------------')
-        print(f'Processing locale {i} of {len(locale_chunk)} : {locale}')
+        print(f'Processing locale {i} of {len(allende_in_france_paris)} : {locale}')
         print('--------------------------------------------------------------------------------------------')
         print('\n')
 
@@ -729,7 +722,10 @@ print(data_df)
 
 
 # export dataframe - xlsx supports unicode, 
-# so no more encoding fiascos compared to saving to csv
+# so no more encoding fiascos compared to saving to csv.
+# suffixed with 21 because allende_scraper_france_streets.py
+# and allende_scraper_france_links.py together made 20 chunks
+
 # data_df.to_excel(
 #     f'test_files/{country_en}_{target_chunk}.xlsx', index=False) # for test files
 data_df.to_excel(
