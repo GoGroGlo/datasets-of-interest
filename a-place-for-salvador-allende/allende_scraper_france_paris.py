@@ -115,7 +115,7 @@ def osm_check(locale_1, data):
 
     # trim the zip code away for later use
     global locale_1_no_zip
-    locale_1_no_zip = re.search(r'\d+\.\s+(.*?),*\s+', locale_1)
+    locale_1_no_zip = re.search(r'(.*?),*\s+', locale_1)
     locale_1_no_zip = str(locale_1_no_zip.group(1))
     
     # store search results here 
@@ -602,8 +602,15 @@ try:
             continue
 
 
+        # skip if locale doesn't contain allende
+        if 'Allende' not in locale:
+            continue
+
+
         # sanitize and print current locale
         locale = locale.strip()
+        locale = re.search(r'\d+\. (.* \d+)', locale)
+        locale = str(locale.group(1))
         print('\n')
         print('--------------------------------------------------------------------------------------------')
         print(f'Processing locale {i} of {len(allende_in_france_paris)} : {locale}')
